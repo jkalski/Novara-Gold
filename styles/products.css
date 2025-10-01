@@ -1,0 +1,521 @@
+/* Products Page Styling - Goldman Sachs Inspired */
+
+.products-page {
+  background: var(--gs-gray-50);
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.products-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/goldbarsbackground2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--gs-white);
+  padding: var(--space-24) 0 var(--space-32);
+  text-align: center;
+}
+
+.products-hero h1 {
+  font-size: 3rem;
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-4);
+  line-height: 1.2;
+  color: var(--gs-white);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--gs-gray-300);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: var(--font-medium);
+}
+
+/* Products Grid */
+.products-grid-section {
+  padding: var(--space-32) 0;
+  background: linear-gradient(135deg, var(--gs-gray-50) 0%, var(--gs-gray-100) 50%, var(--gs-gray-50) 100%);
+}
+
+.products-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-8);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+/* Product Cards - Goldman Sachs Style */
+.product-card {
+  background: var(--gs-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: all var(--transition);
+  border: 1px solid var(--gs-gray-200);
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gs-blue);
+}
+
+.product-image {
+  position: relative;
+  background: var(--gs-gray-50);
+  aspect-ratio: 3 / 2; /* Smaller aspect ratio for more compact cards */
+  width: 100%;
+  border-bottom: 1px solid var(--gs-gray-200);
+  flex: 1;
+  overflow: hidden;
+}
+
+.product-image img {
+  object-fit: cover; /* Fill the entire space with cover crop */
+  transition: transform var(--transition);
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.02);
+}
+
+/* Platinum Eagle Image Scaling */
+.platinum-image {
+  transform: scale(1.5) !important;
+}
+
+.product-card:hover .platinum-image {
+  transform: scale(1.55) !important;
+}
+
+/* Silver Bullion Bars Image Scaling */
+.silver-bars-image {
+  transform: scale(1.2) !important;
+}
+
+.product-card:hover .silver-bars-image {
+  transform: scale(1.25) !important;
+}
+
+.product-info {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-info h3 {
+  font-size: 1.125rem;
+  font-weight: var(--font-semibold);
+  color: var(--gs-gray-900);
+  margin-bottom: var(--space-4);
+  line-height: 1.4;
+  min-height: 2.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+.product-btn {
+  width: 100%;
+  background: var(--gs-blue);
+  color: var(--gs-white);
+  border: none;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius);
+  font-weight: var(--font-semibold);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: auto;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.product-btn:hover {
+  background: var(--gs-blue-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  color: var(--gs-white);
+  text-decoration: none;
+}
+
+/* Sidebar Styling */
+.products-sidebar {
+  background: var(--gs-gray-50);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.sidebar-section {
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--gs-gray-200);
+}
+
+.sidebar-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.sidebar-section h3 {
+  font-size: 1.25rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin-bottom: var(--space-4);
+}
+
+.sidebar-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-section li {
+  padding: var(--space-2) 0;
+  color: var(--gs-gray-700);
+  font-size: 0.9rem;
+}
+
+.sidebar-section p {
+  color: var(--gs-gray-600);
+  margin-bottom: var(--space-4);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.phone-number {
+  font-size: 1.25rem !important;
+  font-weight: var(--font-bold) !important;
+  color: var(--gs-blue) !important;
+  margin-bottom: var(--space-4) !important;
+}
+
+.sidebar-btn {
+  width: 100%;
+  background: var(--gs-blue);
+  color: var(--gs-white);
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 0.9rem;
+}
+
+.sidebar-btn:hover {
+  background: var(--gs-blue-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .products-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  
+  .products-sidebar {
+    position: static;
+    order: -1;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+    padding: 0 var(--space-4);
+  }
+  
+  .products-grid-section {
+    padding: var(--space-16) 0;
+  }
+  
+  .product-image {
+    min-height: 250px;
+    padding: var(--space-6);
+  }
+  
+  .product-image img {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    padding: 0 var(--space-4);
+  }
+  
+  .product-card {
+    margin: 0;
+  }
+  
+  .product-image {
+    min-height: 200px;
+    padding: var(--space-4);
+  }
+  
+  .product-image img {
+    max-height: 150px;
+  }
+}
+
+/* Individual Product Page Styling */
+.product-page {
+  background: var(--gs-white);
+  min-height: 100vh;
+  padding: var(--space-16) 0;
+}
+
+.product-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-16);
+  align-items: start;
+}
+
+.product-image {
+  position: relative;
+  background: var(--gs-gray-50);
+  border-radius: var(--radius-lg);
+  aspect-ratio: 4 / 3; /* Slightly smaller aspect ratio for individual product pages */
+  width: 100%;
+  overflow: hidden;
+}
+
+.product-image img {
+  object-fit: cover; /* Fill the entire space with cover crop */
+}
+
+/* Platinum Eagle Image Scaling for Individual Product Pages */
+.product-page .platinum-image {
+  transform: scale(2.0) !important;
+}
+
+.product-info h1 {
+  font-size: 2.5rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin-bottom: var(--space-4);
+  line-height: 1.2;
+}
+
+.product-description {
+  font-size: 1.125rem;
+  color: var(--gs-gray-600);
+  line-height: 1.6;
+  margin-bottom: var(--space-8);
+}
+
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.btn {
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius);
+  font-weight: var(--font-semibold);
+  text-decoration: none;
+  text-align: center;
+  transition: all var(--transition);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--gs-blue);
+  color: var(--gs-white);
+}
+
+.btn-primary:hover {
+  background: var(--gs-blue-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--gs-gold);
+  color: var(--gs-black);
+}
+
+.btn-secondary:hover {
+  background: var(--gs-gold-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--gs-blue);
+  border: 2px solid var(--gs-blue);
+}
+
+.btn-outline:hover {
+  background: var(--gs-blue);
+  color: var(--gs-white);
+}
+
+.product-details {
+  display: grid;
+  gap: var(--space-12);
+  margin-bottom: var(--space-16);
+}
+
+.details-section,
+.specifications-section,
+.highlights-section {
+  background: var(--gs-white);
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gs-gray-200);
+}
+
+.details-section h2,
+.specifications-section h2,
+.highlights-section h2 {
+  font-size: 1.5rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin-bottom: var(--space-6);
+  border-bottom: 2px solid var(--gs-blue);
+  padding-bottom: var(--space-2);
+}
+
+.specs-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--gs-gray-200);
+}
+
+.spec-item:last-child {
+  border-bottom: none;
+}
+
+.spec-label {
+  font-weight: var(--font-semibold);
+  color: var(--gs-gray-700);
+}
+
+.spec-value {
+  color: var(--gs-gray-600);
+}
+
+.highlights-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.highlights-list li {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--gs-gray-200);
+  position: relative;
+  padding-left: var(--space-6);
+}
+
+.highlights-list li:last-child {
+  border-bottom: none;
+}
+
+.highlights-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--gs-blue);
+  font-weight: var(--font-bold);
+}
+
+.back-to-products {
+  text-align: center;
+  margin-top: var(--space-8);
+}
+
+/* Responsive Design for Product Pages */
+@media (max-width: 768px) {
+  .product-header {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  
+  .product-info h1 {
+    font-size: 2rem;
+  }
+  
+  .product-actions {
+    flex-direction: column;
+  }
+  
+  .product-image {
+    min-height: 500px; /* Smaller cards with larger images */
+    padding: var(--space-6);
+  }
+  
+  .product-image img {
+    max-height: 250px;
+  }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Section anchors for navigation */
+#gold,
+#silver,
+#platinum,
+#palladium {
+  scroll-margin-top: 100px;
+}

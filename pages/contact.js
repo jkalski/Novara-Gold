@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { FiMail, FiPhone, FiMapPin, FiClock, FiSend } from 'react-icons/fi'
+import { FiMail, FiPhone, FiClock, FiSend } from 'react-icons/fi'
+import SEO from '../components/SEO'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -17,12 +18,31 @@ export default function Contact() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
+    
+    // For now, just show success message and clear form
+    // In a real implementation, this would send data to your backend
+    console.log('Form submitted:', formData)
+    
     setFormSubmitted(true)
-    setTimeout(() => setFormSubmitted(false), 3000)
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
+    })
+    
+    setTimeout(() => setFormSubmitted(false), 5000)
   }
 
   return (
     <div className='contact-page'>
+      <SEO 
+        title="Contact Novara Gold - Precious Metals Investment Experts"
+        description="Contact Novara Gold for expert precious metals investment guidance. Call (424) 491-8878 or email info@novaragold.com for personalized consultation and support."
+        canonical="/contact"
+        keywords="contact Novara Gold, precious metals consultation, gold investment advice, silver IRA help, investment consultation"
+      />
       <div className='container'>
         <div className='contact-header'>
           <h1>Contact Novara Gold</h1>
@@ -37,7 +57,7 @@ export default function Contact() {
               </div>
               <h3>Phone</h3>
               <p>Call our precious metals specialists</p>
-              <a href='tel:+1-424-491-8878' className='contact-link'>+1 (424) 491-8878</a>
+              <a href='tel:+1-800-243-1571' className='contact-link'>(800) 243-1571</a>
             </div>
 
             <div className='contact-card'>
@@ -49,18 +69,6 @@ export default function Contact() {
               <a href='mailto:info@novaragold.com' className='contact-link'>info@novaragold.com</a>
             </div>
 
-            <div className='contact-card'>
-              <div className='contact-icon'>
-                <FiMapPin />
-              </div>
-              <h3>Office</h3>
-              <p>Visit our headquarters</p>
-              <address className='contact-address'>
-                123 Financial District<br />
-                New York, NY 10004<br />
-                United States
-              </address>
-            </div>
 
             <div className='contact-card'>
               <div className='contact-icon'>
@@ -85,8 +93,16 @@ export default function Contact() {
             {formSubmitted ? (
               <div className='success-message'>
                 <div className='success-icon'>✓</div>
-                <h4>Message Sent!</h4>
-                <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
+                <h4>Thank You for Your Interest!</h4>
+                <p>We've received your message and will contact you within 24 hours. For immediate assistance, please call us at <strong>(800) 243-1571</strong>.</p>
+                <div className='success-actions'>
+                  <button 
+                    onClick={() => setFormSubmitted(false)}
+                    className='cta-btn secondary'
+                  >
+                    Send Another Message
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className='contact-form'>
@@ -173,10 +189,9 @@ export default function Contact() {
 
         <div className='contact-cta'>
           <h2>Ready to Start Your Precious Metals Journey?</h2>
-          <p>Schedule a free consultation with our precious metals specialists</p>
+          <p>Get in touch with our precious metals specialists</p>
           <div className='cta-buttons'>
-            <a href='/contact/schedule' className='cta-btn primary'>Schedule Consultation</a>
-            <a href='/products' className='cta-btn secondary'>Explore Products</a>
+            <a href='/products' className='cta-btn primary'>Explore Products</a>
           </div>
         </div>
       </div>

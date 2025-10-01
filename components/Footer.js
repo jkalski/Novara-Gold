@@ -19,7 +19,6 @@ export default function Footer() {
           <h4>Invest</h4>
           <ul>
             <li><Link href='/products'>Shop Metals</Link></li>
-            <li><Link href='/pricing/live'>Live Pricing</Link></li>
             <li><Link href='/products/ira-eligible'>IRA-Eligible Metals</Link></li>
           </ul>
         </div>
@@ -35,10 +34,10 @@ export default function Footer() {
         <div className='col news'>
           <h4>News & Research</h4>
           <ul>
-            <li><Link href='/news/daily'>Daily Market Analysis</Link></li>
-            <li><Link href='/news/weekly'>Weekly Research Reports</Link></li>
-            <li><Link href='/news/commentary'>Market Commentary</Link></li>
-            <li><Link href='/education/glossary'>Glossary</Link></li>
+            <li><Link href='/news#daily'>Daily Market Analysis</Link></li>
+            <li><Link href='/news#weekly'>Weekly Research Reports</Link></li>
+            <li><Link href='/news#commentary'>Market Commentary</Link></li>
+            <li><Link href='/news#glossary'>Glossary</Link></li>
           </ul>
         </div>
         <div className='col policies'>
@@ -51,24 +50,22 @@ export default function Footer() {
         </div>
       </div>
       <div className='compliance'>
-        <details>
-          <summary>Compliance & Legal</summary>
-          <div className='compliance-content'>
-            <p><strong>Investment Disclaimer:</strong> Novara Gold and its representatives are precious metals specialists, but we are not licensed or registered investment advisers, CPAs, attorneys, or other financial service professionals. We do not provide financial, tax, legal or investment advice.</p>
-            
-            <p><strong>Risk Warning:</strong> Precious metals, like any investment, carry risk of loss and are not suitable for everyone. Past performance does not guarantee future results. Precious metals may appreciate, depreciate, or remain unchanged depending on various factors.</p>
-            
-            <p><strong>Investment Considerations:</strong> Anyone considering purchasing precious metals should carefully evaluate associated risks and acquisition costs before investing. Always consult your financial and tax professional before making investment decisions.</p>
-            
-            <p><strong>Long-term Investment:</strong> Novara Gold views precious metals as long-term investments. While you can sell at any time, you should be prepared to hold purchased metals for several years.</p>
-            
-            <p><strong>No Guarantees:</strong> Novara Gold cannot guarantee that any metals purchased will appreciate or produce a profit above markup/commissions charged, whether bought for direct delivery or within a precious metals IRA.</p>
-            
-            <p><strong>Customer Responsibility:</strong> The decision to purchase or sell precious metals is yours alone. All transactions should be based on your own research, prudence, and judgment.</p>
-            
-            <p><strong>Terms of Service:</strong> By accessing Novara Gold content, you agree to be bound by our terms of service. For questions, contact us at 800-243-1571.</p>
-          </div>
-        </details>
+        <h4>Compliance & Legal</h4>
+        <div className='compliance-content'>
+          <p><strong>Investment Disclaimer:</strong> Novara Gold and its representatives are precious metals specialists, but we are not licensed or registered investment advisers, CPAs, attorneys, or other financial service professionals. We do not provide financial, tax, legal or investment advice.</p>
+          
+          <p><strong>Risk Warning:</strong> Precious metals, like any investment, carry risk of loss and are not suitable for everyone. Past performance does not guarantee future results. Precious metals may appreciate, depreciate, or remain unchanged depending on various factors.</p>
+          
+          <p><strong>Investment Considerations:</strong> Anyone considering purchasing precious metals should carefully evaluate associated risks and acquisition costs before investing. Always consult your financial and tax professional before making investment decisions.</p>
+          
+          <p><strong>Long-term Investment:</strong> Novara Gold views precious metals as long-term investments. While you can sell at any time, you should be prepared to hold purchased metals for several years.</p>
+          
+          <p><strong>No Guarantees:</strong> Novara Gold cannot guarantee that any metals purchased will appreciate or produce a profit above markup/commissions charged, whether bought for direct delivery or within a precious metals IRA.</p>
+          
+          <p><strong>Customer Responsibility:</strong> The decision to purchase or sell precious metals is yours alone. All transactions should be based on your own research, prudence, and judgment.</p>
+          
+          <p><strong>Terms of Service:</strong> By accessing Novara Gold content, you agree to be bound by our terms of service. For questions, contact us at 800-243-1571.</p>
+        </div>
       </div>
       <div className='bottom-bar'>
         <div className='container'>

@@ -23,19 +23,13 @@ const MENU = [
       { 
         heading: 'Metals', 
         links: [
-          { label: 'Gold (Coins, Bars)', href: '/products/gold' },
-          { label: 'Silver (Coins, Bars)', href: '/products/silver' },
-          { label: 'Platinum', href: '/products/platinum' },
-          { label: 'Palladium', href: '/products/palladium' },
-          { label: 'IRA-Eligible Metals List', href: '/products/ira-eligible' }
+          { label: 'Gold (Coins, Bars)', href: '/products#gold' },
+          { label: 'Silver (Coins, Bars)', href: '/products#silver' },
+          { label: 'Platinum', href: '/products#platinum' },
+          { label: 'Palladium', href: '/products#palladium' },
+          { label: 'IRA-Eligible Metals List', href: '/products#ira-eligible' }
         ]
       },
-      { 
-        heading: 'Pricing', 
-        links: [
-          { label: 'Live Pricing', href: '/pricing/live' }
-        ]
-      }
     ]
   },
   { 
@@ -75,18 +69,18 @@ const MENU = [
       { 
         heading: 'Market Updates', 
         links: [
-          { label: 'Daily Market Analysis', href: '/news/daily' },
-          { label: 'Weekly Research Reports', href: '/news/weekly' },
-          { label: 'Market Commentary', href: '/news/commentary' },
-          { label: 'Economic Indicators', href: '/news/indicators' }
+          { label: 'Daily Market Analysis', href: '/news#daily' },
+          { label: 'Weekly Research Reports', href: '/news#weekly' },
+          { label: 'Market Commentary', href: '/news#commentary' },
+          { label: 'Economic Indicators', href: '/news#indicators' }
         ]
       },
       { 
         heading: 'Education', 
         links: [
-          { label: 'Beginners\' Guide', href: '/education/beginners' },
-          { label: 'Market Insights', href: '/education/news' },
-          { label: 'Glossary', href: '/education/glossary' }
+          { label: 'Beginners\' Guide', href: '/news#beginners' },
+          { label: 'Market Insights', href: '/news#education-news' },
+          { label: 'Glossary', href: '/news#glossary' }
         ]
       }
     ]

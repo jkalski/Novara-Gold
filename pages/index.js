@@ -5,8 +5,10 @@ import {
   FiX, 
   FiUsers, 
   FiLock, 
-  FiStar 
+  FiClock,
+  FiUserX 
 } from 'react-icons/fi'
+import SEO from '../components/SEO'
 
 export default function Home() {
   const [currentMetal, setCurrentMetal] = useState(0)
@@ -87,6 +89,12 @@ export default function Home() {
 
   return (
     <div>
+      <SEO 
+        title="Novara Gold - The Future of Vaulted Wealth | Precious Metals Investment"
+        description="Discover the future of vaulted wealth with Novara Gold. Expert precious metals investment services including gold, silver, platinum, and palladium IRAs with secure storage and transparent pricing."
+        canonical="/"
+        keywords="precious metals investment, gold IRA, silver IRA, platinum investment, palladium, secure storage, retirement planning, wealth protection"
+      />
       {/* Hero Section */}
       <section className='hero'>
         <div className='container'>
@@ -98,6 +106,8 @@ export default function Home() {
                 width={1000}
                 height={200}
                 priority
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               />
             </div>
             <p className='hero-tagline'>The Future of Vaulted Wealth</p>
@@ -159,82 +169,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Core Principles Section - Goldman Sachs Style */}
-      <section className='gs-principles-section'>
-        <div className='gs-container'>
-          <div className='gs-section-header'>
-            <h2>Our Core Principles</h2>
-            <p>Our commitment to excellence and client success</p>
-          </div>
-          
-          {/* Principles Titles Row */}
-          <div className='gs-principles-titles'>
-            <div className='gs-principle-title'>
-              <div className='gs-principle-icon'>
-                <FiShield />
-              </div>
-              <h3>Integrity</h3>
-            </div>
-            
-            <div className='gs-principle-title'>
-              <div className='gs-principle-icon'>
-                <FiX />
-              </div>
-              <h3>No Gimmicks</h3>
-            </div>
-            
-            <div className='gs-principle-title'>
-              <div className='gs-principle-icon'>
-                <FiUsers />
-              </div>
-              <h3>No Endorsements</h3>
-            </div>
-            
-            <div className='gs-principle-title'>
-              <div className='gs-principle-icon'>
-                <FiLock />
-              </div>
-              <h3>Security</h3>
-            </div>
-            
-            <div className='gs-principle-title'>
-              <div className='gs-principle-icon'>
-                <FiStar />
-              </div>
-              <h3>Guidance</h3>
-            </div>
-          </div>
-          
-          {/* Principles Descriptions */}
-          <div className='gs-principles-descriptions'>
-            <div className='gs-principle-description'>
-              <h4>Integrity</h4>
-              <p>Honest advice without hidden agendas or inflated promises. Every asset is explained in detail with straightforward pricing and transparent costs.</p>
-            </div>
-            
-            <div className='gs-principle-description'>
-              <h4>No Gimmicks</h4>
-              <p>No "free" promotions that hide true costs. We rely on customer experiences and transparent pricing to grow our business.</p>
-            </div>
-            
-            <div className='gs-principle-description'>
-              <h4>No Endorsements</h4>
-              <p>No paid celebrities. We rely on real client reviews and actual client experiences to grow our brand authentically.</p>
-            </div>
-            
-            <div className='gs-principle-description'>
-              <h4>Security</h4>
-              <p>Industry-leading secure storage solutions with insured depositories, providing peace of mind for your precious metals investments.</p>
-            </div>
-            
-            <div className='gs-principle-description'>
-              <h4>Guidance</h4>
-              <p>Education and guidance aligned with your long-term goals. We focus on suitability, clarity, and value in every recommendation.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* What We Do Section - Goldman Sachs Style */}
       <section className='gs-what-we-do-section'>
         <div className='gs-container'>
@@ -246,9 +180,9 @@ export default function Home() {
           <div className='gs-services-grid'>
             <div className='gs-service-card'>
               <div className='gs-card-header'>
-                <h3>Precious Metals Trading</h3>
+                <h3>Physical Precious Metals</h3>
               </div>
-              <p>Powering clients' strategic priorities with best-in-class advice, unmatched experience, and access to our global network of precious metals markets.</p>
+              <p>Direct purchase of gold, silver, platinum, and palladium coins and bars with competitive pricing, secure storage options, and IRA-eligible products for retirement planning.</p>
               <a href='/products' className='gs-service-link'>Learn More →</a>
             </div>
             
@@ -266,6 +200,143 @@ export default function Home() {
               </div>
               <p>Industry-leading secure storage solutions with insured depositories, providing peace of mind for your precious metals investments.</p>
               <a href='/security' className='gs-service-link'>Learn More →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Principles Section - Goldman Sachs Style */}
+      <section className='gs-principles-section'>
+        <div className='gs-container'>
+          <div className='gs-section-header'>
+            <h2>Our Core Principles</h2>
+            <p>Our commitment to excellence and client success</p>
+          </div>
+          
+          {/* Principles Titles Row */}
+          <div className='gs-principles-titles'>
+            <a href='/about#integrity' className='gs-principle-title gs-principle-link'>
+              <div className='gs-principle-icon'>
+                <FiShield />
+              </div>
+              <h3>Integrity</h3>
+            </a>
+            
+            <a href='/about#no-gimmicks' className='gs-principle-title gs-principle-link'>
+              <div className='gs-principle-icon'>
+                <FiX />
+              </div>
+              <h3>No Gimmicks</h3>
+            </a>
+            
+            <a href='/about#no-endorsements' className='gs-principle-title gs-principle-link'>
+              <div className='gs-principle-icon'>
+                <FiUserX />
+              </div>
+              <h3>No Endorsements</h3>
+            </a>
+            
+            <a href='/about#security' className='gs-principle-title gs-principle-link'>
+              <div className='gs-principle-icon'>
+                <FiLock />
+              </div>
+              <h3>Security</h3>
+            </a>
+            
+            <a href='/about#guidance' className='gs-principle-title gs-principle-link'>
+              <div className='gs-principle-icon'>
+                <FiClock />
+              </div>
+              <h3>Guidance</h3>
+            </a>
+          </div>
+          
+        </div>
+      </section>
+
+      {/* Featured Products Section */}
+      <section className='featured-products-section'>
+        <div className='gs-container'>
+          <div className='gs-section-header'>
+            <h2>Featured Products</h2>
+            <p>Discover our premium selection of precious metals</p>
+          </div>
+          
+          <div className='featured-products-grid'>
+            <div className='featured-product-card'>
+              <div className='product-image-container'>
+                <Image 
+                  src="/images/Gold American Eagle.png" 
+                  alt="Gold American Eagle"
+                  width={400}
+                  height={250}
+                  className='product-image'
+                  loading="lazy"
+                />
+              </div>
+              <div className='product-info'>
+                <h3>Gold American Eagle</h3>
+                <p className='product-metal'>Gold</p>
+                <p className='product-description'>The most popular gold coin in the world, backed by the U.S. government and IRA-eligible.</p>
+                <a href='/products' className='product-link'>View Details →</a>
+              </div>
+            </div>
+            
+            <div className='featured-product-card'>
+              <div className='product-image-container'>
+                <Image 
+                  src="/images/Silver American Eagle.png" 
+                  alt="Silver American Eagle"
+                  width={400}
+                  height={250}
+                  className='product-image'
+                  loading="lazy"
+                />
+              </div>
+              <div className='product-info'>
+                <h3>Silver American Eagle</h3>
+                <p className='product-metal'>Silver</p>
+                <p className='product-description'>America's premier silver bullion coin, offering exceptional value and liquidity.</p>
+                <a href='/products' className='product-link'>View Details →</a>
+              </div>
+            </div>
+            
+            <div className='featured-product-card'>
+              <div className='product-image-container'>
+                <Image 
+                  src="/images/Platinum Eagle.png" 
+                  alt="Platinum Eagle"
+                  width={400}
+                  height={250}
+                  className='product-image platinum-image'
+                  loading="lazy"
+                />
+              </div>
+              <div className='product-info'>
+                <h3>Platinum Eagle</h3>
+                <p className='product-metal'>Platinum</p>
+                <p className='product-description'>Rare and valuable platinum coins with exceptional purity and IRA eligibility.</p>
+                <a href='/products' className='product-link'>View Details →</a>
+              </div>
+            </div>
+            
+            <div className='featured-product-card'>
+              <div className='product-image-container'>
+                <Image 
+                  src="/images/Palladium RMC Maple Leaf.png" 
+                  alt="Palladium RMC Maple Leaf"
+                  width={400}
+                  height={250}
+                  className='product-image'
+                  loading="lazy"
+                />
+              </div>
+              <div className='product-info'>
+                <h3>Palladium Maple Leaf</h3>
+                <p className='product-metal'>Palladium</p>
+                <p className='product-description'>Rare palladium coins from the Royal Canadian Mint, offering unique investment opportunities.</p>
+                <a href='/products' className='product-link'>View Details →</a>
+              </div>
             </div>
           </div>
         </div>
@@ -307,37 +378,6 @@ export default function Home() {
         </div>
       </section>
 
-
-      {/* Our Firm Section - Goldman Sachs Style */}
-      <section className='gs-our-firm-section'>
-        <div className='gs-container'>
-          <div className='gs-firm-header'>
-            <h2>Our Firm</h2>
-            <p>We aspire to be the world's most exceptional precious metals firm</p>
-          </div>
-          
-          <div className='gs-firm-stats'>
-            <div className='gs-stat-card'>
-              <div className='gs-stat-number'>156+</div>
-              <div className='gs-stat-label'>Years of Excellence</div>
-              <p>The culture of Novara Gold is defined by an unwavering commitment to client service and an unrelenting pursuit of exceptional performance.</p>
-            </div>
-            
-            <div className='gs-stat-card'>
-              <div className='gs-stat-number'>95%+</div>
-              <div className='gs-stat-label'>Client Satisfaction</div>
-              <p>Clients give us top ratings for 'Best People' and 'Expertise' in precious metals advisory and execution.</p>
-            </div>
-            
-            <div className='gs-stat-card'>
-              <div className='gs-stat-number'>$1B+</div>
-              <div className='gs-stat-label'>Assets Under Management</div>
-              <p>We manage precious metals portfolios for clients seeking to preserve and grow wealth through strategic metal allocations.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Precious Metals Section - Blue Background */}
       <section id='precious-metals' className='precious-metals-section'>
         <div className='container'>
@@ -346,15 +386,25 @@ export default function Home() {
               <div className='carousel-header'>
                 <h2>Unlock Your Precious Metals Potential</h2>
                 <p>Discover the power of precious metals investing with our comprehensive investor kit. Get expert insights, market analysis, and personalized guidance from our precious metals specialists.</p>
-              </div>
-              <div className='invest-image-container'>
-                <Image 
-                  src="/images/invest.jpg" 
-                  alt="Precious Metals Investment Opportunities"
-                  width={600}
-                  height={400}
-                  className='invest-image'
-                />
+                
+                <div className='features-highlight'>
+                  <div className='feature-item'>
+                    <h3>IRA-Eligible Metals</h3>
+                    <p>Gold, silver, platinum, and palladium coins and bars approved for retirement accounts</p>
+                  </div>
+                  <div className='feature-item'>
+                    <h3>Secure Storage</h3>
+                    <p>Industry-leading insured depositories with allocated storage for maximum security</p>
+                  </div>
+                  <div className='feature-item'>
+                    <h3>Expert Guidance</h3>
+                    <p>Personalized investment strategies from our precious metals specialists</p>
+                  </div>
+                  <div className='feature-item'>
+                    <h3>Transparent Pricing</h3>
+                    <p>No hidden fees, competitive premiums, and real-time market pricing</p>
+                  </div>
+                </div>
               </div>
             </div>
             

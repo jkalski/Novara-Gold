@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import SEO from '../../components/SEO'
 
 export default function IRA() {
   const [activeSection, setActiveSection] = useState('overview')
@@ -9,8 +10,8 @@ export default function IRA() {
     { id: 'rollover', title: 'Rollover & Transfer Guide', href: '#rollover' },
     { id: 'fees', title: 'Fees & Minimums', href: '#fees' },
     { id: 'custodians', title: 'Custodians & Depositories', href: '#custodians' },
-    { id: 'faq', title: 'FAQ', href: '#faq' },
-    { id: 'forms', title: 'Forms & Documents', href: '#forms' }
+    { id: 'faq', title: 'FAQ', href: '#faq' }
+    // { id: 'forms', title: 'Forms & Documents', href: '#forms' } // Temporarily hidden
   ]
 
   const scrollToSection = (sectionId) => {
@@ -37,6 +38,12 @@ export default function IRA() {
 
   return (
     <div className='section'>
+      <SEO 
+        title="Precious Metals IRA - Gold, Silver, Platinum & Palladium | Novara Gold"
+        description="Diversify your retirement portfolio with a precious metals IRA. Gold, silver, platinum, and palladium investments with secure storage, transparent fees, and expert guidance."
+        canonical="/ira"
+        keywords="precious metals IRA, gold IRA, silver IRA, platinum IRA, palladium IRA, retirement planning, IRA rollover, secure storage"
+      />
       <div className='container'>
         <div className='ira-page'>
           {/* Header */}
@@ -89,7 +96,7 @@ export default function IRA() {
 
           {/* How It Works Section */}
           <section id='how-it-works' className='ira-section'>
-            <h2>How a Precious Metals IRA Works</h2>
+            <h2>HOW IS A PRECIOUS METALS IRA WORKS</h2>
             
             <div className='ira-intro'>
               <h3>Protecting Retirement with Tangible Wealth</h3>
@@ -103,12 +110,10 @@ export default function IRA() {
 
             <div className='process-step'>
               <h4>STEP 2: FUND YOUR ACCOUNT</h4>
-              <p>Your new IRA can be funded in several ways:</p>
-              <ul>
-                <li><strong>Rollover:</strong> Move funds from an existing IRA, 401(K), 403(b), or similar accounts.</li>
-                <li><strong>Transfer:</strong> Directly transfer funds from another IRA without triggering taxes.</li>
-                <li><strong>New Contribution:</strong> Make a standard annual contribution</li>
-              </ul>
+              <p>Your new IRA can be funded in several ways.</p>
+              <p><strong>Rollover:</strong> Move funds from an existing IRA, 401(K), 403(b), or similar accounts.</p>
+              <p><strong>Transfer:</strong> Directly transfer funds from another IRA without triggering taxes.</p>
+              <p><strong>New Contribution:</strong> Make a standard annual contribution</p>
               <p>Our specialists guide you through every option to ensure a smooth, compliant process.</p>
             </div>
 
@@ -125,10 +130,12 @@ export default function IRA() {
             <div className='process-step'>
               <h4>STEP 5: MANAGE, GROW, AND WITHDRAW</h4>
               <p>As with any IRA, your account grows tax-deferred (or tax-free if in a Roth IRA). When the time comes, you can choose to:</p>
-              <ul>
-                <li>Sell Metals within the account for cash distribution, or</li>
-                <li>Take Physical Delivery of your metals as part of your retirement distribution.</li>
-              </ul>
+              <p>Sell Metals within the account for cash distribution, or</p>
+              <p>Take Physical Delivery of your metals as part of your retirement distribution.</p>
+            </div>
+
+            <div className='process-step'>
+              <p>Which ever step you find yourself you will always have a team of specialists at Novara Gold helping you chose which is best for your specific needs and goals, because a Precious Metals IRA in more than just an account- it's peace of mind. At Novara Gold, we handle the details, so you can focus on building a retirement that's both stable and enduring.</p>
             </div>
           </section>
 
@@ -153,25 +160,6 @@ export default function IRA() {
               </ul>
             </div>
 
-            <div className='rollover-type'>
-              <h4>Direct Transfer</h4>
-              <p>Transfer funds directly from another IRA without triggering taxes. This is the safest and most straightforward method.</p>
-            </div>
-
-            <div className='rollover-type'>
-              <h4>New Annual Contributions</h4>
-              <p>Make new contributions up to the annual limits ($7,000 for 2024, or $8,000 if you're 50 or older).</p>
-            </div>
-
-            <h3>Our Rollover Process</h3>
-            <p>Our specialists handle the entire rollover process for you:</p>
-            <ol>
-              <li>We coordinate with your current custodian</li>
-              <li>Complete all necessary paperwork</li>
-              <li>Ensure compliance with IRS regulations</li>
-              <li>Handle the transfer of funds</li>
-              <li>Guide you through metal selection once funded</li>
-            </ol>
           </section>
 
           {/* Fees Section */}
@@ -200,7 +188,6 @@ export default function IRA() {
             <ul>
               <li><strong>Initial Investment:</strong> $50,000 minimum</li>
               <li><strong>Additional Contributions:</strong> Minimum amounts vary by custodian</li>
-              <li><strong>Annual Contribution Limits:</strong> $7,000 (under 50) / $8,000 (50 and over)</li>
             </ul>
 
             <h3>Fee Transparency</h3>
@@ -280,7 +267,8 @@ export default function IRA() {
             </div>
           </section>
 
-          {/* Forms Section */}
+          {/* Forms Section - Temporarily Hidden */}
+          {/* 
           <section id='forms' className='ira-section'>
             <h2>Forms & Documents</h2>
             
@@ -346,6 +334,7 @@ export default function IRA() {
               <li>Beneficiary information</li>
             </ul>
           </section>
+          */}
 
           {/* Call to Action */}
           <section className='ira-cta'>
@@ -354,7 +343,6 @@ export default function IRA() {
               <p>Contact our IRA specialists to begin the process of diversifying your retirement portfolio with precious metals.</p>
               <div className='cta-buttons'>
                 <button className='btn-primary'>Get Started</button>
-                <button className='btn-secondary'>Schedule Consultation</button>
               </div>
             </div>
           </section>

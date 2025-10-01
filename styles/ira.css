@@ -246,10 +246,27 @@
   color: var(--gs-gray-700);
 }
 
+.faq-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .faq-item {
-  margin-bottom: var(--space-8);
-  padding: var(--space-6) 0;
-  border-bottom: 1px solid var(--gs-gray-100);
+  margin-bottom: var(--space-10);
+  padding: var(--space-8) 0;
+  border-bottom: 2px solid var(--gs-gray-100);
+}
+
+.faq-item:last-of-type {
+  border-bottom: none;
+}
+
+.faq-item h2 {
+  font-size: 1.5rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-blue);
+  margin-bottom: var(--space-4);
+  line-height: 1.3;
 }
 
 .faq-item h4 {
@@ -264,6 +281,34 @@
   font-size: 1.125rem;
   line-height: 1.7;
   color: var(--gs-gray-700);
+  margin-bottom: var(--space-4);
+}
+
+.faq-item ul {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--gs-gray-700);
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-6);
+}
+
+.faq-item li {
+  margin-bottom: var(--space-2);
+}
+
+.faq-contact {
+  background: var(--gs-gray-50);
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--gs-gold);
+  margin-top: var(--space-12);
+  text-align: center;
+}
+
+.faq-contact p {
+  font-size: 1.25rem;
+  color: var(--gs-gray-800);
+  margin: 0;
 }
 
 .document-list {

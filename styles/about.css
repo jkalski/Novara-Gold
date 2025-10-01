@@ -294,3 +294,232 @@
     font-size: 0.95rem;
   }
 }
+
+/* Core Principles Section */
+.principles-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 100px 0;
+  position: relative;
+}
+
+.principles-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gs-gold) 50%, transparent 100%);
+}
+
+.principles-header {
+  text-align: center;
+  margin-bottom: 80px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.principles-header h2 {
+  font-size: 3rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  position: relative;
+}
+
+.principles-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--gs-gold);
+  border-radius: 2px;
+}
+
+.principles-header p {
+  font-size: 1.375rem;
+  color: var(--gs-gray-600);
+  line-height: 1.6;
+  font-weight: var(--font-medium);
+  margin: 0;
+}
+
+.principles-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.principle-item {
+  margin-bottom: 50px;
+  padding: 30px 0;
+  position: relative;
+  border-left: 4px solid var(--gs-gold);
+  padding-left: 30px;
+  transition: all 0.3s ease;
+}
+
+.principle-item:hover {
+  border-left-color: var(--gs-blue);
+  transform: translateX(8px);
+}
+
+.principle-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gs-gold) 0%, transparent 100%);
+  opacity: 0.2;
+}
+
+.principle-content {
+  width: 100%;
+}
+
+.principle-content h3 {
+  font-size: 2rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin-bottom: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+.principle-content h3::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: var(--gs-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--gs-white), 0 0 0 6px var(--gs-gold);
+}
+
+.principle-content p {
+  color: var(--gs-gray-700);
+  line-height: 1.7;
+  font-size: 1.125rem;
+  margin: 0;
+  font-weight: var(--font-medium);
+}
+
+/* Alternating colors for visual interest */
+.principle-item:nth-child(even) {
+  border-left-color: var(--gs-blue);
+}
+
+.principle-item:nth-child(even):hover {
+  border-left-color: var(--gs-gold);
+}
+
+.principle-item:nth-child(even) .principle-content h3::before {
+  background: var(--gs-blue);
+  box-shadow: 0 0 0 4px var(--gs-white), 0 0 0 6px var(--gs-blue);
+}
+
+/* Responsive Design for Principles Section */
+@media (max-width: 1024px) {
+  .principles-section {
+    padding: 80px 0;
+  }
+  
+  .principles-header {
+    margin-bottom: 60px;
+  }
+  
+  .principles-header h2 {
+    font-size: 2.5rem;
+  }
+  
+  .principle-item {
+    margin-bottom: 40px;
+    padding: 25px 0;
+  }
+  
+  .principle-content h3 {
+    font-size: 1.75rem;
+  }
+  
+  .principle-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .principles-section {
+    padding: 60px 0;
+  }
+  
+  .principles-header {
+    margin-bottom: 50px;
+  }
+  
+  .principles-header h2 {
+    font-size: 2rem;
+  }
+  
+  .principles-header p {
+    font-size: 1.125rem;
+  }
+  
+  .principle-item {
+    margin-bottom: 35px;
+    padding: 20px 0;
+    padding-left: 25px;
+  }
+  
+  .principle-content h3::before {
+    left: -25px;
+    width: 10px;
+    height: 10px;
+  }
+  
+  .principle-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+  
+  .principle-content p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .principles-header h2 {
+    font-size: 1.75rem;
+  }
+  
+  .principles-header p {
+    font-size: 1rem;
+  }
+  
+  .principle-item {
+    padding-left: 20px;
+  }
+  
+  .principle-content h3::before {
+    left: -20px;
+    width: 8px;
+    height: 8px;
+  }
+  
+  .principle-content h3 {
+    font-size: 1.375rem;
+  }
+  
+  .principle-content p {
+    font-size: 0.9rem;
+  }
+}

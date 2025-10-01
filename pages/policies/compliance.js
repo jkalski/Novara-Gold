@@ -1,1 +1,1 @@
-export default function Page(){return (<div className='section'><div className='container'><h1>Policies Compliance</h1><div className='card' style={marginTop:16}><p>Placeholder content for Policies Compliance.</p></div></div></div>)}
+export default function Page(){return (<div className='section'><div className='container'><h1>Policies Compliance</h1><div className='card' style={{marginTop:16}}><p>Placeholder content for Policies Compliance.</p></div></div></div>)}
