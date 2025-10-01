@@ -10,6 +10,7 @@
     "compress-images": "node compress-images.js"
   },
   "dependencies": {
+    "contentful": "^11.8.2",
     "lightweight-charts": "^5.0.8",
     "lru-cache": "^11.2.2",
     "next": "13.5.6",

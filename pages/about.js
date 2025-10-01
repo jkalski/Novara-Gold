@@ -59,6 +59,14 @@ export default function About() {
             <div className='about-images'>
               <div className='about-image-item'>
                 <Image 
+                  src="/images/people3.jpg" 
+                  alt="Team collaboration" 
+                  width={400}
+                  height={300}
+                />
+              </div>
+              <div className='about-image-item'>
+                <Image 
                   src="/images/people1.jpg" 
                   alt="Business meeting" 
                   width={400}
@@ -69,14 +77,6 @@ export default function About() {
                 <Image 
                   src="/images/people2.jpg" 
                   alt="Celebration" 
-                  width={400}
-                  height={300}
-                />
-              </div>
-              <div className='about-image-item'>
-                <Image 
-                  src="/images/people3.jpg" 
-                  alt="Team collaboration" 
                   width={400}
                   height={300}
                 />

@@ -69,18 +69,7 @@ const MENU = [
       { 
         heading: 'Market Updates', 
         links: [
-          { label: 'Daily Market Analysis', href: '/news#daily' },
-          { label: 'Weekly Research Reports', href: '/news#weekly' },
-          { label: 'Market Commentary', href: '/news#commentary' },
-          { label: 'Economic Indicators', href: '/news#indicators' }
-        ]
-      },
-      { 
-        heading: 'Education', 
-        links: [
-          { label: 'Beginners\' Guide', href: '/news#beginners' },
-          { label: 'Market Insights', href: '/news#education-news' },
-          { label: 'Glossary', href: '/news#glossary' }
+          { label: 'Market Chart', href: '/news#chart' }
         ]
       }
     ]

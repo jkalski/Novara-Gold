@@ -342,7 +342,7 @@ export default function IRA() {
               <h2>Ready to Start Your Precious Metals IRA?</h2>
               <p>Contact our IRA specialists to begin the process of diversifying your retirement portfolio with precious metals.</p>
               <div className='cta-buttons'>
-                <button className='btn-primary'>Get Started</button>
+                <a href="/contact" className='btn-primary'>Get Started</a>
               </div>
             </div>
           </section>
