@@ -5,20 +5,21 @@ import { useState } from 'react'
 const MENU = [
   { 
     label: 'Why Novara', 
+    href: '/about',
     columns: [
       { 
         heading: 'About', 
         links: [
           { label: 'About Us', href: '/about' },
-          { label: 'Core Principles', href: '/principles' },
-          { label: 'Reviews & Testimonials', href: '/reviews' },
-          { label: 'Security & Storage Overview', href: '/security' }
+          { label: 'Core Principles', href: '/about#principles' },
+          { label: 'Reviews & Testimonials', href: '/reviews' }
         ]
       }
     ]
   },
   { 
     label: 'Products', 
+    href: '/products',
     columns: [
       { 
         heading: 'Metals', 
@@ -34,6 +35,7 @@ const MENU = [
   },
   { 
     label: 'IRA', 
+    href: '/ira',
     columns: [
       { 
         heading: 'IRA', 
@@ -51,20 +53,19 @@ const MENU = [
   },
   { 
     label: 'Buy-Back', 
+    href: '/buyback',
     columns: [
       { 
         heading: 'Buy-Back', 
         links: [
-          { label: 'Policy Overview', href: '/buyback' },
-          { label: 'In-IRA / Depository Process', href: '/buyback/in-ira' },
-          { label: 'Personal Possession Process', href: '/buyback/personal' },
-          { label: 'Not Purchased From Novara', href: '/buyback/third-party' }
+          { label: 'Policy Overview', href: '/buyback' }
         ]
       }
     ]
   },
   { 
     label: 'News', 
+    href: '/news',
     columns: [
       { 
         heading: 'Market Updates', 
@@ -101,16 +102,13 @@ export default function Navbar() {
             className='nav-toggle' 
             onClick={() => setMobile(!mobile)} 
             aria-expanded={mobile}
-            style={{
-              display: 'none',
-              background: 'none',
-              border: 'none',
-              fontSize: '1.2rem',
-              cursor: 'pointer',
-              color: 'var(--gray-700)'
-            }}
+            aria-label="Toggle navigation menu"
           >
-            Menu
+            <span className={`hamburger ${mobile ? 'active' : ''}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
           </button>
           
           <nav className={`primary-nav ${mobile ? 'open' : ''}`}>

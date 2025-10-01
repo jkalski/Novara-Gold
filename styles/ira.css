@@ -477,3 +477,153 @@
     max-width: 300px;
   }
 }
+
+@media (max-width: 480px) {
+  .ira-page {
+    padding: var(--space-6) 0;
+  }
+  
+  .ira-header {
+    padding: var(--space-6) 0;
+  }
+  
+  .ira-header h1 {
+    font-size: 2rem;
+  }
+  
+  .ira-header .lead {
+    font-size: 1rem;
+  }
+  
+  .ira-nav {
+    padding: var(--space-4);
+  }
+  
+  .ira-nav button {
+    padding: var(--space-3) var(--space-4);
+    font-size: 0.8rem;
+  }
+  
+  .ira-section h2 {
+    font-size: 1.75rem;
+  }
+  
+  .ira-section h3 {
+    font-size: 1.25rem;
+  }
+  
+  .ira-section h4 {
+    font-size: 1.125rem;
+  }
+  
+  .ira-section p {
+    font-size: 1rem;
+  }
+  
+  .ira-section ul, .ira-section ol {
+    font-size: 1rem;
+  }
+  
+  .ira-intro {
+    padding: var(--space-8);
+  }
+  
+  .ira-intro h3 {
+    font-size: 1.5rem;
+  }
+  
+  .ira-intro p {
+    font-size: 1.125rem;
+  }
+  
+  .process-step {
+    padding: var(--space-6) 0;
+    padding-left: var(--space-4);
+  }
+  
+  .process-step h4 {
+    font-size: 1.25rem;
+  }
+  
+  .process-step p {
+    font-size: 1rem;
+  }
+  
+  .rollover-type h4 {
+    font-size: 1.25rem;
+  }
+  
+  .rollover-type p {
+    font-size: 1rem;
+  }
+  
+  .fee-structure {
+    gap: var(--space-4);
+  }
+  
+  .fee-item h4 {
+    font-size: 1.125rem;
+  }
+  
+  .fee-item p {
+    font-size: 1rem;
+  }
+  
+  .faq-item h2 {
+    font-size: 1.25rem;
+  }
+  
+  .faq-item h4 {
+    font-size: 1.125rem;
+  }
+  
+  .faq-item p {
+    font-size: 1rem;
+  }
+  
+  .faq-item ul {
+    font-size: 1rem;
+  }
+  
+  .faq-contact {
+    padding: var(--space-6);
+  }
+  
+  .faq-contact p {
+    font-size: 1.125rem;
+  }
+  
+  .document-list {
+    gap: var(--space-4);
+  }
+  
+  .document-item h4 {
+    font-size: 1.125rem;
+  }
+  
+  .document-item p {
+    font-size: 1rem;
+  }
+  
+  .document-item button {
+    padding: var(--space-2) var(--space-4);
+    font-size: 0.8rem;
+  }
+  
+  .ira-cta {
+    padding: var(--space-12) var(--space-4);
+  }
+  
+  .cta-card h2 {
+    font-size: 2rem;
+  }
+  
+  .cta-card p {
+    font-size: 1.125rem;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: var(--space-3) var(--space-6);
+    font-size: 0.95rem;
+  }
+}

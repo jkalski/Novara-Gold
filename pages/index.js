@@ -285,6 +285,25 @@ export default function Home() {
             <div className='featured-product-card'>
               <div className='product-image-container'>
                 <Image 
+                  src="/images/Gold Pamp Suisse Bar.png" 
+                  alt="Gold PAMP Suisse Bar"
+                  width={400}
+                  height={250}
+                  className='product-image'
+                  loading="lazy"
+                />
+              </div>
+              <div className='product-info'>
+                <h3>Gold PAMP Suisse Bar</h3>
+                <p className='product-metal'>Gold</p>
+                <p className='product-description'>Premium gold bars from PAMP Suisse, known for exceptional quality and purity.</p>
+                <a href='/products' className='product-link'>View Details →</a>
+              </div>
+            </div>
+            
+            <div className='featured-product-card'>
+              <div className='product-image-container'>
+                <Image 
                   src="/images/Silver American Eagle.png" 
                   alt="Silver American Eagle"
                   width={400}
@@ -297,25 +316,6 @@ export default function Home() {
                 <h3>Silver American Eagle</h3>
                 <p className='product-metal'>Silver</p>
                 <p className='product-description'>America's premier silver bullion coin, offering exceptional value and liquidity.</p>
-                <a href='/products' className='product-link'>View Details →</a>
-              </div>
-            </div>
-            
-            <div className='featured-product-card'>
-              <div className='product-image-container'>
-                <Image 
-                  src="/images/Platinum Eagle.png" 
-                  alt="Platinum Eagle"
-                  width={400}
-                  height={250}
-                  className='product-image platinum-image'
-                  loading="lazy"
-                />
-              </div>
-              <div className='product-info'>
-                <h3>Platinum Eagle</h3>
-                <p className='product-metal'>Platinum</p>
-                <p className='product-description'>Rare and valuable platinum coins with exceptional purity and IRA eligibility.</p>
                 <a href='/products' className='product-link'>View Details →</a>
               </div>
             </div>
@@ -356,7 +356,7 @@ export default function Home() {
                 <h3>Gold & Silver</h3>
               </div>
               <p>Comprehensive trading and storage solutions for gold and silver investments, from coins to bars.</p>
-              <a href='/products/gold' className='gs-service-link'>Explore Gold →</a>
+              <a href='/products' className='gs-service-link'>Explore Gold →</a>
             </div>
             
             <div className='gs-insight-card'>
@@ -364,7 +364,7 @@ export default function Home() {
                 <h3>Platinum & Palladium</h3>
               </div>
               <p>Specialized services for platinum and palladium investments, including IRA-eligible options.</p>
-              <a href='/products/platinum' className='gs-service-link'>Explore Platinum →</a>
+              <a href='/products' className='gs-service-link'>Explore Platinum →</a>
             </div>
             
             <div className='gs-insight-card'>
@@ -372,7 +372,7 @@ export default function Home() {
                 <h3>IRA-Eligible Metals</h3>
               </div>
               <p>Expert guidance on IRA-eligible precious metals with full compliance and regulatory support.</p>
-              <a href='/products/ira-eligible' className='gs-service-link'>View Options →</a>
+              <a href='/ira' className='gs-service-link'>View Options →</a>
             </div>
           </div>
         </div>

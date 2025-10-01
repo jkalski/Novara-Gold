@@ -87,7 +87,7 @@ export default function About() {
       </section>
 
       {/* Core Principles Section */}
-      <section className='principles-section'>
+      <section id='principles' className='principles-section'>
         <div className='container'>
           <div className='principles-header'>
             <h2>Our Core Principles</h2>

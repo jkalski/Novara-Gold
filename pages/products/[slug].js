@@ -332,7 +332,7 @@ export default function ProductPage() {
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
               style={{objectFit: 'cover'}}
-              className={product.name === 'Platinum Eagle' ? 'platinum-image' : ''}
+              className=""
             />
           </div>
           <div className='product-info'>
