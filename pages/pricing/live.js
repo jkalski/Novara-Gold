@@ -1,0 +1,1 @@
+export default function Page(){return (<div className='section'><div className='container'><h1>Pricing Live</h1><div className='card' style={marginTop:16}><p>Placeholder content for Pricing Live.</p></div></div></div>)}

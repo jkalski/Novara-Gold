@@ -1,0 +1,1 @@
+export default function Page(){return (<div className='section'><div className='container'><h1>Products Ira-Eligible</h1><div className='card' style={marginTop:16}><p>Placeholder content for Products Ira-Eligible.</p></div></div></div>)}

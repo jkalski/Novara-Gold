@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# next.js build
+.next/
+out/
+
+# production
+build/
+dist/
+
+# env & misc
+.env
+.env.*
+.DS_Store
+npm-debug.log*
+yarn-error.log*
