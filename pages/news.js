@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import SEO from '../components/SEO'
+import MarketChart from '../components/MarketChart'
 import { getMarketUpdates, getFeaturedMarketUpdate } from '../lib/contentful'
 
 export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConfigured }) {
@@ -89,61 +90,8 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
           </div>
           
           <div className='chart-content'>
-            <div className='chart-container'>
-              <div className='chart-header'>
-                <h3>Gold Price Chart</h3>
-                <div className='chart-controls'>
-                  <button className='timeframe-btn active'>1D</button>
-                  <button className='timeframe-btn'>1W</button>
-                  <button className='timeframe-btn'>1M</button>
-                  <button className='timeframe-btn'>3M</button>
-                  <button className='timeframe-btn'>1Y</button>
-                </div>
-              </div>
-              
-              <div className='chart-placeholder'>
-                <div className='chart-area'>
-                  <div className='chart-title'>Gold Spot Price (USD per ounce)</div>
-                  <div className='chart-visual'>
-                    <div className='price-display'>
-                      <span className='current-price'>$2,045.50</span>
-                      <span className='price-change positive'>+$45.20 (+2.26%)</span>
-                    </div>
-                    <div className='chart-mock'>
-                      <div className='chart-line'></div>
-                      <div className='chart-points'>
-                        <div className='point' style={{left: '10%', bottom: '20%'}}></div>
-                        <div className='point' style={{left: '25%', bottom: '35%'}}></div>
-                        <div className='point' style={{left: '40%', bottom: '15%'}}></div>
-                        <div className='point' style={{left: '55%', bottom: '45%'}}></div>
-                        <div className='point' style={{left: '70%', bottom: '25%'}}></div>
-                        <div className='point' style={{left: '85%', bottom: '10%'}}></div>
-                        <div className='point current' style={{left: '95%', bottom: '5%'}}></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='chart-info'>
-                    <div className='info-item'>
-                      <span className='label'>Open:</span>
-                      <span className='value'>$2,000.30</span>
-                    </div>
-                    <div className='info-item'>
-                      <span className='label'>High:</span>
-                      <span className='value'>$2,048.75</span>
-                    </div>
-                    <div className='info-item'>
-                      <span className='label'>Low:</span>
-                      <span className='value'>$1,995.80</span>
-                    </div>
-                    <div className='info-item'>
-                      <span className='label'>Volume:</span>
-                      <span className='value'>1.2M</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <MarketChart />
+            
             <div className='chart-sidebar'>
               <div className='price-summary'>
                 <h4>Current Prices</h4>
@@ -167,24 +115,6 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
                     <span className='metal'>Palladium</span>
                     <span className='price'>$1,890.75</span>
                     <span className='change negative'>-0.50%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className='market-news'>
-                <h4>Latest Market News</h4>
-                <div className='news-list'>
-                  <div className='news-item'>
-                    <span className='time'>2h ago</span>
-                    <p>Fed signals potential rate cuts boost gold demand</p>
-                  </div>
-                  <div className='news-item'>
-                    <span className='time'>4h ago</span>
-                    <p>Central bank gold purchases hit record levels</p>
-                  </div>
-                  <div className='news-item'>
-                    <span className='time'>6h ago</span>
-                    <p>Inflation data supports precious metals rally</p>
                   </div>
                 </div>
               </div>
