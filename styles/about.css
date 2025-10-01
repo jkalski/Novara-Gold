@@ -52,16 +52,16 @@
 }
 
 .about-hero h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
   font-weight: var(--font-bold);
-  margin-bottom: 24px;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
   color: var(--gs-white);
   letter-spacing: -0.02em;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .about-hero-subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 3.5vw, 1.5rem);
   font-weight: var(--font-medium);
   margin-bottom: 0;
   color: var(--gs-gold-light);
@@ -70,47 +70,47 @@
 
 /* About Content Section */
 .about-content {
-  padding: 80px 0;
+  padding: clamp(3rem, 10vw, 5rem) 0;
   background: var(--gs-white);
 }
 
 .about-content-wrapper {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 60px;
+  gap: clamp(2rem, 8vw, 3.75rem);
   align-items: start;
-  max-width: 1200px;
+  max-width: clamp(20rem, 90vw, 75rem);
   margin: 0 auto;
 }
 
 .about-text h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
   font-weight: var(--font-bold);
-  margin-bottom: 32px;
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
   color: var(--gs-gray-800);
   letter-spacing: -0.02em;
 }
 
 .about-description p {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   line-height: 1.7;
   color: var(--gs-gray-600);
-  margin-bottom: 24px;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
 }
 
 .about-description .tagline {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 3vw, 1.25rem);
   font-weight: var(--font-bold);
   color: var(--gs-blue);
-  margin-top: 32px;
-  padding: 16px 0;
+  margin-top: clamp(1.5rem, 4vw, 2rem);
+  padding: clamp(0.75rem, 2vw, 1rem) 0;
   border-top: 2px solid var(--gs-blue);
 }
 
 .about-images {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(1rem, 3vw, 1.5rem);
 }
 
 .about-image-item {
@@ -126,57 +126,57 @@
 
 .about-image-item img {
   width: 100%;
-  height: 200px;
+  height: clamp(10rem, 25vw, 12.5rem);
   object-fit: cover;
   object-position: center;
 }
 
 /* About CTA Section */
 .about-cta {
-  padding: 80px 0;
+  padding: clamp(3rem, 10vw, 5rem) 0;
   background: linear-gradient(135deg, var(--gs-blue) 0%, var(--gs-blue-light) 100%);
   color: var(--gs-white);
   text-align: center;
 }
 
 .cta-content {
-  max-width: 800px;
+  max-width: clamp(20rem, 50vw, 50rem);
   margin: 0 auto;
 }
 
 .cta-content h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
   font-weight: var(--font-bold);
-  margin-bottom: 24px;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
   color: var(--gs-white);
   letter-spacing: -0.02em;
 }
 
 .cta-content p {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 3vw, 1.25rem);
   line-height: 1.7;
-  margin-bottom: 32px;
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
   opacity: 0.95;
-  max-width: 600px;
+  max-width: clamp(20rem, 50vw, 37.5rem);
   margin-left: auto;
   margin-right: auto;
 }
 
 .cta-buttons {
   display: flex;
-  gap: 16px;
+  gap: clamp(0.75rem, 2vw, 1rem);
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .cta-buttons .btn {
-  padding: 16px 32px;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
   border-radius: var(--radius);
   font-weight: var(--font-semibold);
   text-decoration: none;
   transition: all var(--transition);
   display: inline-block;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
 }
 
 .cta-buttons .btn-primary {
@@ -204,101 +204,127 @@
 }
 
 /* Responsive Design for About Page */
-@media (max-width: 1024px) {
+@media (max-width: 64rem) {
   .about-content-wrapper {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: clamp(2rem, 6vw, 2.5rem);
   }
   
   .about-images {
     flex-direction: row;
     justify-content: center;
+    gap: var(--space-4);
   }
   
   .about-image-item {
     flex: 1;
-    max-width: 300px;
+    max-width: clamp(15rem, 30vw, 18.75rem);
+  }
+  
+  .about-image-item img {
+    width: 100%;
+    height: clamp(10rem, 25vw, 12.5rem);
+    object-fit: cover;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .about-hero {
     min-height: 50vh;
   }
   
   .about-hero h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    margin-bottom: var(--space-3);
   }
   
   .about-hero-subtitle {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    margin-bottom: var(--space-4);
   }
   
   .about-content {
-    padding: 60px 0;
+    padding: clamp(2.5rem, 8vw, 3.75rem) 0;
   }
   
   .about-content-wrapper {
-    gap: 32px;
+    gap: clamp(1.5rem, 4vw, 2rem);
   }
   
   .about-text h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-bottom: var(--space-4);
   }
   
   .about-description p {
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    margin-bottom: var(--space-4);
   }
   
   .about-images {
     flex-direction: column;
+    gap: var(--space-4);
   }
   
   .about-image-item {
     max-width: 100%;
   }
   
+  .about-image-item img {
+    width: 100%;
+    height: clamp(12.5rem, 30vw, 15.625rem);
+    object-fit: cover;
+  }
+  
   .about-cta {
-    padding: 60px 0;
+    padding: clamp(2.5rem, 8vw, 3.75rem) 0;
   }
   
   .cta-content h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-bottom: var(--space-3);
+  }
+  
+  .cta-content p {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    margin-bottom: var(--space-6);
   }
   
   .cta-buttons {
     flex-direction: column;
     align-items: center;
+    gap: var(--space-3);
   }
   
   .cta-buttons .btn {
     width: 100%;
-    max-width: 300px;
+    max-width: clamp(15rem, 40vw, 18.75rem);
+    padding: var(--space-3) var(--space-6);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .about-hero h1 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 6vw, 2rem);
   }
   
   .about-hero-subtitle {
-    font-size: 1.125rem;
+    font-size: clamp(0.875rem, 2.5vw, 1.125rem);
   }
   
   .about-text h2 {
-    font-size: 1.75rem;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
   }
   
   .about-description p {
-    font-size: 0.95rem;
+    font-size: clamp(0.875rem, 2.5vw, 0.95rem);
   }
 }
 
 /* Core Principles Section */
 .principles-section {
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  padding: 100px 0;
+  padding: clamp(4rem, 12vw, 6.25rem) 0;
   position: relative;
 }
 
@@ -314,17 +340,17 @@
 
 .principles-header {
   text-align: center;
-  margin-bottom: 80px;
-  max-width: 800px;
+  margin-bottom: clamp(3rem, 10vw, 5rem);
+  max-width: clamp(20rem, 50vw, 50rem);
   margin-left: auto;
   margin-right: auto;
 }
 
 .principles-header h2 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   font-weight: var(--font-bold);
   color: var(--gs-gray-900);
-  margin-bottom: 24px;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
   letter-spacing: -0.02em;
   line-height: 1.1;
   position: relative;
@@ -333,17 +359,17 @@
 .principles-header h2::after {
   content: '';
   position: absolute;
-  bottom: -12px;
+  bottom: clamp(-0.5rem, -1.5vw, -0.75rem);
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
+  width: clamp(2.5rem, 8vw, 3.75rem);
+  height: clamp(0.125rem, 0.5vw, 0.25rem);
   background: var(--gs-gold);
   border-radius: 2px;
 }
 
 .principles-header p {
-  font-size: 1.375rem;
+  font-size: clamp(1rem, 3.5vw, 1.375rem);
   color: var(--gs-gray-600);
   line-height: 1.6;
   font-weight: var(--font-medium);
@@ -351,22 +377,22 @@
 }
 
 .principles-content {
-  max-width: 1000px;
+  max-width: clamp(20rem, 90vw, 62.5rem);
   margin: 0 auto;
 }
 
 .principle-item {
-  margin-bottom: 50px;
-  padding: 30px 0;
+  margin-bottom: clamp(2rem, 6vw, 3.125rem);
+  padding: clamp(1.5rem, 4vw, 1.875rem) 0;
   position: relative;
   border-left: 4px solid var(--gs-gold);
-  padding-left: 30px;
+  padding-left: clamp(1.5rem, 4vw, 1.875rem);
   transition: all 0.3s ease;
 }
 
 .principle-item:hover {
   border-left-color: var(--gs-blue);
-  transform: translateX(8px);
+  transform: translateX(clamp(0.25rem, 1vw, 0.5rem));
 }
 
 .principle-item:not(:last-child)::after {
@@ -385,10 +411,10 @@
 }
 
 .principle-content h3 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: var(--font-bold);
   color: var(--gs-gray-900);
-  margin-bottom: 20px;
+  margin-bottom: clamp(1rem, 2.5vw, 1.25rem);
   line-height: 1.2;
   letter-spacing: -0.01em;
   position: relative;
@@ -397,20 +423,20 @@
 .principle-content h3::before {
   content: '';
   position: absolute;
-  left: -30px;
+  left: clamp(-1.5rem, -3vw, -1.875rem);
   top: 50%;
   transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
+  width: clamp(0.5rem, 1.5vw, 0.75rem);
+  height: clamp(0.5rem, 1.5vw, 0.75rem);
   background: var(--gs-gold);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px var(--gs-white), 0 0 0 6px var(--gs-gold);
+  box-shadow: 0 0 0 clamp(0.125rem, 0.5vw, 0.25rem) var(--gs-white), 0 0 0 clamp(0.25rem, 0.75vw, 0.375rem) var(--gs-gold);
 }
 
 .principle-content p {
   color: var(--gs-gray-700);
   line-height: 1.7;
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   margin: 0;
   font-weight: var(--font-medium);
 }
@@ -426,100 +452,100 @@
 
 .principle-item:nth-child(even) .principle-content h3::before {
   background: var(--gs-blue);
-  box-shadow: 0 0 0 4px var(--gs-white), 0 0 0 6px var(--gs-blue);
+  box-shadow: 0 0 0 clamp(0.125rem, 0.5vw, 0.25rem) var(--gs-white), 0 0 0 clamp(0.25rem, 0.75vw, 0.375rem) var(--gs-blue);
 }
 
 /* Responsive Design for Principles Section */
-@media (max-width: 1024px) {
+@media (max-width: 64rem) {
   .principles-section {
-    padding: 80px 0;
+    padding: clamp(3rem, 8vw, 5rem) 0;
   }
   
   .principles-header {
-    margin-bottom: 60px;
+    margin-bottom: clamp(2.5rem, 6vw, 3.75rem);
   }
   
   .principles-header h2 {
-    font-size: 2.5rem;
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
   }
   
   .principle-item {
-    margin-bottom: 40px;
-    padding: 25px 0;
+    margin-bottom: clamp(2rem, 5vw, 2.5rem);
+    padding: clamp(1.25rem, 3vw, 1.5625rem) 0;
   }
   
   .principle-content h3 {
-    font-size: 1.75rem;
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem);
   }
   
   .principle-content p {
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .principles-section {
-    padding: 60px 0;
+    padding: clamp(2.5rem, 6vw, 3.75rem) 0;
   }
   
   .principles-header {
-    margin-bottom: 50px;
+    margin-bottom: clamp(2rem, 5vw, 3.125rem);
   }
   
   .principles-header h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
   }
   
   .principles-header p {
-    font-size: 1.125rem;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
   }
   
   .principle-item {
-    margin-bottom: 35px;
-    padding: 20px 0;
-    padding-left: 25px;
+    margin-bottom: clamp(1.5rem, 4vw, 2.1875rem);
+    padding: clamp(1rem, 2.5vw, 1.25rem) 0;
+    padding-left: clamp(1.25rem, 3vw, 1.5625rem);
   }
   
   .principle-content h3::before {
-    left: -25px;
-    width: 10px;
-    height: 10px;
+    left: clamp(-1.25rem, -2.5vw, -1.5625rem);
+    width: clamp(0.5rem, 1.25vw, 0.625rem);
+    height: clamp(0.5rem, 1.25vw, 0.625rem);
   }
   
   .principle-content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 16px;
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
   }
   
   .principle-content p {
-    font-size: 0.95rem;
+    font-size: clamp(0.875rem, 2.5vw, 0.95rem);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .principles-header h2 {
-    font-size: 1.75rem;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
   }
   
   .principles-header p {
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
   
   .principle-item {
-    padding-left: 20px;
+    padding-left: clamp(1rem, 2.5vw, 1.25rem);
   }
   
   .principle-content h3::before {
-    left: -20px;
-    width: 8px;
-    height: 8px;
+    left: clamp(-1rem, -2vw, -1.25rem);
+    width: clamp(0.375rem, 1vw, 0.5rem);
+    height: clamp(0.375rem, 1vw, 0.5rem);
   }
   
   .principle-content h3 {
-    font-size: 1.375rem;
+    font-size: clamp(1rem, 3vw, 1.375rem);
   }
   
   .principle-content p {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2.2vw, 0.9rem);
   }
 }

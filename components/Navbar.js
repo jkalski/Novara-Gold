@@ -112,6 +112,13 @@ export default function Navbar() {
           </button>
           
           <nav className={`primary-nav ${mobile ? 'open' : ''}`}>
+            {/* Mobile Home Button - Only visible on mobile */}
+            <div className='mobile-home-button'>
+              <Link href='/' className='mobile-home-link'>
+                Home
+              </Link>
+            </div>
+            
             <ul className='top-level'>
               {MENU.map((item, index) => (
                 <li 
@@ -156,6 +163,14 @@ export default function Navbar() {
               ))}
             </ul>
             
+            {/* Mobile Contact Button - Only visible on mobile */}
+            <div className='mobile-contact-button'>
+              <Link href='/contact' className='mobile-contact-link'>
+                Contact
+              </Link>
+            </div>
+            
+            {/* Desktop Contact - Hidden on mobile */}
             <div className='nav-right'>
               <Link href='/contact' className='top-link'>Contact</Link>
             </div>

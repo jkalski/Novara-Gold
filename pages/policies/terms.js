@@ -33,7 +33,7 @@ export default function Page(){
             <li>Calls, text messages, and prerecorded messages via automated dialing systems about promotions</li>
             <li>Email communications regarding your account and our services</li>
           </ul>
-          <p>You may opt out of SMS messages by replying STOP to any message. For help, text 424-491-8878. Message and data rates may apply. Messaging frequency may vary. Consent is not a condition of purchase.</p>
+          <p>You may opt out of SMS messages by replying STOP to any message. For help, text 424-491-8678. Message and data rates may apply. Messaging frequency may vary. Consent is not a condition of purchase.</p>
           
           <h3>4. Privacy and Data Protection</h3>
           <p>Your privacy is important to us. Please review our <a href="/policies/privacy">Privacy Policy</a> to understand how we collect, use, and protect your information.</p>

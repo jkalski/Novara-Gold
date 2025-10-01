@@ -39,14 +39,14 @@
 }
 
 .news-hero h1 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   font-weight: var(--font-bold);
   margin-bottom: var(--space-4);
   line-height: 1.2;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 3vw, 1.25rem);
   opacity: 0.9;
   line-height: 1.6;
 }
@@ -83,7 +83,7 @@
   color: var(--gs-gray-700);
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
 }
 
 .news-nav button:hover {
@@ -124,7 +124,7 @@
 }
 
 .section-header h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
   font-weight: var(--font-bold);
   color: var(--gs-gray-900);
   margin: 0;
@@ -133,10 +133,10 @@
 
 /* Market Chart */
 .chart-content {
-  max-width: 1400px;
+  max-width: clamp(20rem, 90vw, 87.5rem);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 1fr clamp(15rem, 25vw, 18.75rem);
   gap: var(--space-8);
   align-items: start;
 }
@@ -159,7 +159,7 @@
 }
 
 .chart-header h3 {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
   font-weight: var(--font-bold);
   color: var(--gs-gray-900);
   margin: 0;
@@ -175,7 +175,7 @@
   background: var(--gs-gray-100);
   border: 1px solid var(--gs-gray-300);
   border-radius: var(--radius);
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
   font-weight: var(--font-medium);
   color: var(--gs-gray-700);
   cursor: pointer;
@@ -235,13 +235,13 @@
 }
 
 .current-price {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: var(--font-bold);
   color: var(--gs-gray-900);
 }
 
 .price-change {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   font-weight: var(--font-semibold);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius);
@@ -414,7 +414,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .news-page {
     padding: var(--space-12) 0;
   }
@@ -425,11 +425,11 @@
   }
   
   .news-hero h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
   }
   
   .hero-subtitle {
-    font-size: 1.125rem;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
   }
   
   .news-nav ul {
@@ -439,7 +439,7 @@
   
   .news-nav button {
     width: 100%;
-    max-width: 300px;
+    max-width: clamp(15rem, 40vw, 18.75rem);
     justify-content: center;
   }
   
@@ -450,7 +450,7 @@
   }
   
   .section-header h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
   }
   
   .chart-container {
@@ -478,7 +478,7 @@
   }
   
   .current-price {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
   }
   
   .tradingview-chart-container,
@@ -487,11 +487,11 @@
   }
   
   .tradingview-chart {
-    height: 300px;
+    height: clamp(15rem, 40vw, 18.75rem);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .news-page {
     padding: var(--space-8) 0;
   }
@@ -501,11 +501,11 @@
   }
   
   .news-hero h1 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 6vw, 2rem);
   }
   
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
   
   .news-nav {
@@ -514,11 +514,11 @@
   
   .news-nav button {
     padding: var(--space-3) var(--space-4);
-    font-size: 0.95rem;
+    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
   }
   
   .section-header h2 {
-    font-size: 1.75rem;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
   }
   
   .chart-container {
@@ -526,20 +526,20 @@
   }
   
   .chart-header h3 {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 3vw, 1.25rem);
   }
   
   .timeframe-btn {
     padding: var(--space-1) var(--space-3);
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 1.8vw, 0.8rem);
   }
   
   .current-price {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 3vw, 1.25rem);
   }
   
   .price-change {
-    font-size: 0.95rem;
+    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
   }
   
   .tradingview-chart-container,
@@ -548,15 +548,15 @@
   }
   
   .tradingview-chart {
-    height: 250px;
+    height: clamp(12.5rem, 35vw, 15.625rem);
   }
   
   .functional-chart-container .chart-visual {
-    min-height: 300px;
+    min-height: clamp(15rem, 40vw, 18.75rem);
   }
   
   .functional-chart-container .price-value {
-    font-size: 1.75rem;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
   }
   
   .functional-chart-container .chart-info {
@@ -652,7 +652,7 @@
   background: var(--gs-gray-100);
   border: 1px solid var(--gs-gray-300);
   border-radius: var(--radius);
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
   font-weight: var(--font-medium);
   color: var(--gs-gray-700);
   cursor: pointer;
@@ -695,7 +695,7 @@
 }
 
 .functional-chart-container .price-change {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   font-weight: var(--font-semibold);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius);
@@ -1189,7 +1189,7 @@
 }
 
 .coming-soon-icon {
-  font-size: 5rem;
+  font-size: clamp(3rem, 10vw, 5rem);
   margin-bottom: var(--space-6);
   animation: bounce 2s infinite;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -1209,7 +1209,7 @@
 }
 
 .coming-soon-content h2 {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
   font-weight: var(--font-bold);
   margin-bottom: var(--space-6);
   line-height: 1.2;
@@ -1232,7 +1232,7 @@
 }
 
 .coming-soon-content p {
-  font-size: 1.375rem;
+  font-size: clamp(1rem, 3.5vw, 1.375rem);
   opacity: 0.95;
   line-height: 1.6;
   margin-bottom: var(--space-8);
@@ -1242,7 +1242,7 @@
 
 .coming-soon-features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(clamp(15rem, 25vw, 15.625rem), 1fr));
   gap: var(--space-6);
   margin-top: var(--space-8);
 }
@@ -1285,7 +1285,7 @@
 }
 
 .feature-icon {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   flex-shrink: 0;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   animation: iconPulse 2s ease-in-out infinite;
@@ -1302,20 +1302,20 @@
 
 .feature-item span:last-child {
   font-weight: var(--font-semibold);
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 1;
 }
 
 /* Responsive Design for Coming Soon */
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .coming-soon-content h2 {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
   }
   
   .coming-soon-content p {
-    font-size: 1.125rem;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
   }
   
   .coming-soon-features {
@@ -1330,17 +1330,17 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .coming-soon-section {
     padding: var(--space-16) 0;
   }
   
   .coming-soon-content h2 {
-    font-size: 2rem;
+    font-size: clamp(1.25rem, 5vw, 2rem);
   }
   
   .coming-soon-icon {
-    font-size: 3rem;
+    font-size: clamp(2rem, 8vw, 3rem);
   }
 }
 

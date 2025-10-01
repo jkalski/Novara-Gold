@@ -187,7 +187,6 @@ export default function IRA() {
             <h3>Minimum Investment Requirements</h3>
             <ul>
               <li><strong>Initial Investment:</strong> $50,000 minimum</li>
-              <li><strong>Additional Contributions:</strong> Minimum amounts vary by custodian</li>
             </ul>
 
             <h3>Fee Transparency</h3>
@@ -243,7 +242,7 @@ export default function IRA() {
 
             <div className='faq-item'>
               <h4>What happens to my metals when I reach retirement age?</h4>
-              <p>At age 59½, you can take distributions from your IRA. You can choose to receive the metals directly or sell them for cash. Both options are subject to applicable taxes.</p>
+              <p>At age 59½, you can take distributions from your IRA. You can choose to receive the metals directly or sell them for cash. At 72½ or older, requirement of distributions may also be taken out from this account.</p>
             </div>
 
             <div className='faq-item'>

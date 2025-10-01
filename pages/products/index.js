@@ -37,9 +37,10 @@ export default function Products() {
                 <Image 
                   src="/images/Gold American Eagle.png" 
                   alt="United States Mint Gold American Eagle 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -53,9 +54,10 @@ export default function Products() {
                 <Image 
                   src="/images/Gold American Buffalo.png" 
                   alt="United States Mint Gold American Buffalo 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -69,9 +71,10 @@ export default function Products() {
                 <Image 
                   src="/images/Gold Austrian Philharmonic.png" 
                   alt="Austrian Mint Gold Philharmonic 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -85,9 +88,10 @@ export default function Products() {
                 <Image 
                   src="/images/Gold Maple Leaf.png" 
                   alt="Royal Canadian Mint Gold Maple Leaf 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -101,9 +105,10 @@ export default function Products() {
                 <Image 
                   src="/images/Gold Brittania (2013).png" 
                   alt="The Royal Mint Gold Britannia 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -117,9 +122,10 @@ export default function Products() {
                 <Image 
                   src="/images/Gold Pamp Suisse Bar.png" 
                   alt="Gold Pamp Suisse Bar 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -133,9 +139,10 @@ export default function Products() {
                 <Image 
                   src="/images/Brittania Gold Bar.png" 
                   alt="Britannia Gold Bar 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -149,9 +156,10 @@ export default function Products() {
                 <Image 
                   src="/images/Gold Bullion Bars.png" 
                   alt="1 oz Gold Generic Bar .9999" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -165,9 +173,10 @@ export default function Products() {
                 <Image 
                   src="/images/Gold American Eagle Proof Box and COA.png" 
                   alt="United States Mint Gold American Eagle Proof 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -182,9 +191,10 @@ export default function Products() {
                 <Image 
                   src="/images/Silver American Eagle.png" 
                   alt="United States Mint Silver American Eagle 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -198,9 +208,10 @@ export default function Products() {
                 <Image 
                   src="/images/Silver Maple Leaf.png" 
                   alt="Royal Canadian Mint Silver Maple Leaf 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -214,9 +225,10 @@ export default function Products() {
                 <Image 
                   src="/images/Silver Bullion Bars.png" 
                   alt="10 oz Silver Bar" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                   className='silver-bars-image'
                 />
               </div>
@@ -232,9 +244,10 @@ export default function Products() {
                 <Image 
                   src="/images/Platinum Eagle.png" 
                   alt="United States Mint Platinum Eagle 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                   className='platinum-image'
                 />
               </div>
@@ -250,9 +263,10 @@ export default function Products() {
                 <Image 
                   src="/images/Palladium RMC Maple Leaf.png" 
                   alt="Royal Canadian Mint Palladium Maple Leaf 1 oz" 
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  style={{ objectFit: 'cover' }}
+                  width={250}
+                  height={250}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               <div className='product-info'>
@@ -359,7 +373,7 @@ export default function Products() {
                       />
                       <span className='checkmark'></span>
                       <div className='consent-text'>
-                        <span>By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8878. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <a href="/policies/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/policies/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>.</span>
+                        <span>By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8678. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <a href="/policies/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/policies/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>.</span>
                       </div>
                     </label>
                   </div>
@@ -373,40 +387,10 @@ export default function Products() {
           </div>
         </section>
 
-        {/* Call to Action */}
+        {/* Call to Action - Hidden */}
         <section style={{textAlign: 'center', padding: '3rem 0'}}>
-          <div className='card' style={{background: 'linear-gradient(135deg, var(--blue-600), var(--blue-800))', color: 'white'}}>
-            <h3 style={{marginTop: 0, color: 'white'}}>Ready to Start Your Precious Metals Investment?</h3>
-            <p style={{fontSize: '1.1rem', marginBottom: '2rem'}}>
-              Contact our experts to discuss your investment goals and find the right precious metals for your portfolio.
-            </p>
-            <div style={{display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'}}>
-              <a href="/contact" style={{
-                background: 'white',
-                color: 'var(--blue-600)',
-                padding: '0.75rem 1.5rem',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-                display: 'inline-block'
-              }}>
-                Get Started
-              </a>
-              <a href="/ira" style={{
-                background: 'transparent',
-                color: 'white',
-                padding: '0.75rem 1.5rem',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-                border: '2px solid white',
-                display: 'inline-block'
-              }}>
-                Learn About IRA
-              </a>
-            </div>
-        </div>
         </section>
+
       </div>
     </div>
   )

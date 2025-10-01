@@ -9,6 +9,8 @@ export default function MarketChart() {
   const [priceChange, setPriceChange] = useState(25.50)
   const [priceChangePercent, setPriceChangePercent] = useState(0.66)
   const [lastUpdated, setLastUpdated] = useState(new Date())
+  const [metalPrices, setMetalPrices] = useState({})
+  const [selectedMetal, setSelectedMetal] = useState('gold')
 
 
   // Fetch real data from Metalprice API

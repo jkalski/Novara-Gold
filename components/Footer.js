@@ -12,7 +12,6 @@ export default function Footer() {
             <li>Phone: (800) 243-1571</li>
             <li>Email: info@novaragold.com</li>
             <li><Link href='/contact'>Contact Us</Link></li>
-            <li><Link href='/contact/schedule'>Schedule a Call</Link></li>
           </ul>
         </div>
         <div className='col invest'>
@@ -34,10 +33,7 @@ export default function Footer() {
         <div className='col news'>
           <h4>News & Research</h4>
           <ul>
-            <li><Link href='/news#daily'>Daily Market Analysis</Link></li>
-            <li><Link href='/news#weekly'>Weekly Research Reports</Link></li>
-            <li><Link href='/news#commentary'>Market Commentary</Link></li>
-            <li><Link href='/news#glossary'>Glossary</Link></li>
+            <li><Link href='/news'>Market Chart</Link></li>
           </ul>
         </div>
         <div className='col policies'>

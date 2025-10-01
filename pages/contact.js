@@ -8,16 +8,36 @@ export default function Contact() {
     email: '',
     phone: '',
     subject: '',
-    message: ''
+    message: '',
+    smsConsent: false
   })
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [validationError, setValidationError] = useState('')
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value, type, checked } = e.target
+    setFormData({ 
+      ...formData, 
+      [name]: type === 'checkbox' ? checked : value 
+    })
+    
+    // Clear validation error when user interacts with the form
+    if (validationError) {
+      setValidationError('')
+    }
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
+    
+    // Clear any previous validation errors
+    setValidationError('')
+    
+    // Validate that SMS consent is checked
+    if (!formData.smsConsent) {
+      setValidationError('Please check the SMS consent box to continue.')
+      return
+    }
     
     // For now, just show success message and clear form
     // In a real implementation, this would send data to your backend
@@ -29,7 +49,8 @@ export default function Contact() {
       email: '',
       phone: '',
       subject: '',
-      message: ''
+      message: '',
+      smsConsent: false
     })
     
     setTimeout(() => setFormSubmitted(false), 5000)
@@ -39,7 +60,7 @@ export default function Contact() {
     <div className='contact-page'>
       <SEO 
         title="Contact Novara Gold - Precious Metals Investment Experts"
-        description="Contact Novara Gold for expert precious metals investment guidance. Call (424) 491-8878 or email info@novaragold.com for personalized consultation and support."
+        description="Contact Novara Gold for expert precious metals investment guidance. Call (424) 491-8678 or email info@novaragold.com for personalized consultation and support."
         canonical="/contact"
         keywords="contact Novara Gold, precious metals consultation, gold investment advice, silver IRA help, investment consultation"
       />
@@ -77,9 +98,7 @@ export default function Contact() {
               <h3>Hours</h3>
               <p>Our team is available</p>
               <div className='contact-hours'>
-                <div>Monday - Friday: 8:00 AM - 6:00 PM EST</div>
-                <div>Saturday: 9:00 AM - 4:00 PM EST</div>
-                <div>Sunday: Closed</div>
+                <div>Monday - Friday: 8:00 AM - 5:00 PM PST</div>
               </div>
             </div>
           </div>
@@ -176,6 +195,29 @@ export default function Contact() {
                     placeholder='Tell us how we can help you with your precious metals investment needs...'
                     required
                   />
+                </div>
+
+                <div className='form-group checkbox-group'>
+                  <label className={`checkbox-label ${validationError ? 'error' : ''}`}>
+                    <input
+                      type='checkbox'
+                      name='smsConsent'
+                      checked={formData.smsConsent}
+                      onChange={handleInputChange}
+                      required
+                    />
+                    <span className='checkmark'></span>
+                    <span className='checkbox-text'>
+                      By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8678. Message and data rates may apply. Messaging frequency may vary.
+                      <br /><br />
+                      You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase.
+                    </span>
+                  </label>
+                  {validationError && (
+                    <div className='validation-error'>
+                      {validationError}
+                    </div>
+                  )}
                 </div>
 
                 <button type='submit' className='submit-btn'>

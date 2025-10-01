@@ -58,7 +58,7 @@ export default function SEO({
             "logo": `${siteUrl}/images/Main Logo.png`,
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+1-424-491-8878",
+              "telephone": "+1-424-491-8678",
               "contactType": "customer service"
             },
             "sameAs": [

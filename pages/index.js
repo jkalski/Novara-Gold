@@ -469,7 +469,7 @@ export default function Home() {
                       />
                       <span className='checkmark'></span>
                       <div className='consent-text'>
-                        <span>By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8878. Message and data rates may apply. Messaging frequency may vary.</span>
+                        <span>By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8678. Message and data rates may apply. Messaging frequency may vary.</span>
                         
                         {!showFullConsent && (
                           <button 
