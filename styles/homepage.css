@@ -449,6 +449,7 @@
   color: var(--gs-blue);
   text-decoration: underline;
   font-weight: 500;
+  font-size: 0.6rem;
 }
 
 .checkbox-group a:hover {
@@ -457,8 +458,9 @@
 }
 
 .consent-text {
-  flex: 1;
-  position: relative;
+  display: inline;
+  font-size: 0.6rem;
+  line-height: 1.2;
 }
 
 .see-more-btn {
@@ -479,9 +481,7 @@
 }
 
 .checkbox-label {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-4);
+  display: block;
   cursor: pointer;
   font-size: 0.8rem;
   color: var(--gs-gray-700);
@@ -493,6 +493,12 @@
   border-radius: 8px;
   transition: all 0.3s ease;
   background: var(--gs-gray-50);
+}
+
+.checkbox-container {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 8px;
 }
 
 .checkbox-label:hover {
@@ -523,6 +529,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2px;
 }
 
 .checkbox-label:hover .checkmark {
@@ -547,8 +554,8 @@
   content: "";
   position: absolute;
   display: none;
-  left: 7px;
-  top: 3px;
+  left: 8px;
+  top: 5px;
   width: 5px;
   height: 9px;
   border: solid white;
@@ -770,12 +777,83 @@
   .gs-principles-descriptions {
     grid-template-columns: 1fr;
   }
+  
+  .about-quote p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    padding: 0 var(--space-4);
+  }
+  
+  .quote-icon-left {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    left: -1.5rem;
+    top: -0.75rem;
+  }
+  
+  .quote-icon-right {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    right: -0.5rem;
+    bottom: -0.25rem;
+  }
 }
 
 /* GS What We Do Section */
 .gs-what-we-do-section {
   padding: var(--space-24) 0;
   background: var(--gs-gray-50);
+}
+
+/* About Quote Section */
+.about-quote {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  background: none;
+  font-style: normal;
+}
+
+.about-quote p {
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  line-height: 1.6;
+  color: var(--gs-gray-800);
+  margin-bottom: var(--space-6);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+.quote-icon-left {
+  position: absolute;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  color: var(--gs-gold);
+  opacity: 0.8;
+  top: -1.5rem;
+  left: -3.5rem;
+  z-index: 1;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.quote-icon-right {
+  position: absolute;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  color: var(--gs-gold);
+  opacity: 0.8;
+  bottom: -0.5rem;
+  right: -2rem;
+  z-index: 1;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.about-quote cite {
+  display: block;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--gs-blue);
+  font-weight: 600;
+  font-style: normal;
+  margin-top: var(--space-8);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .gs-services-grid {
@@ -830,6 +908,29 @@
 .gs-thinking-section {
   padding: var(--space-24) 0;
   background: var(--gs-white);
+}
+
+.gs-thinking-content {
+  max-width: 1100px;
+  margin: 0 auto var(--space-16);
+  text-align: center;
+}
+
+.gs-thinking-paragraph {
+  font-size: clamp(0.875rem, 2.2vw, 1rem);
+  line-height: 1.8;
+  color: var(--gs-gray-700);
+  font-weight: 400;
+  font-style: italic;
+  margin: 0;
+}
+
+.gs-attribution {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--gs-blue);
+  display: block;
+  margin-top: var(--space-2);
 }
 
 .gs-insights-grid {
@@ -1168,6 +1269,19 @@
     padding: var(--space-4) var(--space-6);
     font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
+  
+  /* Responsive checkbox for medium screens */
+  .checkmark {
+    height: 22px;
+    width: 22px;
+  }
+  
+  .checkmark:after {
+    left: 7px;
+    top: 4px;
+    width: 4px;
+    height: 8px;
+  }
 }
 
 @media (max-width: 30rem) {
@@ -1291,5 +1405,42 @@
   
   .price-change {
     font-size: clamp(0.55rem, 1.5vw, 0.7rem);
+  }
+  
+  .about-quote p {
+    font-size: clamp(0.95rem, 2.2vw, 1.125rem);
+    padding: 0 var(--space-2);
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  .quote-icon-left {
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+    left: -1rem;
+    top: -0.5rem;
+  }
+  
+  .quote-icon-right {
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+    right: -0.25rem;
+    bottom: -0.25rem;
+  }
+  
+  .about-quote cite {
+    font-size: clamp(0.875rem, 2.2vw, 1rem);
+    margin-top: var(--space-6);
+  }
+  
+  /* Responsive checkbox and checkmark */
+  .checkmark {
+    height: 20px;
+    width: 20px;
+  }
+  
+  .checkmark:after {
+    left: 6px;
+    top: 3px;
+    width: 4px;
+    height: 7px;
   }
 }

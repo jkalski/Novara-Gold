@@ -8,7 +8,7 @@ const MENU = [
     href: '/about',
     columns: [
       { 
-        heading: 'About', 
+        heading: 'WHY NOVARA', 
         links: [
           { label: 'About Us', href: '/about' },
           { label: 'Core Principles', href: '/about#principles' },
@@ -81,6 +81,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(null)
   const [mobile, setMobile] = useState(false)
 
+  const closeMobileMenu = () => {
+    setMobile(false)
+    setOpen(null)
+  }
+
   return (
     <header className='site-header'>
       
@@ -114,7 +119,7 @@ export default function Navbar() {
           <nav className={`primary-nav ${mobile ? 'open' : ''}`}>
             {/* Mobile Home Button - Only visible on mobile */}
             <div className='mobile-home-button'>
-              <Link href='/' className='mobile-home-link'>
+              <Link href='/' className='mobile-home-link' onClick={closeMobileMenu}>
                 Home
               </Link>
             </div>
@@ -128,12 +133,12 @@ export default function Navbar() {
                   className={item.columns ? 'has-mega' : ''}
                 >
                   {item.href ? (
-                    <Link href={item.href} className='top-link'>
+                    <Link href={item.href} className='top-link mobile-hidden' onClick={closeMobileMenu}>
                       {item.label}
                     </Link>
                   ) : (
                     <button 
-                      className='top-link' 
+                      className='top-link mobile-hidden' 
                       onClick={() => setOpen(open === index ? null : index)} 
                       aria-expanded={open === index}
                     >
@@ -150,7 +155,7 @@ export default function Navbar() {
                             <ul>
                               {col.links.map((link, linkIndex) => (
                                 <li key={linkIndex}>
-                                  <Link href={link.href}>{link.label}</Link>
+                                  <Link href={link.href} onClick={closeMobileMenu}>{link.label}</Link>
                                 </li>
                               ))}
                             </ul>
@@ -165,7 +170,7 @@ export default function Navbar() {
             
             {/* Mobile Contact Button - Only visible on mobile */}
             <div className='mobile-contact-button'>
-              <Link href='/contact' className='mobile-contact-link'>
+              <Link href='/contact' className='mobile-contact-link' onClick={closeMobileMenu}>
                 Contact
               </Link>
             </div>

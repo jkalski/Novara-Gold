@@ -199,18 +199,19 @@ export default function Contact() {
 
                 <div className='form-group checkbox-group'>
                   <label className={`checkbox-label ${validationError ? 'error' : ''}`}>
-                    <input
-                      type='checkbox'
-                      name='smsConsent'
-                      checked={formData.smsConsent}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <span className='checkmark'></span>
-                    <span className='checkbox-text'>
-                      By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8678. Message and data rates may apply. Messaging frequency may vary.
-                      <br /><br />
-                      You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase.
+                    <div className='checkbox-container'>
+                      <input
+                        type='checkbox'
+                        name='smsConsent'
+                        checked={formData.smsConsent}
+                        onChange={handleInputChange}
+                        required
+                        className='consent-checkbox'
+                      />
+                      <span className='checkmark'></span>
+                    </div>
+                    <span className='consent-text'>
+                      By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text HELP to 424-491-8678. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <a href="/policies/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/policies/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>.
                     </span>
                   </label>
                   {validationError && (

@@ -8,6 +8,7 @@ import {
   FiClock,
   FiUserX 
 } from 'react-icons/fi'
+import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri'
 import SEO from '../components/SEO'
 
 export default function Home() {
@@ -169,38 +170,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What We Do Section - Goldman Sachs Style */}
+      {/* About Quote Section */}
       <section className='gs-what-we-do-section'>
         <div className='gs-container'>
           <div className='gs-section-header'>
-            <h2>What We Do</h2>
-            <p>Delivering for Our Clients</p>
-          </div>
-          
-          <div className='gs-services-grid'>
-            <div className='gs-service-card'>
-              <div className='gs-card-header'>
-                <h3>Physical Precious Metals</h3>
-              </div>
-              <p>Direct purchase of gold, silver, platinum, and palladium coins and bars with competitive pricing, secure storage options, and IRA-eligible products for retirement planning.</p>
-              <a href='/products' className='gs-service-link'>Learn More →</a>
-            </div>
-            
-            <div className='gs-service-card'>
-              <div className='gs-card-header'>
-                <h3>IRA Solutions</h3>
-              </div>
-              <p>Partnering with clients to navigate the complexities of precious metals IRAs through unparalleled insights, proven judgement, and bespoke solutions.</p>
-              <a href='/ira' className='gs-service-link'>Learn More →</a>
-            </div>
-            
-            <div className='gs-service-card'>
-              <div className='gs-card-header'>
-                <h3>Secure Storage</h3>
-              </div>
-              <p>Industry-leading secure storage solutions with insured depositories, providing peace of mind for your precious metals investments.</p>
-              <a href='/security' className='gs-service-link'>Learn More →</a>
-            </div>
+            <blockquote className='about-quote'>
+              <p>
+                <RiDoubleQuotesL className='quote-icon-left' />
+                Novara Gold was established to be an industry changer in an industry that is desperate for change. We are doing this by making trust, transparency, and honesty at the heart of everything we do. We stand apart from competitors who rely on gimmicks like 'free Silver' or pay high prices for celebrity endorsements. These marketing tactics only raise client costs. By avoiding such practices, we keep our pricing fair, our guidance honest, and our focus where it belongs: protecting and growing your wealth.
+                <RiDoubleQuotesR className='quote-icon-right' />
+              </p>
+              <cite>- Novara Gold</cite>
+            </blockquote>
           </div>
         </div>
       </section>
@@ -350,6 +331,14 @@ export default function Home() {
             <p>Insights on Financial Markets and the Global Economy</p>
           </div>
           
+          <div className='gs-thinking-content'>
+            <p className='gs-thinking-paragraph'>
+              "In times when markets swing like a pendulum and global headlines shift overnight, gold remains the anchor in the sea of uncertainty. At Novara Gold, we analyze trends in inflation, interest rates, and currency movements to help investors understand what the financial noise often hides: True Value Endures. As central banks print, debt rises, and currencies waver, physical gold stands as a timeless store of trust and purchasing power - a safeguard not just against volatility, but against complacency. In short, when others chase trends, we help you preserve wealth that lasts"
+              <br />
+              <span className='gs-attribution'>- Novara Gold</span>
+            </p>
+          </div>
+          
           <div className='gs-insights-grid'>
             <div className='gs-insight-card'>
               <div className='gs-card-header'>
@@ -460,16 +449,18 @@ export default function Home() {
                   
                   <div className='form-group checkbox-group'>
                     <label className='checkbox-label'>
-                      <input
-                        type='checkbox'
-                        id='consent'
-                        name='consent'
-                        required
-                        className='consent-checkbox'
-                      />
-                      <span className='checkmark'></span>
-                      <div className='consent-text'>
-                        <span>By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8678. Message and data rates may apply. Messaging frequency may vary.</span>
+                      <div className='checkbox-container'>
+                        <input
+                          type='checkbox'
+                          id='consent'
+                          name='consent'
+                          required
+                          className='consent-checkbox'
+                        />
+                        <span className='checkmark'></span>
+                      </div>
+                      <span className='consent-text'>
+                        By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text HELP to 424-491-8678. Message and data rates may apply. Messaging frequency may vary.
                         
                         {!showFullConsent && (
                           <button 
@@ -485,15 +476,11 @@ export default function Home() {
                         )}
                         
                         {showFullConsent && (
-                          <>
-                            <br/><br/>
-                            <span>You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase.</span>
-                          </>
+                          <span> You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase.</span>
                         )}
                         
-                        <br/><br/>
-                        <span>See our <a href="/policies/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/policies/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>.</span>
-                      </div>
+                        <span> See our <a href="/policies/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/policies/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>.</span>
+                      </span>
                     </label>
                   </div>
                   

@@ -464,7 +464,7 @@ html {
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: var(--font-medium);
-  transition: all var(--transition);
+  transition: none;
   display: block;
   padding: var(--space-2) 0;
   border-radius: var(--radius-sm);
@@ -473,7 +473,6 @@ html {
 .mega-col a:hover {
   color: var(--gs-blue);
   background: var(--gs-gray-50);
-  padding-left: var(--space-2);
 }
 
 /* Goldman Sachs Style Hero Section */
@@ -1181,7 +1180,7 @@ img {
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1000;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-height: calc(100vh - clamp(3.5rem, 8vw, 4rem));
@@ -1205,7 +1204,7 @@ img {
     font-size: 1.1rem;
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius);
-    transition: all var(--transition);
+    transition: none;
     background: rgba(255, 255, 255, 0.05);
     text-align: center;
   }
@@ -1213,7 +1212,6 @@ img {
   .mobile-home-link:hover {
     background: rgba(255, 255, 255, 0.15);
     color: var(--gs-white);
-    transform: translateX(4px);
   }
   
   /* Mobile Contact Button - Only visible on mobile */
@@ -1232,7 +1230,7 @@ img {
     font-size: 1.1rem;
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius);
-    transition: all var(--transition);
+    transition: none;
     background: rgba(255, 255, 255, 0.05);
     text-align: center;
   }
@@ -1240,7 +1238,6 @@ img {
   .mobile-contact-link:hover {
     background: rgba(255, 255, 255, 0.15);
     color: var(--gs-white);
-    transform: translateX(4px);
   }
   
   .primary-nav.open {
@@ -1294,6 +1291,11 @@ img {
     padding: var(--space-4) var(--space-3);
     font-size: 1rem;
     border-radius: 0;
+    transition: none;
+  }
+  
+  .mobile-hidden {
+    display: none;
   }
   
   .nav-right {
@@ -1330,12 +1332,37 @@ img {
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.9rem;
     padding: var(--space-2) 0;
+    transition: none;
   }
   
   .mega-col a:hover {
     color: var(--gs-white);
     background: rgba(255, 255, 255, 0.1);
-    padding-left: var(--space-2);
+  }
+  
+  /* Completely disable any transforms on mobile menu items */
+  .primary-nav *,
+  .primary-nav *:hover,
+  .primary-nav *:active,
+  .primary-nav *:focus,
+  .primary-nav .top-link,
+  .primary-nav .top-link:hover,
+  .primary-nav .top-link:active,
+  .primary-nav .top-link:focus,
+  .primary-nav .mega-col a,
+  .primary-nav .mega-col a:hover,
+  .primary-nav .mega-col a:active,
+  .primary-nav .mega-col a:focus,
+  .primary-nav .mobile-home-link,
+  .primary-nav .mobile-home-link:hover,
+  .primary-nav .mobile-home-link:active,
+  .primary-nav .mobile-home-link:focus,
+  .primary-nav .mobile-contact-link,
+  .primary-nav .mobile-contact-link:hover,
+  .primary-nav .mobile-contact-link:active,
+  .primary-nav .mobile-contact-link:focus {
+    transform: none !important;
+    transition: none !important;
   }
   
   .hero {
@@ -1431,13 +1458,6 @@ img {
     padding: var(--space-6);
   }
   
-  .lead-form-container {
-    padding: var(--space-8);
-  }
-  
-  .form-header h3 {
-    font-size: 1.5rem;
-  }
 }
 
 /* Mobile Phone */
@@ -1592,6 +1612,11 @@ img {
     font-size: 0.95rem;
     width: 100%;
     text-align: left;
+    transition: none;
+  }
+  
+  .mobile-hidden {
+    display: none;
   }
   
   .metals-content {
@@ -1623,36 +1648,7 @@ img {
     font-size: 0.95rem;
   }
   
-  .lead-form-container {
-    padding: var(--space-6);
-  }
   
-  .form-header h3 {
-    font-size: 1.375rem;
-  }
-  
-  .form-header p {
-    font-size: 0.95rem;
-  }
-  
-  .form-group input {
-    padding: var(--space-3) var(--space-4);
-    font-size: 1rem;
-  }
-  
-  .submit-btn {
-    padding: var(--space-4) var(--space-6);
-    font-size: 1rem;
-  }
-  
-  .checkbox-label {
-    padding: var(--space-3);
-    font-size: 0.8rem;
-  }
-  
-  .consent-text {
-    font-size: 0.75rem;
-  }
 
   /* Coming Soon Mobile Styles */
   .coming-soon-content {
