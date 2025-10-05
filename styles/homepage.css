@@ -175,18 +175,27 @@
   font-size: clamp(0.7rem, 1.8vw, 0.8rem);
 }
 
-.price-change {
-  font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-  font-weight: 400;
+/* Ticker ribbon specific price change styles */
+.ticker-ribbon .price-change {
+  font-size: clamp(0.6rem, 1.4vw, 0.7rem);
+  font-weight: 500;
   color: #000000;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
 }
 
-.price-change.positive {
+.ticker-ribbon .price-change.positive {
   color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
 }
 
-.price-change.negative {
+.ticker-ribbon .price-change.negative {
   color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
 }
 
 @keyframes scroll-x {
@@ -1403,8 +1412,8 @@
     font-size: clamp(0.6rem, 1.6vw, 0.75rem);
   }
   
-  .price-change {
-    font-size: clamp(0.55rem, 1.5vw, 0.7rem);
+  .ticker-ribbon .price-change {
+    font-size: clamp(0.65rem, 1.7vw, 0.8rem);
   }
   
   .about-quote p {
