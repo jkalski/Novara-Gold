@@ -38,8 +38,8 @@ export default function BuyBackPage() {
             <div className="hero-icon">
               <FiShield />
             </div>
-            <h1>BUY BACK COMMITMENT</h1>
-            <p className="hero-subtitle">While offering a guaranteed buy back is not legal is the United States, Novara Gold does have a buy back commitment to our clients for metals only purchased through Novara Gold. Once you take possession of your Precious Metals, they are your property. Whether they are stored personally or within a self-directed IRA, you can sell them at any time and to any person or dealer you chose. We ask our clients to come to Novara Gold first. We will do our best to give you the best possible price through our network of dealers. Our process for buy backs can be found below:</p>
+            <h1>BUY BACK POLICY</h1>
+            <p className="hero-subtitle">While offering a guaranteed buy back is not legal is the United States, Novara Gold does have a buy back policy to our clients for metals only purchased through Novara Gold. Once you take possession of your Precious Metals, they are your property. Whether they are stored personally or within a self-directed IRA, you can sell them at any time and to any person or dealer you chose. We ask our clients to come to Novara Gold first. We will do our best to give you the best possible price through our network of dealers. Our process for buy backs can be found below:</p>
             <div className="hero-cta">
               <a href="tel:8002431571" className="btn btn-primary btn-large">
                 <FiPhone className="btn-icon" />
@@ -281,13 +281,13 @@ export default function BuyBackPage() {
             font-size: 1.5rem;
           }
 
-          .commitment-header {
+          .policy-header {
             flex-direction: column;
             text-align: center;
             gap: var(--space-3);
           }
 
-          .commitment-header h2 {
+          .policy-header h2 {
             font-size: 1.75rem;
           }
 
@@ -306,7 +306,7 @@ export default function BuyBackPage() {
             padding: var(--space-6);
           }
 
-          .commitment-section {
+          .policy-section {
             padding: var(--space-8);
           }
         }
@@ -605,20 +605,20 @@ export default function BuyBackPage() {
           line-height: 1.5;
         }
 
-        .commitment-section {
+        .policy-section {
           background: linear-gradient(135deg, var(--gs-gray-50) 0%, var(--gs-gray-100) 100%);
           padding: var(--space-16) 0;
           margin: var(--space-16) 0;
           border-radius: var(--radius-xl);
         }
 
-        .commitment-content {
+        .policy-content {
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 var(--space-6);
         }
 
-        .commitment-content h2 {
+        .policy-content h2 {
           text-align: center;
           font-size: 2.5rem;
           font-weight: var(--font-bold);
@@ -626,25 +626,25 @@ export default function BuyBackPage() {
           color: var(--gs-gray-800);
         }
 
-        .commitment-grid {
+        .policy-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: var(--space-8);
         }
 
-        .commitment-text {
+        .policy-text {
           max-width: 1000px;
           margin: 0 auto;
         }
 
-        .commitment-text p {
+        .policy-text p {
           font-size: 1.125rem;
           line-height: 1.7;
           color: var(--gs-gray-700);
           text-align: left;
         }
 
-        .commitment-item {
+        .policy-item {
           background: white;
           padding: var(--space-6);
           border-radius: var(--radius-lg);
@@ -653,20 +653,20 @@ export default function BuyBackPage() {
           text-align: center;
         }
 
-        .commitment-icon {
+        .policy-icon {
           font-size: 2.5rem;
           color: var(--gs-blue);
           margin-bottom: var(--space-4);
         }
 
-        .commitment-item h4 {
+        .policy-item h4 {
           font-size: 1.25rem;
           font-weight: var(--font-semibold);
           margin-bottom: var(--space-4);
           color: var(--gs-gray-800);
         }
 
-        .commitment-item p {
+        .policy-item p {
           color: var(--gs-gray-600);
           line-height: 1.6;
         }

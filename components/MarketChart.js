@@ -8,10 +8,17 @@ export default function MarketChart() {
   const [currentPrice, setCurrentPrice] = useState(3899.30)
   const [priceChange, setPriceChange] = useState(25.50)
   const [priceChangePercent, setPriceChangePercent] = useState(0.66)
-  const [lastUpdated, setLastUpdated] = useState(new Date())
+  const [lastUpdated, setLastUpdated] = useState(null)
+  const [mounted, setMounted] = useState(false)
   const [metalPrices, setMetalPrices] = useState({})
   const [selectedMetal, setSelectedMetal] = useState('gold')
 
+
+  // Handle client-side mounting
+  useEffect(() => {
+    setMounted(true)
+    setLastUpdated(new Date())
+  }, [])
 
   // Fetch real data from Metalprice API
   const fetchRealData = async (timeframe) => {
@@ -232,7 +239,7 @@ export default function MarketChart() {
         <div className="chart-title-section">
           <h3>Gold Spot Price (USD per ounce)</h3>
           <div className="last-updated">
-            Last updated: {lastUpdated.toLocaleTimeString()}
+            {mounted && lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString()}` : 'Loading...'}
           </div>
         </div>
         <div className="chart-controls">
