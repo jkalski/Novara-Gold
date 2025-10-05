@@ -7,9 +7,16 @@ import { getMarketUpdates, getFeaturedMarketUpdate } from '../lib/contentful'
 export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConfigured }) {
   const [metalPrices, setMetalPrices] = useState({})
   const [priceChanges, setPriceChanges] = useState({})
-  const [lastUpdated, setLastUpdated] = useState(new Date())
+  const [lastUpdated, setLastUpdated] = useState(null)
+  const [mounted, setMounted] = useState(false)
   const router = useRouter()
   const [activeSection, setActiveSection] = useState('chart')
+
+  // Handle client-side mounting
+  useEffect(() => {
+    setMounted(true)
+    setLastUpdated(new Date())
+  }, [])
 
   // Fetch real metal prices
   useEffect(() => {
@@ -161,7 +168,7 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
             <div className='chart-sidebar'>
               <div className='price-summary'>
                 <h4>Current Prices</h4>
-                <div className='last-updated'>Last updated: {lastUpdated.toLocaleTimeString()}</div>
+                <div className='last-updated'>{mounted && lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString()}` : 'Loading...'}</div>
                 <div className='price-list'>
                   <div className='price-row'>
                     <span className='metal'>Gold</span>
