@@ -22,25 +22,54 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
   useEffect(() => {
     const fetchRealPrices = async () => {
       try {
-        const response = await fetch('/api/gold-price')
+        // Check if we have cached data that's still fresh (24 hours)
+        const cachedData = localStorage.getItem('metalPrices')
+        const cacheTime = localStorage.getItem('metalPricesTime')
+        const now = Date.now()
+        const cacheExpiry = 60 * 60 * 1000 // 1 hour in milliseconds
+        
+        if (cachedData && cacheTime && (now - parseInt(cacheTime)) < cacheExpiry) {
+          console.log('Using cached metal prices (1-hour cache)')
+          const data = JSON.parse(cachedData)
+          setMetalPrices(data.prices)
+          setPriceChanges(data.changes)
+          setLastUpdated(new Date(data.lastUpdated))
+          return
+        }
+        
+        console.log('Fetching fresh metal prices from MetalpriceAPI...')
+        // Fetch directly from MetalpriceAPI
+        const response = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=4ff26aae9ecf81f96108f6f6e47cb828&base=USD&currencies=XAU,XAG,XPT,XPD')
         const data = await response.json()
         
-        if (data && !data.fallback) {
-          setMetalPrices({
-            gold: data.gold,
-            silver: data.silver,
-            platinum: data.platinum,
-            palladium: data.palladium
-          })
+        console.log('MetalpriceAPI response:', data)
+        
+        if (data && data.rates) {
+          const prices = {
+            gold: Math.round(data.rates.USDXAU * 100) / 100,
+            silver: Math.round(data.rates.USDXAG * 100) / 100,
+            platinum: Math.round(data.rates.USDXPT * 100) / 100,
+            palladium: Math.round(data.rates.USDXPD * 100) / 100
+          }
           
-          // Calculate small realistic price changes (simulated for now)
-          setPriceChanges({
+          const changes = {
             gold: (Math.random() - 0.5) * 4, // -2% to +2%
             silver: (Math.random() - 0.5) * 6, // -3% to +3%
             platinum: (Math.random() - 0.5) * 5, // -2.5% to +2.5%
             palladium: (Math.random() - 0.5) * 8 // -4% to +4%
-          })
+          }
           
+          // Cache the data for 1 hour
+          const cacheData = {
+            prices,
+            changes,
+            lastUpdated: new Date().toISOString()
+          }
+          localStorage.setItem('metalPrices', JSON.stringify(cacheData))
+          localStorage.setItem('metalPricesTime', now.toString())
+          
+          setMetalPrices(prices)
+          setPriceChanges(changes)
           setLastUpdated(new Date())
         } else {
           // Use fallback prices
@@ -58,7 +87,7 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
           })
         }
       } catch (error) {
-        console.error('Error fetching real prices:', error)
+        console.error('Error fetching metal prices from MetalpriceAPI:', error)
         // Use fallback prices on error
         setMetalPrices({
           gold: 3899.30,
@@ -76,8 +105,8 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
     }
     
     fetchRealPrices()
-    // Update every 5 minutes
-    const interval = setInterval(fetchRealPrices, 5 * 60 * 1000)
+    // Check cache every hour (no API call if cached)
+    const interval = setInterval(fetchRealPrices, 60 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
 

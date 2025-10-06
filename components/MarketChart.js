@@ -20,23 +20,97 @@ export default function MarketChart() {
     setLastUpdated(new Date())
   }, [])
 
-  // Fetch real data from Metalprice API
+  // Convert timeseries data to chart format
+  const convertTimeseriesToChartData = (rates, timeframe) => {
+    const chartData = []
+    const sortedDates = Object.keys(rates).sort()
+    
+    sortedDates.forEach((date, index) => {
+      const price = Math.round(rates[date].USDXAU * 100) / 100
+      chartData.push({
+        time: new Date(date).getTime(),
+        price: price,
+        date: date
+      })
+    })
+    
+    console.log(`Converted ${chartData.length} historical data points for ${timeframe}`)
+    return chartData
+  }
+
+  // Fetch real historical data from metals-api.com timeseries (except 1D which uses GoldAPI)
   const fetchRealData = async (timeframe) => {
     try {
-      console.log(`Fetching real gold data for ${timeframe}...`)
+      console.log(`Fetching real historical gold data for ${timeframe}...`)
       
-      // Use our cached API endpoint (saves API calls)
-      const response = await fetch('/api/gold-price')
+      // For 1D timeframe, use GoldAPI for real-time data
+      if (timeframe === '1D') {
+        const myHeaders = new Headers();
+        myHeaders.append("x-access-token", "goldapi-akhgqzsmgej2ukd-io");
+        myHeaders.append("Content-Type", "application/json");
+
+        const requestOptions = {
+          method: 'GET',
+          headers: myHeaders,
+          redirect: 'follow'
+        };
+
+        const response = await fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
+        const data = await response.json()
+        
+        console.log('GoldAPI response for 1D:', data)
+        
+        if (data && data.price) {
+          const currentGoldPrice = data.price
+          console.log(`Current gold price: $${currentGoldPrice} per ounce (real-time from GoldAPI)`)
+          
+          // Generate historical data based on current price for 1D
+          const chartData = generateHistoricalDataFromCurrentPrice(currentGoldPrice, timeframe)
+          return chartData
+        } else {
+          console.log('No valid data from GoldAPI, using mock data')
+          return generateMockData(timeframe)
+        }
+      }
+      
+      // For all other timeframes, use metals-api.com timeseries
+      const endDate = new Date()
+      const startDate = new Date()
+      
+      switch (timeframe) {
+        case '1W':
+          startDate.setDate(endDate.getDate() - 7)
+          break
+        case '1M':
+          startDate.setMonth(endDate.getMonth() - 1)
+          break
+        case '6M':
+          startDate.setMonth(endDate.getMonth() - 6)
+          break
+        case '1Y':
+          startDate.setFullYear(endDate.getFullYear() - 1)
+          break
+        case '5Y':
+          startDate.setFullYear(endDate.getFullYear() - 5)
+          break
+        default:
+          startDate.setMonth(endDate.getMonth() - 1)
+      }
+      
+      const startDateStr = startDate.toISOString().split('T')[0]
+      const endDateStr = endDate.toISOString().split('T')[0]
+      
+      // Fetch historical data from metals-api.com
+      const response = await fetch(`https://api.metalpriceapi.com/v1/timeframe?api_key=4ff26aae9ecf81f96108f6f6e47cb828&start_date=${startDateStr}&end_date=${endDateStr}&base=USD&currencies=XAU`)
       const data = await response.json()
       
-      console.log('Cached gold price response:', data)
+      console.log('Metals-API timeseries response:', data)
       
-      if (data && data.gold) {
-        const currentGoldPrice = data.gold
-        console.log(`Current gold price: $${currentGoldPrice} per ounce (${data.fallback ? 'fallback' : 'real'})`)
-        
-        // Generate historical data based on current price for different timeframes
-        const chartData = generateHistoricalDataFromCurrentPrice(currentGoldPrice, timeframe)
+      if (data && data.success && data.rates) {
+        // Convert timeseries data to chart format
+        const chartData = convertTimeseriesToChartData(data.rates, timeframe)
+        const currentGoldPrice = chartData[chartData.length - 1].price
+        console.log(`Current gold price: $${currentGoldPrice} per ounce (real historical data from metals-api.com)`)
         
         // Update current price and change
         const latestPrice = chartData[chartData.length - 1].price
@@ -52,11 +126,11 @@ export default function MarketChart() {
         console.log(`Successfully loaded ${chartData.length} data points`)
         return chartData
       } else {
-        console.log('No valid data from cached API, using mock data')
+        console.log('No valid data from metals-api.com, using mock data')
         return generateMockData(timeframe)
       }
     } catch (error) {
-      console.error('Error fetching real data:', error)
+      console.error('Error fetching historical data from metals-api.com:', error)
       return generateMockData(timeframe)
     }
   }
@@ -81,12 +155,16 @@ export default function MarketChart() {
         points = 30
         interval = 24
         break
-      case '3M':
-        points = 90
+      case '6M':
+        points = 180
         interval = 24
         break
       case '1Y':
         points = 365
+        interval = 24
+        break
+      case '5Y':
+        points = 1825
         interval = 24
         break
     }
@@ -137,12 +215,16 @@ export default function MarketChart() {
         points = 30
         interval = 24
         break
-      case '3M':
-        points = 90
+      case '6M':
+        points = 180
         interval = 24
         break
       case '1Y':
         points = 365
+        interval = 24
+        break
+      case '5Y':
+        points = 1825
         interval = 24
         break
     }
@@ -206,8 +288,12 @@ export default function MarketChart() {
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
     } else if (timeframe === '1M') {
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-    } else if (timeframe === '3M') {
+    } else if (timeframe === '6M') {
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    } else if (timeframe === '1Y') {
+      return date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+    } else if (timeframe === '5Y') {
+      return date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
     } else {
       return date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
     }
@@ -229,8 +315,9 @@ export default function MarketChart() {
     { id: '1D', label: '1D' },
     { id: '1W', label: '1W' },
     { id: '1M', label: '1M' },
-    { id: '3M', label: '3M' },
-    { id: '1Y', label: '1Y' }
+    { id: '6M', label: '6M' },
+    { id: '1Y', label: '1Y' },
+    { id: '5Y', label: '5Y' }
   ]
 
   return (

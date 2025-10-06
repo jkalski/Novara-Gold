@@ -32,23 +32,83 @@ export default function Home() {
     { name: 'Ruthenium', symbol: 'Ru', icon: '🔸', color: '#A8A8A8' }
   ]
 
-  // Simulate live price updates
+  // Fetch real metal prices with 1-hour caching
   useEffect(() => {
-    const updatePrices = () => {
-      setPrices({
-        Gold: (1800 + Math.random() * 100).toFixed(2),
-        Silver: (22 + Math.random() * 5).toFixed(2),
-        Platinum: (900 + Math.random() * 50).toFixed(2),
-        Palladium: (2000 + Math.random() * 200).toFixed(2),
-        Copper: (3.5 + Math.random() * 0.5).toFixed(2),
-        Rhodium: (15000 + Math.random() * 2000).toFixed(2),
-        Iridium: (5000 + Math.random() * 500).toFixed(2),
-        Ruthenium: (400 + Math.random() * 50).toFixed(2)
-      })
+    const fetchRealPrices = async () => {
+      try {
+        // Check if we have cached data that's still fresh (1 hour)
+        const cachedData = localStorage.getItem('homepageMetalPrices')
+        const cacheTime = localStorage.getItem('homepageMetalPricesTime')
+        const now = Date.now()
+        const cacheExpiry = 60 * 60 * 1000 // 1 hour in milliseconds
+        
+        if (cachedData && cacheTime && (now - parseInt(cacheTime)) < cacheExpiry) {
+          console.log('Using cached homepage metal prices (1-hour cache)')
+          const data = JSON.parse(cachedData)
+          setPrices(data.prices)
+          return
+        }
+        
+        console.log('Fetching fresh homepage metal prices from MetalpriceAPI...')
+        // Fetch directly from MetalpriceAPI
+        const response = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=4ff26aae9ecf81f96108f6f6e47cb828&base=USD&currencies=XAU,XAG,XPT,XPD')
+        const data = await response.json()
+        
+        console.log('Homepage MetalpriceAPI response:', data)
+        
+        if (data && data.rates) {
+          const prices = {
+            Gold: (Math.round(data.rates.USDXAU * 100) / 100).toFixed(2),
+            Silver: (Math.round(data.rates.USDXAG * 100) / 100).toFixed(2),
+            Platinum: (Math.round(data.rates.USDXPT * 100) / 100).toFixed(2),
+            Palladium: (Math.round(data.rates.USDXPD * 100) / 100).toFixed(2),
+            Copper: (3.5 + Math.random() * 0.5).toFixed(2), // Keep simulated for now
+            Rhodium: (15000 + Math.random() * 2000).toFixed(2), // Keep simulated for now
+            Iridium: (5000 + Math.random() * 500).toFixed(2), // Keep simulated for now
+            Ruthenium: (400 + Math.random() * 50).toFixed(2) // Keep simulated for now
+          }
+          
+          // Cache the data for 1 hour
+          const cacheData = {
+            prices,
+            lastUpdated: new Date().toISOString()
+          }
+          localStorage.setItem('homepageMetalPrices', JSON.stringify(cacheData))
+          localStorage.setItem('homepageMetalPricesTime', now.toString())
+          
+          setPrices(prices)
+        } else {
+          // Use fallback prices
+          setPrices({
+            Gold: '3899.30',
+            Silver: '47.53',
+            Platinum: '1598.00',
+            Palladium: '1290.80',
+            Copper: (3.5 + Math.random() * 0.5).toFixed(2),
+            Rhodium: (15000 + Math.random() * 2000).toFixed(2),
+            Iridium: (5000 + Math.random() * 500).toFixed(2),
+            Ruthenium: (400 + Math.random() * 50).toFixed(2)
+          })
+        }
+      } catch (error) {
+        console.error('Error fetching homepage metal prices from MetalpriceAPI:', error)
+        // Use fallback prices on error
+        setPrices({
+          Gold: '3899.30',
+          Silver: '47.53',
+          Platinum: '1598.00',
+          Palladium: '1290.80',
+          Copper: (3.5 + Math.random() * 0.5).toFixed(2),
+          Rhodium: (15000 + Math.random() * 2000).toFixed(2),
+          Iridium: (5000 + Math.random() * 500).toFixed(2),
+          Ruthenium: (400 + Math.random() * 50).toFixed(2)
+        })
+      }
     }
     
-    updatePrices()
-    const interval = setInterval(updatePrices, 5000)
+    fetchRealPrices()
+    // Check cache every hour (no API call if cached)
+    const interval = setInterval(fetchRealPrices, 60 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
 
