@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 export default function MarketChart() {
-  const [timeframe, setTimeframe] = useState('1D')
+  const [timeframe, setTimeframe] = useState('1W')
   const [chartData, setChartData] = useState([])
   const [loading, setLoading] = useState(true)
   const [currentPrice, setCurrentPrice] = useState(3899.30)
@@ -38,99 +38,148 @@ export default function MarketChart() {
     return chartData
   }
 
-  // Fetch real historical data from metals-api.com timeseries (except 1D which uses GoldAPI)
+  // Convert Alpha Vantage data to chart format
+  const convertAlphaVantageToChartData = (timeSeries) => {
+    const chartData = []
+    
+    // Convert time series object to array and sort by timestamp
+    const entries = Object.entries(timeSeries).map(([timestamp, data]) => ({
+      timestamp: new Date(timestamp).getTime(),
+      open: parseFloat(data['1. open']),
+      high: parseFloat(data['2. high']),
+      low: parseFloat(data['3. low']),
+      close: parseFloat(data['4. close']),
+      volume: parseInt(data['5. volume'])
+    })).sort((a, b) => a.timestamp - b.timestamp)
+    
+    // Convert to chart format
+    for (const entry of entries) {
+      if (entry.close > 0) {
+        chartData.push({
+          time: new Date(entry.timestamp).toISOString(),
+          price: Math.round(entry.close * 100) / 100,
+          high: Math.round(entry.high * 100) / 100,
+          low: Math.round(entry.low * 100) / 100,
+          open: Math.round(entry.open * 100) / 100,
+          volume: entry.volume,
+          date: new Date(entry.timestamp).toISOString()
+        })
+      }
+    }
+    
+    console.log(`Converted ${chartData.length} intraday data points from Alpha Vantage`)
+    return chartData
+  }
+
+  // Convert Yahoo Finance data to chart format
+  const convertYahooFinanceToChartData = (quote, meta) => {
+    const chartData = []
+    const timestamps = quote.timestamp || []
+    const closes = quote.close || []
+    const highs = quote.high || []
+    const lows = quote.low || []
+    const opens = quote.open || []
+    
+    // Use close prices for the chart
+    for (let i = 0; i < timestamps.length; i++) {
+      if (closes[i] !== null && closes[i] !== undefined && closes[i] > 0) {
+        chartData.push({
+          time: new Date(timestamps[i] * 1000).toISOString(), // Convert to ISO string
+          price: Math.round(closes[i] * 100) / 100,
+          high: highs[i] ? Math.round(highs[i] * 100) / 100 : null,
+          low: lows[i] ? Math.round(lows[i] * 100) / 100 : null,
+          open: opens[i] ? Math.round(opens[i] * 100) / 100 : null,
+          date: new Date(timestamps[i] * 1000).toISOString()
+        })
+      }
+    }
+    
+    console.log(`Converted ${chartData.length} intraday data points from Yahoo Finance`)
+    return chartData
+  }
+
+  // Check if it's a weekend (Saturday or Sunday)
+  const isWeekend = () => {
+    const today = new Date()
+    const dayOfWeek = today.getDay()
+    const isWeekendDay = dayOfWeek === 0 || dayOfWeek === 6 // Sunday = 0, Saturday = 6
+    console.log(`Today is ${today.toDateString()}, day ${dayOfWeek}, isWeekend: ${isWeekendDay}`)
+    return isWeekendDay
+  }
+
+  // Get the most recent Friday's date
+  const getLastFriday = () => {
+    const today = new Date()
+    const dayOfWeek = today.getDay()
+    const daysToSubtract = dayOfWeek === 0 ? 2 : dayOfWeek === 6 ? 1 : 0 // If Sunday, go back 2 days; if Saturday, go back 1 day
+    const lastFriday = new Date(today)
+    lastFriday.setDate(today.getDate() - daysToSubtract)
+    return lastFriday
+  }
+
+  // Fetch real historical data from Yahoo Finance
   const fetchRealData = async (timeframe) => {
     try {
       console.log(`Fetching real historical gold data for ${timeframe}...`)
       
-      // For 1D timeframe, use GoldAPI for real-time data
-      if (timeframe === '1D') {
-        const myHeaders = new Headers();
-        myHeaders.append("x-access-token", "goldapi-akhgqzsmgej2ukd-io");
-        myHeaders.append("Content-Type", "application/json");
-
-        const requestOptions = {
-          method: 'GET',
-          headers: myHeaders,
-          redirect: 'follow'
-        };
-
-        const response = await fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
+      
+        // For all timeframes, use Yahoo Finance API
+        let yahooRange = '1mo'
+        switch (timeframe) {
+          case '1W':
+            yahooRange = '5d'
+            break
+          case '1M':
+            yahooRange = '1mo'
+            break
+          case '6M':
+            yahooRange = '6mo'
+            break
+          case '1Y':
+            yahooRange = '1y'
+            break
+          case '5Y':
+            yahooRange = '5y'
+            break
+        }
+        
+        console.log(`Fetching ${timeframe} data from Yahoo Finance with range: ${yahooRange}`)
+        const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1d&range=${yahooRange}`))
         const data = await response.json()
         
-        console.log('GoldAPI response for 1D:', data)
+        console.log('Yahoo Finance response:', data)
         
-        if (data && data.price) {
-          const currentGoldPrice = data.price
-          console.log(`Current gold price: $${currentGoldPrice} per ounce (real-time from GoldAPI)`)
+        if (data && data.chart && data.chart.result && data.chart.result[0]) {
+          const result = data.chart.result[0]
+          const quote = result.indicators.quote[0]
           
-          // Generate historical data based on current price for 1D
-          const chartData = generateHistoricalDataFromCurrentPrice(currentGoldPrice, timeframe)
-          return chartData
-        } else {
-          console.log('No valid data from GoldAPI, using mock data')
-          return generateMockData(timeframe)
+          // Convert Yahoo Finance data to chart format
+          const chartData = convertYahooFinanceToChartData(quote, result.meta)
+          
+          if (chartData.length > 0) {
+            const currentGoldPrice = chartData[chartData.length - 1].price
+            console.log(`Current gold price: $${currentGoldPrice} per ounce (real historical data from Yahoo Finance)`)
+            
+            // Update current price and change
+            const latestPrice = chartData[chartData.length - 1].price
+            const previousPrice = chartData.length > 1 ? chartData[chartData.length - 2].price : latestPrice
+            const change = latestPrice - previousPrice
+            const changePercent = previousPrice > 0 ? (change / previousPrice) * 100 : 0
+            
+            setCurrentPrice(latestPrice)
+            setPriceChange(change)
+            setPriceChangePercent(changePercent)
+            setLastUpdated(new Date())
+            
+            console.log(`Successfully loaded ${chartData.length} real historical data points for ${timeframe}`)
+            return chartData
+          }
         }
-      }
-      
-      // For all other timeframes, use metals-api.com timeseries
-      const endDate = new Date()
-      const startDate = new Date()
-      
-      switch (timeframe) {
-        case '1W':
-          startDate.setDate(endDate.getDate() - 7)
-          break
-        case '1M':
-          startDate.setMonth(endDate.getMonth() - 1)
-          break
-        case '6M':
-          startDate.setMonth(endDate.getMonth() - 6)
-          break
-        case '1Y':
-          startDate.setFullYear(endDate.getFullYear() - 1)
-          break
-        case '5Y':
-          startDate.setFullYear(endDate.getFullYear() - 5)
-          break
-        default:
-          startDate.setMonth(endDate.getMonth() - 1)
-      }
-      
-      const startDateStr = startDate.toISOString().split('T')[0]
-      const endDateStr = endDate.toISOString().split('T')[0]
-      
-      // Fetch historical data from metals-api.com
-      const response = await fetch(`https://api.metalpriceapi.com/v1/timeframe?api_key=4ff26aae9ecf81f96108f6f6e47cb828&start_date=${startDateStr}&end_date=${endDateStr}&base=USD&currencies=XAU`)
-      const data = await response.json()
-      
-      console.log('Metals-API timeseries response:', data)
-      
-      if (data && data.success && data.rates) {
-        // Convert timeseries data to chart format
-        const chartData = convertTimeseriesToChartData(data.rates, timeframe)
-        const currentGoldPrice = chartData[chartData.length - 1].price
-        console.log(`Current gold price: $${currentGoldPrice} per ounce (real historical data from metals-api.com)`)
         
-        // Update current price and change
-        const latestPrice = chartData[chartData.length - 1].price
-        const previousPrice = chartData.length > 1 ? chartData[chartData.length - 2].price : latestPrice
-        const change = latestPrice - previousPrice
-        const changePercent = (change / previousPrice) * 100
-
-        setCurrentPrice(latestPrice)
-        setPriceChange(change)
-        setPriceChangePercent(changePercent)
-        setLastUpdated(new Date())
-        
-        console.log(`Successfully loaded ${chartData.length} data points`)
-        return chartData
-      } else {
-        console.log('No valid data from metals-api.com, using mock data')
+        console.log('No valid data from Yahoo Finance, using mock data')
         return generateMockData(timeframe)
-      }
     } catch (error) {
-      console.error('Error fetching historical data from metals-api.com:', error)
+      console.error('Error fetching data from Yahoo Finance:', error)
       return generateMockData(timeframe)
     }
   }
@@ -143,10 +192,6 @@ export default function MarketChart() {
     let interval = 1 // hours
 
     switch (timeframe) {
-      case '1D':
-        points = 24
-        interval = 1
-        break
       case '1W':
         points = 7
         interval = 24
@@ -203,10 +248,6 @@ export default function MarketChart() {
     let interval = 1 // hours
 
     switch (timeframe) {
-      case '1D':
-        points = 24
-        interval = 1
-        break
       case '1W':
         points = 7
         interval = 24
@@ -268,23 +309,25 @@ export default function MarketChart() {
     setLoading(true)
     // Fetch real data from Alpha Vantage
     fetchRealData(timeframe).then(data => {
+      console.log('Setting chart data:', data.length, 'points')
+      console.log('Sample chart data:', data.slice(0, 2))
       setChartData(data)
       setLoading(false)
     }).catch(error => {
       console.error('Error loading chart data:', error)
-      // Fallback to mock data
-      const data = generateMockData(timeframe)
-      setChartData(data)
+        // Fallback to mock data
+        const data = generateMockData(timeframe)
+        setChartData(data)
       setLoading(false)
     })
+
+
   }, [timeframe])
 
 
   const formatTime = (timeStr) => {
     const date = new Date(timeStr)
-    if (timeframe === '1D') {
-      return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
-    } else if (timeframe === '1W') {
+    if (timeframe === '1W') {
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
     } else if (timeframe === '1M') {
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
@@ -312,7 +355,6 @@ export default function MarketChart() {
   }
 
   const timeframes = [
-    { id: '1D', label: '1D' },
     { id: '1W', label: '1W' },
     { id: '1M', label: '1M' },
     { id: '6M', label: '6M' },
@@ -324,7 +366,9 @@ export default function MarketChart() {
     <div className="functional-chart-container">
       <div className="chart-header">
         <div className="chart-title-section">
-          <h3>Gold Spot Price (USD per ounce)</h3>
+          <h3>
+            Gold Spot Price (USD per ounce)
+          </h3>
           <div className="last-updated">
             {mounted && lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString()}` : 'Loading...'}
           </div>
@@ -358,6 +402,9 @@ export default function MarketChart() {
             <p>Loading chart data...</p>
           </div>
         ) : (
+          <>
+            {console.log('Rendering chart with data:', chartData.length, 'points')}
+            {console.log('Chart data sample:', chartData.slice(0, 2))}
               <ResponsiveContainer width="100%" height={450}>
             <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -387,6 +434,7 @@ export default function MarketChart() {
               />
             </LineChart>
           </ResponsiveContainer>
+          </>
         )}
       </div>
 

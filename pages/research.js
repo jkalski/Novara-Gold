@@ -4,7 +4,7 @@ import SEO from '../components/SEO'
 import MarketChart from '../components/MarketChart'
 import { getMarketUpdates, getFeaturedMarketUpdate } from '../lib/contentful'
 
-export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConfigured }) {
+export default function ResearchPage({ marketUpdates, featuredUpdate, contentfulConfigured }) {
   const [metalPrices, setMetalPrices] = useState({})
   const [priceChanges, setPriceChanges] = useState({})
   const [lastUpdated, setLastUpdated] = useState(null)
@@ -110,7 +110,7 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
     return () => clearInterval(interval)
   }, [])
 
-  // Handle URL routing for different news sections
+  // Handle URL routing for different research sections
   useEffect(() => {
     if (router.isReady) {
       const { pathname, asPath } = router
@@ -122,10 +122,10 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
       } else if (asPath.includes('#content')) {
         setActiveSection('content')
         scrollToSection('content')
-      } else if (pathname === '/news/chart') {
+      } else if (pathname === '/research/chart') {
         setActiveSection('chart')
         scrollToSection('chart')
-      } else if (pathname === '/news/content') {
+      } else if (pathname === '/research/content') {
         setActiveSection('content')
         scrollToSection('content')
       }
@@ -150,25 +150,25 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
   }
 
   return (
-    <div className='news-page'>
+    <div className='research-page'>
       <SEO 
-        title="Precious Metals News & Analysis - Market Insights | Novara Gold"
-        description="Stay informed with the latest precious metals news, market analysis, and economic indicators. Expert insights on gold, silver, platinum, and palladium markets from Novara Gold specialists."
-        canonical="/news"
-        keywords="precious metals news, gold market analysis, silver price updates, platinum market trends, palladium analysis, economic indicators, market commentary"
+        title="Precious Metals Research & Analysis - Market Insights | Novara Gold"
+        description="Stay informed with the latest precious metals research, market analysis, and economic indicators. Expert insights on gold, silver, platinum, and palladium markets from Novara Gold specialists."
+        canonical="/research"
+        keywords="precious metals research, gold market analysis, silver price updates, platinum market trends, palladium analysis, economic indicators, market commentary"
       />
       
       <div className='container'>
         {/* Hero Section */}
-        <div className='news-hero'>
+        <div className='research-hero'>
           <div className='hero-content'>
-            <h1>Precious Metals News & Analysis</h1>
+            <h1>Precious Metals Research & Analysis</h1>
             <p className='hero-subtitle'>Stay informed with expert market insights, daily analysis, and comprehensive research on precious metals markets.</p>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className='news-nav'>
+        <nav className='research-nav'>
           <ul>
             {sections.map((section) => (
               <li key={section.id}>
@@ -185,7 +185,7 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
         </nav>
 
         {/* Market Chart Section */}
-        <section id='chart' className='news-section'>
+        <section id='chart' className='research-section'>
           <div className='section-header'>
             <span className='section-icon'>📈</span>
             <h2>Gold Market Chart</h2>
@@ -246,7 +246,7 @@ export default function NewsPage({ marketUpdates, featuredUpdate, contentfulConf
         <section className='newsletter-section'>
           <div className='newsletter-content'>
             <h2>Stay Informed with Our Market Updates</h2>
-            <p>Get the latest precious metals news, analysis, and market insights delivered directly to your inbox.</p>
+            <p>Get the latest precious metals research, analysis, and market insights delivered directly to your inbox.</p>
             <form className='newsletter-form'>
               <div className='form-group'>
                 <input type='email' placeholder='Enter your email address' required />

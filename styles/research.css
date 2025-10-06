@@ -1,13 +1,13 @@
-/* News Page Styling - Goldman Sachs Inspired */
+/* Research Page Styling - Goldman Sachs Inspired */
 
-.news-page {
+.research-page {
   background: var(--gs-gray-50);
   min-height: 100vh;
   padding: var(--space-16) 0;
 }
 
 /* Hero Section */
-.news-hero {
+.research-hero {
   background: linear-gradient(135deg, var(--gs-blue) 0%, var(--gs-blue-dark) 100%);
   color: var(--gs-white);
   padding: var(--space-20) 0;
@@ -18,7 +18,7 @@
   overflow: hidden;
 }
 
-.news-hero::before {
+.research-hero::before {
   content: '';
   position: absolute;
   top: 0;
@@ -38,7 +38,7 @@
   padding: 0 var(--space-6);
 }
 
-.news-hero h1 {
+.research-hero h1 {
   font-size: clamp(2rem, 8vw, 3rem);
   font-weight: var(--font-bold);
   margin-bottom: var(--space-4);
@@ -52,7 +52,7 @@
 }
 
 /* Navigation */
-.news-nav {
+.research-nav {
   background: var(--gs-white);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
@@ -61,7 +61,7 @@
   border: 1px solid var(--gs-gray-200);
 }
 
-.news-nav ul {
+.research-nav ul {
   display: flex;
   gap: var(--space-2);
   list-style: none;
@@ -71,7 +71,7 @@
   flex-wrap: wrap;
 }
 
-.news-nav button {
+.research-nav button {
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -86,13 +86,13 @@
   font-size: clamp(0.875rem, 2.5vw, 1rem);
 }
 
-.news-nav button:hover {
+.research-nav button:hover {
   background: var(--gs-gray-50);
   border-color: var(--gs-blue);
   color: var(--gs-blue);
 }
 
-.news-nav button.active {
+.research-nav button.active {
   background: var(--gs-blue);
   border-color: var(--gs-blue);
   color: var(--gs-white);
@@ -102,8 +102,8 @@
   font-size: 1.25rem;
 }
 
-/* News Sections */
-.news-section {
+/* Research Sections */
+.research-section {
   margin-bottom: var(--space-20);
   scroll-margin-top: 100px;
 }
@@ -415,16 +415,16 @@
 }
 
 @media (max-width: 48rem) {
-  .news-page {
+  .research-page {
     padding: var(--space-12) 0;
   }
   
-  .news-hero {
+  .research-hero {
     padding: var(--space-16) 0;
     margin-bottom: var(--space-12);
   }
   
-  .news-hero h1 {
+  .research-hero h1 {
     font-size: clamp(1.5rem, 6vw, 2.5rem);
   }
   
@@ -432,12 +432,12 @@
     font-size: clamp(1rem, 2.5vw, 1.125rem);
   }
   
-  .news-nav ul {
+  .research-nav ul {
     flex-direction: column;
     align-items: center;
   }
   
-  .news-nav button {
+  .research-nav button {
     width: 100%;
     max-width: clamp(15rem, 40vw, 18.75rem);
     justify-content: center;
@@ -492,15 +492,15 @@
 }
 
 @media (max-width: 30rem) {
-  .news-page {
+  .research-page {
     padding: var(--space-8) 0;
   }
   
-  .news-hero {
+  .research-hero {
     padding: var(--space-12) 0;
   }
   
-  .news-hero h1 {
+  .research-hero h1 {
     font-size: clamp(1.5rem, 6vw, 2rem);
   }
   
@@ -508,11 +508,11 @@
     font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
   
-  .news-nav {
+  .research-nav {
     padding: var(--space-3);
   }
   
-  .news-nav button {
+  .research-nav button {
     padding: var(--space-3) var(--space-4);
     font-size: clamp(0.8rem, 2.2vw, 0.95rem);
   }
@@ -806,6 +806,18 @@
   font-size: 1.125rem;
   font-weight: var(--font-semibold);
   color: var(--gs-gray-900);
+}
+
+/* Weekend indicator styling */
+.weekend-indicator {
+  font-size: 0.875rem;
+  font-weight: var(--font-medium);
+  color: var(--gs-blue);
+  background: rgba(59, 130, 246, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 
@@ -2019,7 +2031,7 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .news-hero h1 {
+  .research-hero h1 {
     font-size: 2.5rem;
   }
   
@@ -2027,12 +2039,12 @@
     font-size: 1.125rem;
   }
   
-  .news-nav ul {
+  .research-nav ul {
     flex-direction: column;
     align-items: center;
   }
   
-  .news-nav button {
+  .research-nav button {
     width: 100%;
     max-width: 300px;
     justify-content: center;
@@ -2052,7 +2064,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .news-grid,
+  .research-grid,
   .reports-grid,
   .commentary-grid {
     grid-template-columns: 1fr;
@@ -2077,15 +2089,15 @@
 }
 
 @media (max-width: 480px) {
-  .news-page {
+  .research-page {
     padding: var(--space-8) 0;
   }
   
-  .news-hero {
+  .research-hero {
     padding: var(--space-12) 0;
   }
   
-  .news-hero h1 {
+  .research-hero h1 {
     font-size: 2rem;
   }
   

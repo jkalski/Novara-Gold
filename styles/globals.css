@@ -438,6 +438,12 @@ html {
   padding: 0 var(--space-8);
 }
 
+.mega-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+}
+
 .mega-col h4 {
   margin: 0 0 var(--space-5);
   font-size: 0.8rem;
@@ -447,6 +453,10 @@ html {
   color: var(--gs-gray-500);
   border-bottom: 2px solid var(--gs-gold);
   padding-bottom: var(--space-3);
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  line-height: 1;
 }
 
 .mega-col ul {

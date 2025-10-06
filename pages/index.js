@@ -5,9 +5,9 @@ import {
   FiX, 
   FiUsers, 
   FiLock, 
-  FiClock,
   FiUserX 
 } from 'react-icons/fi'
+import { LiaCompassSolid } from 'react-icons/lia'
 import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri'
 import SEO from '../components/SEO'
 
@@ -286,7 +286,7 @@ export default function Home() {
             
             <a href='/about#guidance' className='gs-principle-title gs-principle-link'>
               <div className='gs-principle-icon'>
-                <FiClock />
+                <LiaCompassSolid />
               </div>
               <h3>Guidance</h3>
             </a>

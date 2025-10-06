@@ -64,13 +64,19 @@ const MENU = [
     ]
   },
   { 
-    label: 'News', 
-    href: '/news',
+    label: 'Research', 
+    href: '/research',
     columns: [
       { 
         heading: 'Market Updates', 
         links: [
-          { label: 'Market Chart', href: '/news#chart' }
+          { label: 'Market Chart', href: '/research#chart' }
+        ]
+      },
+      { 
+        heading: 'Resources', 
+        links: [
+          { label: 'Glossary', href: '/glossary' }
         ]
       }
     ]

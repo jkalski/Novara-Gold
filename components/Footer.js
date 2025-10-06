@@ -30,10 +30,11 @@ export default function Footer() {
             <li><Link href='/ira/fees'>Fees & Minimums</Link></li>
           </ul>
         </div>
-        <div className='col news'>
-          <h4>News & Research</h4>
+        <div className='col research'>
+          <h4>Research & Analysis</h4>
           <ul>
-            <li><Link href='/news'>Market Chart</Link></li>
+            <li><Link href='/research'>Market Chart</Link></li>
+            <li><Link href='/glossary'>Glossary</Link></li>
           </ul>
         </div>
         <div className='col policies'>

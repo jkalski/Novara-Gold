@@ -1,0 +1,312 @@
+/* Glossary Page Styling - Goldman Sachs Inspired */
+
+.glossary-page {
+  background: var(--gs-gray-50);
+  min-height: 100vh;
+  padding: var(--space-16) 0;
+}
+
+/* Hero Section */
+.glossary-hero {
+  background: linear-gradient(135deg, var(--gs-blue) 0%, var(--gs-blue-dark) 100%);
+  color: var(--gs-white);
+  padding: var(--space-20) 0;
+  margin-bottom: var(--space-16);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.glossary-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/images/goldbarsbackground2.jpg') center/cover;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.glossary-hero h1 {
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-4);
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Glossary Content */
+.glossary-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.glossary-category {
+  margin-bottom: var(--space-20);
+  scroll-margin-top: 100px;
+}
+
+.category-title {
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-6);
+  border-bottom: 3px solid var(--gs-gold);
+  text-align: center;
+}
+
+.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-6);
+}
+
+.term-card {
+  background: var(--gs-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gs-gray-200);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.term-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gs-blue) 0%, var(--gs-gold) 100%);
+}
+
+.term-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--gs-blue);
+}
+
+.term-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.term-definition {
+  color: var(--gs-gray-700);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Call to Action Section */
+.glossary-cta {
+  background: linear-gradient(135deg, var(--gs-gold) 0%, #d4af37 50%, var(--gs-blue) 100%);
+  color: var(--gs-white);
+  padding: var(--space-20) 0;
+  border-radius: var(--radius-xl);
+  text-align: center;
+  margin-top: var(--space-20);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--gs-gold);
+}
+
+.glossary-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/images/goldbarsbackground2.jpg') center/cover;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.cta-content h2 {
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-4);
+  line-height: 1.2;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cta-content p {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  opacity: 0.95;
+  line-height: 1.6;
+  margin-bottom: var(--space-8);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-semibold);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.125rem;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.cta-button.primary {
+  background: var(--gs-white);
+  color: var(--gs-blue);
+  border-color: var(--gs-white);
+}
+
+.cta-button.primary:hover {
+  background: var(--gs-gray-50);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: var(--gs-white);
+  border-color: var(--gs-white);
+}
+
+.cta-button.secondary:hover {
+  background: var(--gs-white);
+  color: var(--gs-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glossary-page {
+    padding: var(--space-12) 0;
+  }
+  
+  .glossary-hero {
+    padding: var(--space-16) 0;
+    margin-bottom: var(--space-12);
+  }
+  
+  .glossary-hero h1 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+  }
+  
+  .category-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+  
+  .terms-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  
+  .term-card {
+    padding: var(--space-4);
+  }
+  
+  .term-title {
+    font-size: 1.125rem;
+  }
+  
+  .term-definition {
+    font-size: 0.95rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .glossary-page {
+    padding: var(--space-8) 0;
+  }
+  
+  .glossary-hero {
+    padding: var(--space-12) 0;
+  }
+  
+  .glossary-hero h1 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+  
+  .category-title {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+  
+  .term-card {
+    padding: var(--space-3);
+  }
+  
+  .term-title {
+    font-size: 1rem;
+  }
+  
+  .term-definition {
+    font-size: 0.875rem;
+  }
+  
+  .cta-content h2 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+  
+  .cta-content p {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+  }
+}
