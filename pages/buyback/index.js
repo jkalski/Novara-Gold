@@ -39,7 +39,7 @@ export default function BuyBackPage() {
               <FiShield />
             </div>
             <h1>BUY BACK POLICY</h1>
-            <p className="hero-subtitle">While offering a guaranteed buy back is not legal is the United States, Novara Gold does have a buy back policy to our clients for metals only purchased through Novara Gold. Once you take possession of your Precious Metals, they are your property. Whether they are stored personally or within a self-directed IRA, you can sell them at any time and to any person or dealer you chose. We ask our clients to come to Novara Gold first. We will do our best to give you the best possible price through our network of dealers. Our process for buy backs can be found below:</p>
+            <p className="hero-subtitle">While offering a guaranteed buy back is not legal is the United States, Novara Gold offers a buy back option to our clients for metals only purchased through Novara Gold. Once you take possession of your Precious Metals, they are your property. Whether they are stored personally or within a self-directed IRA, you can sell them at any time and to any person or dealer you chose. We ask our clients to come to Novara Gold first. We will do our best to give you the best possible price through our network of dealers. Our process for buy backs can be found below:</p>
             <div className="hero-cta">
               <a href="tel:8002431571" className="btn btn-primary btn-large">
                 <FiPhone className="btn-icon" />
