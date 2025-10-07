@@ -177,7 +177,7 @@ export async function getStaticProps() {
         contentfulConfigured: !!(process.env.CONTENTFUL_SPACE_ID && process.env.CONTENTFUL_ACCESS_TOKEN),
         lastUpdated: new Date().toISOString() // Force refresh
       },
-      revalidate: 10 // Revalidate every 10 seconds (temporary)
+      revalidate: 300 // Revalidate every 5 minutes
     }
   } catch (error) {
     console.error('Error fetching Contentful data:', error)
