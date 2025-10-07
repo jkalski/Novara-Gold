@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import SEO from '../components/SEO'
 import EChartsChart from '../components/EChartsChart'
 export default function ResearchPage() {
@@ -98,14 +99,18 @@ export default function ResearchPage() {
         keywords="precious metals research, gold market analysis, silver price updates, platinum market trends, palladium analysis, economic indicators, market commentary"
       />
       
-      <div className='container'>
-        {/* Hero Section */}
-        <div className='research-hero'>
-          <div className='hero-content'>
+      {/* Hero Section - Full Width */}
+      <section className='research-hero'>
+        <div className='hero-background'></div>
+        <div className='container'>
+          <div className='research-hero-content'>
             <h1>Precious Metals Research & Analysis</h1>
-            <p className='hero-subtitle'>Stay informed with expert market insights, daily analysis, and comprehensive research on precious metals markets.</p>
+            <p className='research-hero-subtitle'>Stay informed with expert market insights, daily analysis, and comprehensive research on precious metals markets.</p>
           </div>
         </div>
+      </section>
+
+      <div className='container'>
 
         {/* Navigation */}
         <nav className='research-nav'>
@@ -189,11 +194,15 @@ export default function ResearchPage() {
           </div>
         </section>
 
-        {/* Coming Soon Section */}
-        <section className='coming-soon-section'>
-          <div className='coming-soon-content'>
-            <div className='coming-soon-icon'>🚀</div>
-            <h2>Expert Insights Coming Soon</h2>
+        {/* Market Insights Section */}
+        <section className='market-insights-section'>
+          <div className='market-insights-content'>
+            <div className='insights-icon'>📊</div>
+            <h2>Market Insights & Analysis</h2>
+            <p>Get expert commentary and analysis on precious metals markets from our specialists.</p>
+            <Link href='/insights' className='insights-btn'>
+              View Market Insights →
+            </Link>
           </div>
         </section>
 

@@ -65,13 +65,13 @@ const MENU = [
   },
   { 
     label: 'Research', 
-    href: '/research',
+    href: '/research#chart',
     columns: [
       { 
         heading: 'Market Updates', 
         links: [
-          { label: 'Market Chart', href: '/research#chart' },
-          { label: 'Market Insights', href: '/insights' }
+          { label: 'Market Insights', href: '/insights' },
+          { label: 'Market Chart', href: '/research#chart' }
         ]
       },
       { 
