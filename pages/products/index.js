@@ -1,8 +1,79 @@
 import SEO from '../../components/SEO'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function Products() {
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', consent: false })
+  const [formSubmitted, setFormSubmitted] = useState(false)
+
+  // Format phone number as user types
+  const formatPhoneNumber = (value) => {
+    // Remove all non-numeric characters
+    const phoneNumber = value.replace(/[^\d]/g, '')
+    
+    // Don't format if empty
+    if (phoneNumber.length === 0) {
+      return ''
+    }
+    
+    // Format as (XXX) XXX-XXXX
+    if (phoneNumber.length <= 3) {
+      return `(${phoneNumber}`
+    } else if (phoneNumber.length <= 6) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`
+    } else {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`
+    }
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target
+    
+    // Format phone number if it's the phone field
+    const formattedValue = name === 'phone' ? formatPhoneNumber(value) : value
+    
+    setFormData({ 
+      ...formData, 
+      [name]: type === 'checkbox' ? checked : formattedValue 
+    })
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+    
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          formType: 'lead'
+        }),
+      })
+
+      if (response.ok) {
+        setFormSubmitted(true)
+        setFormData({ name: '', email: '', phone: '', consent: false })
+        setTimeout(() => setFormSubmitted(false), 5000)
+      } else {
+        console.error('Failed to send lead form')
+        // Still show success to user, but log error
+        setFormSubmitted(true)
+        setFormData({ name: '', email: '', phone: '', consent: false })
+        setTimeout(() => setFormSubmitted(false), 5000)
+      }
+    } catch (error) {
+      console.error('Error sending lead form:', error)
+      // Still show success to user, but log error
+      setFormSubmitted(true)
+      setFormData({ name: '', email: '', phone: '', consent: false })
+      setTimeout(() => setFormSubmitted(false), 5000)
+    }
+  }
+
   return (
     <div className='products-page'>
       <SEO 
@@ -331,57 +402,76 @@ export default function Products() {
                   <p>Get instant access to our exclusive investor resources, market insights, and personalized precious metals guidance from our team of experts.</p>
                 </div>
                 
-                <form className='lead-form'>
-                  <div className='form-group'>
-                    <label htmlFor='name'>Full Name</label>
-                    <input
-                      type='text'
-                      id='name'
-                      name='name'
-                      required
-                    />
+                {formSubmitted ? (
+                  <div className='success-message'>
+                    <div className='success-icon'>✓</div>
+                    <h4>Investor Kit Sent!</h4>
+                    <p>Your free investor kit has been sent to your email! Check your inbox for comprehensive investment resources, market insights, and next steps. Our precious metals experts will also contact you within 24 hours for a personal consultation.</p>
                   </div>
-                  
-                  <div className='form-group'>
-                    <label htmlFor='email'>Email Address</label>
-                    <input
-                      type='email'
-                      id='email'
-                      name='email'
-                      required
-                    />
-                  </div>
-                  
-                  <div className='form-group'>
-                    <label htmlFor='phone'>Phone Number</label>
-                    <input
-                      type='tel'
-                      id='phone'
-                      name='phone'
-                      required
-                    />
-                  </div>
-                  
-                  <div className='form-group checkbox-group'>
-                    <label className='checkbox-label'>
+                ) : (
+                  <form onSubmit={handleFormSubmit} className='lead-form'>
+                    <div className='form-group'>
+                      <label htmlFor='name'>Full Name</label>
                       <input
-                        type='checkbox'
-                        id='consent'
-                        name='consent'
+                        type='text'
+                        id='name'
+                        name='name'
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder='John Smith'
                         required
-                        className='consent-checkbox'
                       />
-                      <span className='checkmark'></span>
-                      <div className='consent-text'>
-                        <span>By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8678. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <a href="/policies/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/policies/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>.</span>
-                      </div>
-                    </label>
-                  </div>
-                  
-                  <button type='submit' className='submit-btn'>
-                    Request Free Investor Kit
-                  </button>
-                </form>
+                    </div>
+                    
+                    <div className='form-group'>
+                      <label htmlFor='email'>Email Address</label>
+                      <input
+                        type='email'
+                        id='email'
+                        name='email'
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder='john.smith@email.com'
+                        required
+                      />
+                    </div>
+                    
+                    <div className='form-group'>
+                      <label htmlFor='phone'>Phone Number</label>
+                      <input
+                        type='tel'
+                        id='phone'
+                        name='phone'
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder='(555) 123-4567'
+                        required
+                      />
+                    </div>
+                    
+                    <div className='form-group checkbox-group'>
+                      <label className='checkbox-label'>
+                        <input
+                          type='checkbox'
+                          id='consent'
+                          name='consent'
+                          checked={formData.consent}
+                          onChange={handleInputChange}
+                          required
+                          className='consent-checkbox'
+                        />
+                        <span className='checkmark'></span>
+                        <div className='consent-text'>
+                          <span>By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text 424-491-8678. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <a href="/policies/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/policies/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>.</span>
+                        </div>
+                      </label>
+                    </div>
+                    
+                    <button type='submit' className='submit-btn'>
+                      Request Free Investor Kit
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

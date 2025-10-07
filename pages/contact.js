@@ -7,18 +7,42 @@ export default function Contact() {
     name: '',
     email: '',
     phone: '',
-    subject: '',
-    message: '',
+    // subject: '', // TEMPORARILY COMMENTED OUT
+    // message: '', // TEMPORARILY COMMENTED OUT
     smsConsent: false
   })
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [validationError, setValidationError] = useState('')
 
+  // Format phone number as user types
+  const formatPhoneNumber = (value) => {
+    // Remove all non-numeric characters
+    const phoneNumber = value.replace(/[^\d]/g, '')
+    
+    // Don't format if empty
+    if (phoneNumber.length === 0) {
+      return ''
+    }
+    
+    // Format as (XXX) XXX-XXXX
+    if (phoneNumber.length <= 3) {
+      return `(${phoneNumber}`
+    } else if (phoneNumber.length <= 6) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`
+    } else {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`
+    }
+  }
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target
+    
+    // Format phone number if it's the phone field
+    const formattedValue = name === 'phone' ? formatPhoneNumber(value) : value
+    
     setFormData({ 
       ...formData, 
-      [name]: type === 'checkbox' ? checked : value 
+      [name]: type === 'checkbox' ? checked : formattedValue
     })
     
     // Clear validation error when user interacts with the form
@@ -27,7 +51,7 @@ export default function Contact() {
     }
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
     
     // Clear any previous validation errors
@@ -39,21 +63,40 @@ export default function Contact() {
       return
     }
     
-    // For now, just show success message and clear form
-    // In a real implementation, this would send data to your backend
-    console.log('Form submitted:', formData)
-    
-    setFormSubmitted(true)
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-      smsConsent: false
-    })
-    
-    setTimeout(() => setFormSubmitted(false), 5000)
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          smsConsent: formData.smsConsent,
+          formType: 'lead' // TEMPORARILY USE LEAD TYPE TO TEST
+        }),
+      })
+
+      if (response.ok) {
+        setFormSubmitted(true)
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          // subject: '', // TEMPORARILY COMMENTED OUT
+          // message: '', // TEMPORARILY COMMENTED OUT
+          smsConsent: false
+        })
+        
+        setTimeout(() => setFormSubmitted(false), 5000)
+      } else {
+        setValidationError('Failed to send message. Please try again or call us at (800) 243-1571.')
+      }
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setValidationError('Failed to send message. Please try again or call us at (800) 243-1571.')
+    }
   }
 
   return (
@@ -106,14 +149,14 @@ export default function Contact() {
           <div className='contact-form-container'>
             <div className='form-header'>
               <h2>Send us a Message</h2>
-              <p>Fill out the form below and we'll get back to you within 24 hours</p>
+              <p>Fill out the form below and we'll get back to you within 2 hours</p>
             </div>
 
             {formSubmitted ? (
               <div className='success-message'>
                 <div className='success-icon'>✓</div>
                 <h4>Thank You for Your Interest!</h4>
-                <p>We've received your message and will contact you within 24 hours. For immediate assistance, please call us at <strong>(800) 243-1571</strong>.</p>
+                <p>We've received your message and will contact you within 2 hours. For immediate assistance, please call us at <strong>(800) 243-1571</strong>.</p>
                 <div className='success-actions'>
                   <button 
                     onClick={() => setFormSubmitted(false)}
@@ -134,6 +177,7 @@ export default function Contact() {
                       name='name'
                       value={formData.name}
                       onChange={handleInputChange}
+                      placeholder='John Smith'
                       required
                     />
                   </div>
@@ -146,6 +190,7 @@ export default function Contact() {
                       name='email'
                       value={formData.email}
                       onChange={handleInputChange}
+                      placeholder='john.smith@email.com'
                       required
                     />
                   </div>
@@ -160,10 +205,12 @@ export default function Contact() {
                       name='phone'
                       value={formData.phone}
                       onChange={handleInputChange}
+                      placeholder='(555) 123-4567'
                     />
                   </div>
                   
-                  <div className='form-group'>
+                  {/* TEMPORARILY COMMENTED OUT SUBJECT FIELD TO TEST */}
+                  {/* <div className='form-group'>
                     <label htmlFor='subject'>Subject *</label>
                     <select
                       id='subject'
@@ -181,10 +228,11 @@ export default function Contact() {
                       <option value='buyback'>Buy-Back Program</option>
                       <option value='support'>Customer Support</option>
                     </select>
-                  </div>
+                  </div> */}
                 </div>
 
-                <div className='form-group'>
+                {/* TEMPORARILY COMMENTED OUT MESSAGE FIELD TO TEST */}
+                {/* <div className='form-group'>
                   <label htmlFor='message'>Message *</label>
                   <textarea
                     id='message'
@@ -195,7 +243,7 @@ export default function Contact() {
                     placeholder='Tell us how we can help you with your precious metals investment needs...'
                     required
                   />
-                </div>
+                </div> */}
 
                 <div className='form-group checkbox-group'>
                   <label className={`checkbox-label ${validationError ? 'error' : ''}`}>

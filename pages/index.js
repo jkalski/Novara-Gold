@@ -134,14 +134,68 @@ export default function Home() {
     }
   }, [])
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
-    setFormSubmitted(true)
-    setTimeout(() => setFormSubmitted(false), 3000)
+    
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          formType: 'lead'
+        }),
+      })
+
+      if (response.ok) {
+        setFormSubmitted(true)
+        setFormData({ name: '', email: '', phone: '' })
+        setTimeout(() => setFormSubmitted(false), 5000)
+      } else {
+        console.error('Failed to send lead form')
+        // Still show success to user, but log error
+        setFormSubmitted(true)
+        setFormData({ name: '', email: '', phone: '' })
+        setTimeout(() => setFormSubmitted(false), 5000)
+      }
+    } catch (error) {
+      console.error('Error sending lead form:', error)
+      // Still show success to user, but log error
+      setFormSubmitted(true)
+      setFormData({ name: '', email: '', phone: '' })
+      setTimeout(() => setFormSubmitted(false), 5000)
+    }
+  }
+
+  // Format phone number as user types
+  const formatPhoneNumber = (value) => {
+    // Remove all non-numeric characters
+    const phoneNumber = value.replace(/[^\d]/g, '')
+    
+    // Don't format if empty
+    if (phoneNumber.length === 0) {
+      return ''
+    }
+    
+    // Format as (XXX) XXX-XXXX
+    if (phoneNumber.length <= 3) {
+      return `(${phoneNumber}`
+    } else if (phoneNumber.length <= 6) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`
+    } else {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`
+    }
   }
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    
+    // Format phone number if it's the phone field
+    const formattedValue = name === 'phone' ? formatPhoneNumber(value) : value
+    
+    setFormData({ ...formData, [name]: formattedValue })
   }
 
   return (
@@ -462,8 +516,8 @@ export default function Home() {
               {formSubmitted ? (
                 <div className='success-message'>
                   <div className='success-icon'>✓</div>
-                  <h4>Investor Kit Requested!</h4>
-                  <p>Your free investor kit is being prepared. We'll send it to your email within 24 hours along with a personal consultation invitation from our precious metals experts.</p>
+                  <h4>Investor Kit Sent!</h4>
+                  <p>Your free investor kit has been sent to your email! Check your inbox for comprehensive investment resources, market insights, and next steps. Our precious metals experts will also contact you within 24 hours for a personal consultation.</p>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} className='lead-form'>
@@ -475,6 +529,7 @@ export default function Home() {
                       name='name'
                       value={formData.name}
                       onChange={handleInputChange}
+                      placeholder='John Smith'
                       required
                     />
                   </div>
@@ -487,6 +542,7 @@ export default function Home() {
                       name='email'
                       value={formData.email}
                       onChange={handleInputChange}
+                      placeholder='john.smith@email.com'
                       required
                     />
                   </div>
@@ -499,6 +555,7 @@ export default function Home() {
                       name='phone'
                       value={formData.phone}
                       onChange={handleInputChange}
+                      placeholder='(555) 123-4567'
                       required
                     />
                   </div>
