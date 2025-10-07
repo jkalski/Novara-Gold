@@ -1,0 +1,352 @@
+/* Insights Page Styling */
+
+.insights-page {
+  background: var(--gs-gray-50);
+  min-height: 100vh;
+  padding: var(--space-16) 0;
+}
+
+/* Hero Section */
+.insights-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: var(--space-16);
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.insights-hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: var(--gs-white);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.insights-hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-4);
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.insights-hero-subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  line-height: 1.4;
+  opacity: 0.95;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.section-icon {
+  font-size: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin: 0;
+}
+
+/* Featured Section */
+.featured-section {
+  margin-bottom: var(--space-16);
+}
+
+.featured-insight {
+  background: linear-gradient(135deg, var(--gs-blue) 0%, var(--gs-blue-dark) 100%);
+  color: var(--gs-white);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.insight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-6);
+  gap: var(--space-4);
+}
+
+.insight-header h3 {
+  font-size: 1.75rem;
+  font-weight: var(--font-bold);
+  margin: 0;
+  flex: 1;
+}
+
+.insight-date {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.insight-content {
+  line-height: 1.6;
+}
+
+.insight-summary {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-4);
+  opacity: 0.9;
+}
+
+.insight-details {
+  background: transparent;
+  padding: var(--space-2);
+  margin-top: var(--space-2);
+  text-align: right;
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+}
+
+/* YouTube Video Styling */
+.insight-video,
+.update-video {
+  margin: var(--space-4) 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.insight-video iframe,
+.update-video iframe {
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-md);
+}
+
+/* See More Button Styling */
+.see-more-btn {
+  background: none;
+  color: var(--gs-blue);
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  margin-left: var(--space-2);
+  text-decoration: underline;
+  transition: all 0.2s ease;
+}
+
+.see-more-btn:hover {
+  color: var(--gs-blue-dark);
+  text-decoration: none;
+}
+
+.insight-summary {
+  display: block;
+  line-height: 1.6;
+}
+
+.insight-summary span {
+  display: inline;
+}
+
+/* Updates Section */
+.updates-section {
+  margin-bottom: var(--space-16);
+}
+
+.updates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-6);
+}
+
+.update-card {
+  background: var(--gs-white);
+  border: 1px solid var(--gs-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.update-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gs-blue);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-4);
+  gap: var(--space-3);
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+  font-weight: var(--font-semibold);
+  color: var(--gs-gray-900);
+  margin: 0;
+  flex: 1;
+}
+
+.update-date {
+  font-size: 0.875rem;
+  color: var(--gs-gray-500);
+  white-space: nowrap;
+}
+
+.card-content {
+  line-height: 1.6;
+}
+
+.update-summary {
+  color: var(--gs-gray-600);
+  margin-bottom: var(--space-4);
+  font-size: 1rem;
+}
+
+.update-details {
+  background: transparent;
+  padding: var(--space-2);
+  margin-top: var(--space-2);
+  text-align: right;
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+  color: var(--gs-gray-600);
+}
+
+/* No Content Section */
+.no-content-section {
+  background: var(--gs-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-16);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.no-content-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.no-content-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-6);
+}
+
+.no-content-content h2 {
+  font-size: 2rem;
+  font-weight: var(--font-bold);
+  color: var(--gs-gray-900);
+  margin-bottom: var(--space-4);
+}
+
+.no-content-content p {
+  font-size: 1.125rem;
+  color: var(--gs-gray-600);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .insights-page {
+    padding: var(--space-8) 0;
+  }
+  
+  .insights-hero {
+    padding: var(--space-12) 0;
+  }
+  
+  .featured-insight {
+    padding: var(--space-6);
+  }
+  
+  .insight-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  
+  .updates-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .update-card {
+    padding: var(--space-5);
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  
+  .no-content-section {
+    padding: var(--space-12);
+  }
+}
+
+@media (max-width: 480px) {
+  .insights-hero h1 {
+    font-size: 1.75rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .featured-insight {
+    padding: var(--space-5);
+  }
+  
+  .insight-header h3 {
+    font-size: 1.5rem;
+  }
+}

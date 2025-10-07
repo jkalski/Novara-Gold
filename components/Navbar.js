@@ -70,7 +70,8 @@ const MENU = [
       { 
         heading: 'Market Updates', 
         links: [
-          { label: 'Market Chart', href: '/research#chart' }
+          { label: 'Market Chart', href: '/research#chart' },
+          { label: 'Market Insights', href: '/insights' }
         ]
       },
       { 

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import SEO from '../components/SEO'
 import EChartsChart from '../components/EChartsChart'
-import { getMarketUpdates, getFeaturedMarketUpdate } from '../lib/contentful'
-
-export default function ResearchPage({ marketUpdates, featuredUpdate, contentfulConfigured }) {
+export default function ResearchPage() {
   const [metalPrices, setMetalPrices] = useState({})
   const [priceChanges, setPriceChanges] = useState({})
   const [lastUpdated, setLastUpdated] = useState(null)
@@ -223,30 +221,3 @@ export default function ResearchPage({ marketUpdates, featuredUpdate, contentful
   )
 }
 
-export async function getStaticProps() {
-  try {
-    const [marketUpdates, featuredUpdate] = await Promise.all([
-      getMarketUpdates(),
-      getFeaturedMarketUpdate()
-    ])
-
-    return {
-      props: {
-        marketUpdates: marketUpdates || [],
-        featuredUpdate: featuredUpdate || null,
-        contentfulConfigured: !!(process.env.CONTENTFUL_SPACE_ID && process.env.CONTENTFUL_ACCESS_TOKEN)
-      },
-      revalidate: 3600 // Revalidate every hour
-    }
-  } catch (error) {
-    console.error('Error fetching Contentful data:', error)
-    return {
-      props: {
-        marketUpdates: [],
-        featuredUpdate: null,
-        contentfulConfigured: false
-      },
-      revalidate: 3600
-    }
-  }
-}
