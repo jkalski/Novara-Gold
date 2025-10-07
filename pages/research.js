@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import SEO from '../components/SEO'
-import MarketChart from '../components/MarketChart'
+import EChartsChart from '../components/EChartsChart'
 import { getMarketUpdates, getFeaturedMarketUpdate } from '../lib/contentful'
 
 export default function ResearchPage({ marketUpdates, featuredUpdate, contentfulConfigured }) {
@@ -21,93 +21,37 @@ export default function ResearchPage({ marketUpdates, featuredUpdate, contentful
   // Fetch real metal prices
   useEffect(() => {
     const fetchRealPrices = async () => {
-      try {
-        // Check if we have cached data that's still fresh (24 hours)
-        const cachedData = localStorage.getItem('metalPrices')
-        const cacheTime = localStorage.getItem('metalPricesTime')
-        const now = Date.now()
-        const cacheExpiry = 60 * 60 * 1000 // 1 hour in milliseconds
-        
-        if (cachedData && cacheTime && (now - parseInt(cacheTime)) < cacheExpiry) {
-          console.log('Using cached metal prices (1-hour cache)')
-          const data = JSON.parse(cachedData)
-          setMetalPrices(data.prices)
-          setPriceChanges(data.changes)
-          setLastUpdated(new Date(data.lastUpdated))
-          return
-        }
-        
-        console.log('Fetching fresh metal prices from MetalpriceAPI...')
-        // Fetch directly from MetalpriceAPI
-        const response = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=4ff26aae9ecf81f96108f6f6e47cb828&base=USD&currencies=XAU,XAG,XPT,XPD')
-        const data = await response.json()
-        
-        console.log('MetalpriceAPI response:', data)
-        
-        if (data && data.rates) {
-          const prices = {
-            gold: Math.round(data.rates.USDXAU * 100) / 100,
-            silver: Math.round(data.rates.USDXAG * 100) / 100,
-            platinum: Math.round(data.rates.USDXPT * 100) / 100,
-            palladium: Math.round(data.rates.USDXPD * 100) / 100
-          }
-          
-          const changes = {
-            gold: (Math.random() - 0.5) * 4, // -2% to +2%
-            silver: (Math.random() - 0.5) * 6, // -3% to +3%
-            platinum: (Math.random() - 0.5) * 5, // -2.5% to +2.5%
-            palladium: (Math.random() - 0.5) * 8 // -4% to +4%
-          }
-          
-          // Cache the data for 1 hour
-          const cacheData = {
-            prices,
-            changes,
-            lastUpdated: new Date().toISOString()
-          }
-          localStorage.setItem('metalPrices', JSON.stringify(cacheData))
-          localStorage.setItem('metalPricesTime', now.toString())
-          
-          setMetalPrices(prices)
-          setPriceChanges(changes)
-          setLastUpdated(new Date())
-        } else {
-          // Use fallback prices
-          setMetalPrices({
-            gold: 3899.30,
-            silver: 47.53,
-            platinum: 1598.00,
-            palladium: 1290.80
-          })
-          setPriceChanges({
-            gold: 0.5,
-            silver: -0.3,
-            platinum: 0.8,
-            palladium: -0.2
-          })
-        }
-      } catch (error) {
-        console.error('Error fetching metal prices from MetalpriceAPI:', error)
-        // Use fallback prices on error
-        setMetalPrices({
-          gold: 3899.30,
-          silver: 47.53,
-          platinum: 1598.00,
-          palladium: 1290.80
-        })
-        setPriceChanges({
-          gold: 0.5,
-          silver: -0.3,
-          platinum: 0.8,
-          palladium: -0.2
-        })
+      const response = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=4ff26aae9ecf81f96108f6f6e47cb828&base=USD&currencies=XAU,XAG,XPT,XPD,XCU,XRH,USD')
+      const data = await response.json()
+      
+      const prices = {
+        gold: Math.round(data.rates.USDXAU * 100) / 100,
+        silver: Math.round(data.rates.USDXAG * 100) / 100,
+        platinum: Math.round(data.rates.USDXPT * 100) / 100,
+        palladium: Math.round(data.rates.USDXPD * 100) / 100,
+        copper: Math.round(data.rates.USDXCU * 100) / 100,
+        rhodium: Math.round(data.rates.USDXRH * 100) / 100,
+        iridium: Math.round(data.rates.USDUSD * 100) / 100,
+        ruthenium: Math.round(data.rates.USDUSD * 100) / 100
       }
+      
+      const changes = {
+        gold: (Math.random() - 0.5) * 4,
+        silver: (Math.random() - 0.5) * 6,
+        platinum: (Math.random() - 0.5) * 5,
+        palladium: (Math.random() - 0.5) * 8,
+        copper: (Math.random() - 0.5) * 6,
+        rhodium: (Math.random() - 0.5) * 10,
+        iridium: (Math.random() - 0.5) * 7,
+        ruthenium: (Math.random() - 0.5) * 9
+      }
+      
+      setMetalPrices(prices)
+      setPriceChanges(changes)
+      setLastUpdated(new Date())
     }
     
     fetchRealPrices()
-    // Check cache every hour (no API call if cached)
-    const interval = setInterval(fetchRealPrices, 60 * 60 * 1000)
-    return () => clearInterval(interval)
   }, [])
 
   // Handle URL routing for different research sections
@@ -192,39 +136,55 @@ export default function ResearchPage({ marketUpdates, featuredUpdate, contentful
           </div>
           
           <div className='chart-content'>
-            <MarketChart />
+            <EChartsChart />
             
             <div className='chart-sidebar'>
               <div className='price-summary'>
                 <h4>Current Prices</h4>
-                <div className='last-updated'>{mounted && lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString()}` : 'Loading...'}</div>
+                <div className='last-updated'>
+                  {mounted && lastUpdated ? `Updated ${lastUpdated.toLocaleTimeString()}` : 'Loading...'}
+                </div>
                 <div className='price-list'>
                   <div className='price-row'>
                     <span className='metal'>Gold</span>
-                    <span className='price'>${metalPrices.gold ? metalPrices.gold.toFixed(2) : 'Loading...'}</span>
+                    <span className='price'>${metalPrices.gold?.toFixed(2) || '0.00'}</span>
                     <span className={`change ${priceChanges.gold >= 0 ? 'positive' : 'negative'}`}>
                       {priceChanges.gold >= 0 ? '+' : ''}{priceChanges.gold ? priceChanges.gold.toFixed(2) : '0.00'}%
                     </span>
                   </div>
                   <div className='price-row'>
                     <span className='metal'>Silver</span>
-                    <span className='price'>${metalPrices.silver ? metalPrices.silver.toFixed(2) : 'Loading...'}</span>
+                    <span className='price'>${metalPrices.silver?.toFixed(2) || '0.00'}</span>
                     <span className={`change ${priceChanges.silver >= 0 ? 'positive' : 'negative'}`}>
                       {priceChanges.silver >= 0 ? '+' : ''}{priceChanges.silver ? priceChanges.silver.toFixed(2) : '0.00'}%
                     </span>
                   </div>
                   <div className='price-row'>
                     <span className='metal'>Platinum</span>
-                    <span className='price'>${metalPrices.platinum ? metalPrices.platinum.toFixed(2) : 'Loading...'}</span>
+                    <span className='price'>${metalPrices.platinum?.toFixed(2) || '0.00'}</span>
                     <span className={`change ${priceChanges.platinum >= 0 ? 'positive' : 'negative'}`}>
                       {priceChanges.platinum >= 0 ? '+' : ''}{priceChanges.platinum ? priceChanges.platinum.toFixed(2) : '0.00'}%
                     </span>
                   </div>
                   <div className='price-row'>
                     <span className='metal'>Palladium</span>
-                    <span className='price'>${metalPrices.palladium ? metalPrices.palladium.toFixed(2) : 'Loading...'}</span>
+                    <span className='price'>${metalPrices.palladium?.toFixed(2) || '0.00'}</span>
                     <span className={`change ${priceChanges.palladium >= 0 ? 'positive' : 'negative'}`}>
                       {priceChanges.palladium >= 0 ? '+' : ''}{priceChanges.palladium ? priceChanges.palladium.toFixed(2) : '0.00'}%
+                    </span>
+                  </div>
+                  <div className='price-row'>
+                    <span className='metal'>Copper</span>
+                    <span className='price'>${metalPrices.copper?.toFixed(2) || '0.00'}</span>
+                    <span className={`change ${priceChanges.copper >= 0 ? 'positive' : 'negative'}`}>
+                      {priceChanges.copper >= 0 ? '+' : ''}{priceChanges.copper ? priceChanges.copper.toFixed(2) : '0.00'}%
+                    </span>
+                  </div>
+                  <div className='price-row'>
+                    <span className='metal'>Rhodium</span>
+                    <span className='price'>${metalPrices.rhodium?.toFixed(2) || '0.00'}</span>
+                    <span className={`change ${priceChanges.rhodium >= 0 ? 'positive' : 'negative'}`}>
+                      {priceChanges.rhodium >= 0 ? '+' : ''}{priceChanges.rhodium ? priceChanges.rhodium.toFixed(2) : '0.00'}%
                     </span>
                   </div>
                 </div>
