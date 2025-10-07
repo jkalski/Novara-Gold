@@ -320,6 +320,10 @@
   
   .product-image img {
     object-fit: contain;
+    width: 150%; /* Enlarged images within existing container */
+    height: 150%;
+    max-width: none;
+    max-height: none;
   }
   
   .product-info {
@@ -378,6 +382,10 @@
   
   .product-image img {
     object-fit: contain;
+    width: 180%; /* Enlarged images within existing container */
+    height: 180%;
+    max-width: none;
+    max-height: none;
   }
   
   .product-info {
