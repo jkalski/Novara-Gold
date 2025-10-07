@@ -41,9 +41,7 @@ export default function ResearchPage({ marketUpdates, featuredUpdate, contentful
         platinum: (Math.random() - 0.5) * 5,
         palladium: (Math.random() - 0.5) * 8,
         copper: (Math.random() - 0.5) * 6,
-        rhodium: (Math.random() - 0.5) * 10,
-        iridium: (Math.random() - 0.5) * 7,
-        ruthenium: (Math.random() - 0.5) * 9
+        rhodium: (Math.random() - 0.5) * 10
       }
       
       setMetalPrices(prices)

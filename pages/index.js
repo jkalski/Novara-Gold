@@ -25,11 +25,7 @@ export default function Home() {
     { name: 'Gold', symbol: 'Au', icon: '🥇', color: '#FFD700' },
     { name: 'Silver', symbol: 'Ag', icon: '🥈', color: '#C0C0C0' },
     { name: 'Platinum', symbol: 'Pt', icon: '💎', color: '#E5E4E2' },
-    { name: 'Palladium', symbol: 'Pd', icon: '⚡', color: '#B4B4B4' },
-    { name: 'Copper', symbol: 'Cu', icon: '🟤', color: '#B87333' },
-    { name: 'Rhodium', symbol: 'Rh', icon: '🔷', color: '#00A8CC' },
-    { name: 'Iridium', symbol: 'Ir', icon: '💠', color: '#8B7D6B' },
-    { name: 'Ruthenium', symbol: 'Ru', icon: '🔸', color: '#A8A8A8' }
+    { name: 'Palladium', symbol: 'Pd', icon: '⚡', color: '#B4B4B4' }
   ]
 
   // Fetch real metal prices with 1-hour caching
@@ -49,19 +45,19 @@ export default function Home() {
           return
         }
         
-        console.log('Fetching fresh homepage metal prices from MetalpriceAPI...')
-        // Fetch directly from MetalpriceAPI
-        const response = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=4ff26aae9ecf81f96108f6f6e47cb828&base=USD&currencies=XAU,XAG,XPT,XPD')
+        console.log('Fetching fresh homepage metal prices from our API...')
+        // Use our API endpoint for consistency with research page
+        const response = await fetch('/api/gold-price')
         const data = await response.json()
         
-        console.log('Homepage MetalpriceAPI response:', data)
+        console.log('Homepage API response:', data)
         
-        if (data && data.rates) {
+        if (data) {
           const prices = {
-            Gold: (Math.round(data.rates.USDXAU * 100) / 100).toFixed(2),
-            Silver: (Math.round(data.rates.USDXAG * 100) / 100).toFixed(2),
-            Platinum: (Math.round(data.rates.USDXPT * 100) / 100).toFixed(2),
-            Palladium: (Math.round(data.rates.USDXPD * 100) / 100).toFixed(2),
+            Gold: data.gold ? data.gold.toFixed(2) : '3899.30',
+            Silver: data.silver ? data.silver.toFixed(2) : '47.53',
+            Platinum: data.platinum ? data.platinum.toFixed(2) : '1598.00',
+            Palladium: data.palladium ? data.palladium.toFixed(2) : '1290.80',
             Copper: (3.5 + Math.random() * 0.5).toFixed(2), // Keep simulated for now
             Rhodium: (15000 + Math.random() * 2000).toFixed(2), // Keep simulated for now
             Iridium: (5000 + Math.random() * 500).toFixed(2), // Keep simulated for now
@@ -91,7 +87,7 @@ export default function Home() {
           })
         }
       } catch (error) {
-        console.error('Error fetching homepage metal prices from MetalpriceAPI:', error)
+        console.error('Error fetching homepage metal prices from our API:', error)
         // Use fallback prices on error
         setPrices({
           Gold: '3899.30',

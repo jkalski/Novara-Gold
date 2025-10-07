@@ -57,9 +57,29 @@ export default async function handler(req, res) {
           metals.palladium = palladiumPrice
         }
         
-        // Cache the data
+        // Calculate price changes if we have previous data
+        let priceChanges = {}
+        if (cachedData && cachedData.gold) {
+          priceChanges = {
+            gold: ((metals.gold - cachedData.gold) / cachedData.gold) * 100,
+            silver: ((metals.silver - cachedData.silver) / cachedData.silver) * 100,
+            platinum: ((metals.platinum - cachedData.platinum) / cachedData.platinum) * 100,
+            palladium: ((metals.palladium - cachedData.palladium) / cachedData.palladium) * 100
+          }
+        } else {
+          // First time or no previous data
+          priceChanges = {
+            gold: 0,
+            silver: 0,
+            platinum: 0,
+            palladium: 0
+          }
+        }
+
+        // Cache the data with price changes
         cachedData = {
           ...metals,
+          priceChanges,
           timestamp: now,
           lastUpdated: new Date().toISOString()
         }
