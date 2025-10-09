@@ -206,25 +206,6 @@ export default function ResearchPage() {
           </div>
         </section>
 
-
-        {/* Newsletter Signup */}
-        <section className='newsletter-section'>
-          <div className='newsletter-content'>
-            <h2>Stay Informed with Our Market Updates</h2>
-            <p>Get the latest precious metals research, analysis, and market insights delivered directly to your inbox.</p>
-            <form className='newsletter-form'>
-              <div className='form-group'>
-                <input type='email' placeholder='Enter your email address' required />
-                <button type='submit' className='newsletter-btn'>
-                  Subscribe →
-                </button>
-              </div>
-              <p className='newsletter-disclaimer'>
-                By subscribing, you agree to receive market updates and promotional content from Novara Gold.
-              </p>
-            </form>
-          </div>
-        </section>
       </div>
     </div>
   )

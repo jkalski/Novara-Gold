@@ -7,8 +7,8 @@ export default function Contact() {
     name: '',
     email: '',
     phone: '',
-    // subject: '', // TEMPORARILY COMMENTED OUT
-    // message: '', // TEMPORARILY COMMENTED OUT
+    subject: '',
+    message: '',
     smsConsent: false
   })
   const [formSubmitted, setFormSubmitted] = useState(false)
@@ -73,8 +73,10 @@ export default function Contact() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
           smsConsent: formData.smsConsent,
-          formType: 'lead' // TEMPORARILY USE LEAD TYPE TO TEST
+          formType: 'contact'
         }),
       })
 
@@ -84,8 +86,8 @@ export default function Contact() {
           name: '',
           email: '',
           phone: '',
-          // subject: '', // TEMPORARILY COMMENTED OUT
-          // message: '', // TEMPORARILY COMMENTED OUT
+          subject: '',
+          message: '',
           smsConsent: false
         })
         
@@ -156,7 +158,7 @@ export default function Contact() {
               <div className='success-message'>
                 <div className='success-icon'>✓</div>
                 <h4>Thank You for Your Interest!</h4>
-                <p>We've received your message and will contact you within 2 hours. For immediate assistance, please call us at <strong>(800) 243-1571</strong>.</p>
+                <p>We've received your message and will contact you as soon as possible. For immediate assistance, please call us at <strong>(800) 243-1571</strong>.</p>
                 <div className='success-actions'>
                   <button 
                     onClick={() => setFormSubmitted(false)}
@@ -209,8 +211,7 @@ export default function Contact() {
                     />
                   </div>
                   
-                  {/* TEMPORARILY COMMENTED OUT SUBJECT FIELD TO TEST */}
-                  {/* <div className='form-group'>
+                  <div className='form-group'>
                     <label htmlFor='subject'>Subject *</label>
                     <select
                       id='subject'
@@ -228,11 +229,10 @@ export default function Contact() {
                       <option value='buyback'>Buy-Back Program</option>
                       <option value='support'>Customer Support</option>
                     </select>
-                  </div> */}
+                  </div>
                 </div>
 
-                {/* TEMPORARILY COMMENTED OUT MESSAGE FIELD TO TEST */}
-                {/* <div className='form-group'>
+                <div className='form-group'>
                   <label htmlFor='message'>Message *</label>
                   <textarea
                     id='message'
@@ -243,7 +243,7 @@ export default function Contact() {
                     placeholder='Tell us how we can help you with your precious metals investment needs...'
                     required
                   />
-                </div> */}
+                </div>
 
                 <div className='form-group checkbox-group'>
                   <label className={`checkbox-label ${validationError ? 'error' : ''}`}>

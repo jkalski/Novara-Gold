@@ -28,6 +28,45 @@ function TruncatedText({ text, maxLength = 150 }) {
   )
 }
 
+// Component for article excerpt with additional text
+function ArticleContent({ excerpt, additionalText, maxLength = 250 }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  
+  const combinedText = excerpt + (additionalText ? ' ' + additionalText : '')
+  const shouldTruncate = combinedText.length > maxLength
+  
+  if (!shouldTruncate) {
+    return (
+      <>
+        <p className='insight-summary'>{excerpt}</p>
+        {additionalText && <p className='article-additional-text'>{additionalText}</p>}
+      </>
+    )
+  }
+  
+  const truncatedText = combinedText.substring(0, maxLength)
+  const excerptLength = excerpt.length
+  
+  return (
+    <>
+      {isExpanded ? (
+        <>
+          <p className='insight-summary'>{excerpt}</p>
+          {additionalText && <p className='article-additional-text'>{additionalText}</p>}
+        </>
+      ) : (
+        <p className='insight-summary'>{truncatedText}...</p>
+      )}
+      <button 
+        className='article-see-more-btn'
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        {isExpanded ? 'see less' : 'see more'}
+      </button>
+    </>
+  )
+}
+
 export default function InsightsPage({ marketUpdates, featuredUpdate, contentfulConfigured }) {
   return (
     <div className='insights-page'>
@@ -101,8 +140,8 @@ export default function InsightsPage({ marketUpdates, featuredUpdate, contentful
               </section>
             )}
             
-            {/* Market Updates Grid */}
-            {marketUpdates.length > 0 && (
+            {/* Market Updates Grid - Blog Posts & Videos Only */}
+            {marketUpdates.filter(update => update.fields.contentType !== 'article').length > 0 && (
               <section className='updates-section'>
                 <div className='section-header'>
                   <span className='section-icon'>📚</span>
@@ -110,7 +149,7 @@ export default function InsightsPage({ marketUpdates, featuredUpdate, contentful
                 </div>
                 
                 <div className='updates-grid'>
-                  {marketUpdates.map((update, index) => (
+                  {marketUpdates.filter(update => update.fields.contentType !== 'article').map((update, index) => (
                     <article key={update.sys.id} className='update-card'>
                       <div className='card-header'>
                         <h3>{update.fields.title || `Update ${index + 1}`}</h3>
@@ -131,11 +170,58 @@ export default function InsightsPage({ marketUpdates, featuredUpdate, contentful
                           </div>
                         )}
                         <div className='update-details'>
-                          <p>{update.fields.dateTime ? new Date(update.fields.dateTime).toLocaleDateString('en-US', { 
+                          <p>{(update.fields.dateTime || update.fields.publishedDate) ? new Date(update.fields.dateTime || update.fields.publishedDate).toLocaleDateString('en-US', { 
                             year: 'numeric', 
                             month: 'long', 
                             day: 'numeric' 
                           }) : 'No date set'}</p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Article Sections - Separate Section */}
+            {marketUpdates.filter(update => update.fields.contentType === 'article').length > 0 && (
+              <section className='updates-section articles-section'>
+                <div className='section-header'>
+                  <span className='section-icon'>📰</span>
+                  <h2>Featured Articles</h2>
+                </div>
+                
+                <div className='updates-grid'>
+                  {marketUpdates.filter(update => update.fields.contentType === 'article').map((update, index) => (
+                    <article key={update.sys.id} className='update-card article-card'>
+                      <div className='card-header'>
+                        <h3>{update.fields.title || `Article ${index + 1}`}</h3>
+                        {update.fields.sourceName && (
+                          <span className='source-badge'>{update.fields.sourceName}</span>
+                        )}
+                      </div>
+                      <div className='card-content'>
+                        <ArticleContent 
+                          excerpt={update.fields.shortDescription || 'External article.'} 
+                          additionalText={update.fields.additionalText}
+                          maxLength={200}
+                        />
+                        <div className='update-details'>
+                          <p>{update.fields.publishedDate ? new Date(update.fields.publishedDate).toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          }) : 'No date set'}</p>
+                          {update.fields.articleLink && (
+                            <a 
+                              href={update.fields.articleLink} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className='article-url-display'
+                            >
+                              {update.fields.articleLink.replace(/^https?:\/\//, '').split('/')[0]}
+                            </a>
+                          )}
                         </div>
                       </div>
                     </article>

@@ -9,9 +9,10 @@ export default function Footer() {
         <div className='col contact'>
           <h4>Contact</h4>
           <ul>
-            <li>Phone: (800) 243-1571</li>
-            <li>Email: info@novaragold.com</li>
+            <li>Phone: <a href='tel:+18002431571'>(800) 243-1571</a></li>
+            <li>Email: <a href='mailto:info@novaragold.com'>info@novaragold.com</a></li>
             <li><Link href='/contact'>Contact Us</Link></li>
+            <li style={{marginTop: '0.5rem'}}>10880 Wilshire Blvd Suite 1101<br />Los Angeles, CA 90024</li>
           </ul>
         </div>
         <div className='col invest'>
@@ -24,10 +25,10 @@ export default function Footer() {
         <div className='col ira'>
           <h4>IRA</h4>
           <ul>
-            <li><Link href='/ira'>Overview</Link></li>
-            <li><Link href='/ira/how-it-works'>How It Works</Link></li>
-            <li><Link href='/ira/rollover'>Rollover & Transfer</Link></li>
-            <li><Link href='/ira/fees'>Fees & Minimums</Link></li>
+            <li><Link href='/ira#overview'>Overview</Link></li>
+            <li><Link href='/ira#how-it-works'>How It Works</Link></li>
+            <li><Link href='/ira#rollover'>Rollover & Transfer</Link></li>
+            <li><Link href='/ira#fees'>Fees & Minimums</Link></li>
           </ul>
         </div>
         <div className='col research'>
