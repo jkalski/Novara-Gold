@@ -15,11 +15,12 @@ export default async function handler(req, res) {
     const nodemailerModule = await import('nodemailer')
     const nodemailer = nodemailerModule.default || nodemailerModule
     
-    // Create transporter using GoDaddy email configuration (note: it's createTransport, not createTransporter)
+    // Create transporter using Microsoft 365 email configuration (GoDaddy domain connected to M365)
     const transporter = nodemailer.createTransport({
-      host: 'smtpout.secureserver.net', // GoDaddy SMTP server
-      port: 465,
-      secure: true, // true for 465, false for other ports
+      host: 'smtp.office365.com', // Microsoft 365 SMTP server
+      port: 587,
+      secure: false, // false for 587 (uses STARTTLS)
+      requireTLS: true, // Upgrade to TLS
       auth: {
         user: process.env.GODADDY_EMAIL,
         pass: process.env.GODADDY_EMAIL_PASSWORD,
@@ -30,7 +31,7 @@ export default async function handler(req, res) {
     let emailSubject, emailContent
     
     if (formType === 'lead') {
-      emailSubject = `🌟 New Lead from ${name} - Novara Gold`
+      emailSubject = `🌟 Requested Investor Kit from ${name} - Novara Gold`
       emailContent = `
         <!DOCTYPE html>
         <html>
@@ -55,7 +56,7 @@ export default async function handler(req, res) {
                   <tr>
                     <td style="padding: 40px 30px;">
                       <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px 20px; margin-bottom: 30px; border-radius: 4px;">
-                        <h2 style="color: #92400e; margin: 0 0 5px 0; font-size: 20px;">🌟 New Lead Submission</h2>
+                        <h2 style="color: #92400e; margin: 0 0 5px 0; font-size: 20px;">🌟 Requested Investor Kit</h2>
                         <p style="color: #78350f; margin: 0; font-size: 14px;">A potential client has requested information</p>
                       </div>
                       
