@@ -9,7 +9,7 @@ export default function IRA() {
     { id: 'how-it-works', title: 'How It Works', href: '#how-it-works' },
     { id: 'rollover', title: 'Rollover & Transfer Guide', href: '#rollover' },
     { id: 'fees', title: 'Fees & Minimums', href: '#fees' },
-    { id: 'custodians', title: 'Custodians & Depositories', href: '#custodians' },
+    { id: 'custodians', title: 'Custodian & Depositories', href: '#custodians' },
     { id: 'faq', title: 'FAQ', href: '#faq' }
     // { id: 'forms', title: 'Forms & Documents', href: '#forms' } // Temporarily hidden
   ]
@@ -169,16 +169,17 @@ export default function IRA() {
             <h3>Account Fees & Costs</h3>
             <div className='fee-structure'>
               <div className='fee-item'>
-                <h4>Account Setup</h4>
-                <p>One-time fee for establishing your precious metals IRA - varies by custodian</p>
+                <h4>Account Setup Fee</h4>
+                <p>$50 - One-time fee for establishing your precious metals IRA</p>
               </div>
               <div className='fee-item'>
-                <h4>Annual Maintenance</h4>
-                <p>Annual fee for account administration and record-keeping - varies by custodian</p>
+                <h4>Annual Maintenance Fee</h4>
+                <p>$90 - Annual fee for account administration and record-keeping</p>
               </div>
               <div className='fee-item'>
                 <h4>Storage Fees</h4>
-                <p>Annual fee for secure storage of your precious metals - varies by depository</p>
+                <p><strong>Commingled:</strong> $100 annually</p>
+                <p><strong>Segregated:</strong> Varies by depository</p>
               </div>
             </div>
 
@@ -195,10 +196,14 @@ export default function IRA() {
 
           {/* Custodians Section */}
           <section id='custodians' className='ira-section'>
-            <h2>Custodians & Depositories</h2>
+            <h2>Custodian & Depositories</h2>
             
-            <h3>Approved Custodians</h3>
-            <p>We work with several IRS-approved custodians who specialize in precious metals IRAs. Our custodians are:</p>
+            <h3>Approved Custodian</h3>
+            <p>We work with an IRS-approved custodian who specializes in precious metals IRAs:</p>
+            <ul>
+              <li><strong><a href="https://www.goldstartrust.com" target="_blank" rel="noopener noreferrer" className="depository-link">GOLDSTAR TRUST COMPANY</a></strong></li>
+            </ul>
+            <p>Our custodian is:</p>
             <ul>
               <li>Fully licensed and regulated</li>
               <li>Experienced in precious metals IRAs</li>
