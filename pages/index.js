@@ -17,6 +17,7 @@ export default function Home() {
   const [currentMetal3, setCurrentMetal3] = useState(2)
   const [currentMetal4, setCurrentMetal4] = useState(3)
   const [prices, setPrices] = useState({})
+  const [priceChanges, setPriceChanges] = useState({})
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' })
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [showFullConsent, setShowFullConsent] = useState(false)
@@ -42,6 +43,7 @@ export default function Home() {
           console.log('Using cached homepage metal prices (1-hour cache)')
           const data = JSON.parse(cachedData)
           setPrices(data.prices)
+          setPriceChanges(data.priceChanges || {})
           return
         }
         
@@ -64,15 +66,28 @@ export default function Home() {
             Ruthenium: (400 + Math.random() * 50).toFixed(2) // Keep simulated for now
           }
           
+          const priceChanges = {
+            Gold: data.priceChanges?.gold || 0,
+            Silver: data.priceChanges?.silver || 0,
+            Platinum: data.priceChanges?.platinum || 0,
+            Palladium: data.priceChanges?.palladium || 0,
+            Copper: (Math.random() - 0.5) * 4, // Keep simulated for now
+            Rhodium: (Math.random() - 0.5) * 6, // Keep simulated for now
+            Iridium: (Math.random() - 0.5) * 3, // Keep simulated for now
+            Ruthenium: (Math.random() - 0.5) * 2 // Keep simulated for now
+          }
+          
           // Cache the data for 1 hour
           const cacheData = {
             prices,
+            priceChanges,
             lastUpdated: new Date().toISOString()
           }
           localStorage.setItem('homepageMetalPrices', JSON.stringify(cacheData))
           localStorage.setItem('homepageMetalPricesTime', now.toString())
           
           setPrices(prices)
+          setPriceChanges(priceChanges)
         } else {
           // Use fallback prices
           setPrices({
@@ -84,6 +99,16 @@ export default function Home() {
             Rhodium: (15000 + Math.random() * 2000).toFixed(2),
             Iridium: (5000 + Math.random() * 500).toFixed(2),
             Ruthenium: (400 + Math.random() * 50).toFixed(2)
+          })
+          setPriceChanges({
+            Gold: 0,
+            Silver: 0,
+            Platinum: 0,
+            Palladium: 0,
+            Copper: (Math.random() - 0.5) * 4,
+            Rhodium: (Math.random() - 0.5) * 6,
+            Iridium: (Math.random() - 0.5) * 3,
+            Ruthenium: (Math.random() - 0.5) * 2
           })
         }
       } catch (error) {
@@ -98,6 +123,16 @@ export default function Home() {
           Rhodium: (15000 + Math.random() * 2000).toFixed(2),
           Iridium: (5000 + Math.random() * 500).toFixed(2),
           Ruthenium: (400 + Math.random() * 50).toFixed(2)
+        })
+        setPriceChanges({
+          Gold: 0,
+          Silver: 0,
+          Platinum: 0,
+          Palladium: 0,
+          Copper: (Math.random() - 0.5) * 4,
+          Rhodium: (Math.random() - 0.5) * 6,
+          Iridium: (Math.random() - 0.5) * 3,
+          Ruthenium: (Math.random() - 0.5) * 2
         })
       }
     }
@@ -235,21 +270,18 @@ export default function Home() {
           {/* First set of 4 repetitions */}
           {Array.from({ length: 4 }, (_, repeatIndex) => 
             metals.map((metal, index) => {
-              const change = metal.name === 'Gold' ? 2.3 : 
-                            metal.name === 'Silver' ? -1.8 : 
-                            metal.name === 'Platinum' ? 0.7 : 
-                            metal.name === 'Palladium' ? -2.1 : 
-                            metal.name === 'Copper' ? 1.2 : 
-                            metal.name === 'Rhodium' ? 3.4 : 0.5;
+              const change = priceChanges[metal.name] || 0;
               const isPositive = change >= 0;
               const sign = isPositive ? '+' : '';
               return (
                 <div key={`${metal.name}-${repeatIndex}`} className='ticker-link'>
                   <span className='metal-symbol'>{metal.name}</span>
                   <span className='metal-price'>${prices[metal.name] || 'Loading...'}</span>
-                  <span className={`price-change ${isPositive ? 'positive' : 'negative'}`}>
-                    {sign}{change.toFixed(1)}%
-                  </span>
+                  {change !== 0 && (
+                    <span className={`price-change ${isPositive ? 'positive' : 'negative'}`}>
+                      {sign}{change.toFixed(1)}%
+                    </span>
+                  )}
                 </div>
               );
             })
@@ -257,21 +289,18 @@ export default function Home() {
           {/* Second set of 4 repetitions for seamless loop */}
           {Array.from({ length: 4 }, (_, repeatIndex) => 
             metals.map((metal, index) => {
-              const change = metal.name === 'Gold' ? 2.3 : 
-                            metal.name === 'Silver' ? -1.8 : 
-                            metal.name === 'Platinum' ? 0.7 : 
-                            metal.name === 'Palladium' ? -2.1 : 
-                            metal.name === 'Copper' ? 1.2 : 
-                            metal.name === 'Rhodium' ? 3.4 : 0.5;
+              const change = priceChanges[metal.name] || 0;
               const isPositive = change >= 0;
               const sign = isPositive ? '+' : '';
               return (
                 <div key={`${metal.name}-copy-${repeatIndex}`} className='ticker-link'>
                   <span className='metal-symbol'>{metal.name}</span>
                   <span className='metal-price'>${prices[metal.name] || 'Loading...'}</span>
-                  <span className={`price-change ${isPositive ? 'positive' : 'negative'}`}>
-                    {sign}{change.toFixed(1)}%
-                  </span>
+                  {change !== 0 && (
+                    <span className={`price-change ${isPositive ? 'positive' : 'negative'}`}>
+                      {sign}{change.toFixed(1)}%
+                    </span>
+                  )}
                 </div>
               );
             })

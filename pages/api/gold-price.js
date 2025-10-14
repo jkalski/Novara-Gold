@@ -1,9 +1,12 @@
 // Server-side gold price caching
-// Fetches from Metalprice API twice per day and caches the result
+// Fetches prices every 30 minutes, calculates price changes every 12 hours
 
 let cachedData = null
+let baselinePrices = null
 let lastFetchTime = 0
-const FETCH_INTERVAL = 12 * 60 * 60 * 1000 // 12 hours (twice per day)
+let lastPriceChangeTime = 0
+const FETCH_INTERVAL = 30 * 60 * 1000 // 30 minutes for price updates
+const PRICE_CHANGE_INTERVAL = 12 * 60 * 60 * 1000 // 12 hours for price change calculations
 
 export default async function handler(req, res) {
   const now = Date.now()
@@ -28,47 +31,60 @@ export default async function handler(req, res) {
         // Gold (XAU)
         if (data.rates.XAU) {
           let goldPrice = data.rates.XAU
-          if (goldPrice < 100) goldPrice = goldPrice * 31.1035
-          if (goldPrice < 1000 || goldPrice > 10000) goldPrice = 3899.30
+          // Metalprice API returns price per troy ounce, convert if needed
+          if (goldPrice < 1) goldPrice = 1 / goldPrice
           metals.gold = goldPrice
         }
         
         // Silver (XAG) 
         if (data.rates.XAG) {
           let silverPrice = data.rates.XAG
-          if (silverPrice < 1) silverPrice = silverPrice * 31.1035
-          if (silverPrice < 10 || silverPrice > 100) silverPrice = 47.53
+          // Metalprice API returns price per troy ounce, convert if needed
+          if (silverPrice < 1) silverPrice = 1 / silverPrice
           metals.silver = silverPrice
         }
         
         // Platinum (XPT)
         if (data.rates.XPT) {
           let platinumPrice = data.rates.XPT
-          if (platinumPrice < 100) platinumPrice = platinumPrice * 31.1035
-          if (platinumPrice < 500 || platinumPrice > 5000) platinumPrice = 1598.00
+          // Metalprice API returns price per troy ounce, convert if needed
+          if (platinumPrice < 1) platinumPrice = 1 / platinumPrice
           metals.platinum = platinumPrice
         }
         
         // Palladium (XPD)
         if (data.rates.XPD) {
           let palladiumPrice = data.rates.XPD
-          if (palladiumPrice < 100) palladiumPrice = palladiumPrice * 31.1035
-          if (palladiumPrice < 500 || palladiumPrice > 5000) palladiumPrice = 1290.80
+          // Metalprice API returns price per troy ounce, convert if needed
+          if (palladiumPrice < 1) palladiumPrice = 1 / palladiumPrice
           metals.palladium = palladiumPrice
         }
         
-        // Calculate price changes if we have previous data
+        // Calculate price changes only every 12 hours
         let priceChanges = {}
-        if (cachedData && cachedData.gold) {
+        if (baselinePrices && (now - lastPriceChangeTime) > PRICE_CHANGE_INTERVAL) {
           priceChanges = {
-            gold: ((metals.gold - cachedData.gold) / cachedData.gold) * 100,
-            silver: ((metals.silver - cachedData.silver) / cachedData.silver) * 100,
-            platinum: ((metals.platinum - cachedData.platinum) / cachedData.platinum) * 100,
-            palladium: ((metals.palladium - cachedData.palladium) / cachedData.palladium) * 100
+            gold: ((metals.gold - baselinePrices.gold) / baselinePrices.gold) * 100,
+            silver: ((metals.silver - baselinePrices.silver) / baselinePrices.silver) * 100,
+            platinum: ((metals.platinum - baselinePrices.platinum) / baselinePrices.platinum) * 100,
+            palladium: ((metals.palladium - baselinePrices.palladium) / baselinePrices.palladium) * 100
+          }
+          // Update baseline prices for next 12-hour comparison
+          baselinePrices = { ...metals }
+          lastPriceChangeTime = now
+        } else if (!baselinePrices) {
+          // First time - set baseline prices
+          baselinePrices = { ...metals }
+          lastPriceChangeTime = now
+          priceChanges = {
+            gold: 0,
+            silver: 0,
+            platinum: 0,
+            palladium: 0
           }
         } else {
-          // First time or no previous data
-          priceChanges = {
+          // Use existing price changes
+          priceChanges = cachedData?.priceChanges || {
             gold: 0,
             silver: 0,
             platinum: 0,

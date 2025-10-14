@@ -12,7 +12,7 @@ const testEmailAPI = async () => {
     console.log('Testing email API...');
     console.log('Sending data:', testData);
     
-    const response = await fetch('http://localhost:3000/api/send-email', {
+    const response = await fetch('http://localhost:3002/api/send-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
