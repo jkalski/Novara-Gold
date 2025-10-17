@@ -212,10 +212,7 @@ export default function IRA() {
             </ul>
 
             <h3>Secure Depositories</h3>
-            <p>Your precious metals are stored in highly secure, insured depositories that meet strict IRS requirements:</p>
-            <ul>
-              <li><strong><a href="https://delawaredepository.com/" target="_blank" rel="noopener noreferrer" className="depository-link">Delaware Depository</a></strong></li>
-            </ul>
+            <p>Your precious metals are stored in highly secure, insured depositories that meet strict IRS requirements.</p>
 
             <h3>Storage Features</h3>
             <ul>
