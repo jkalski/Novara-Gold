@@ -15,3 +15,20 @@ dist/
 .DS_Store
 npm-debug.log*
 yarn-error.log*
+
+# === Local logs & scratch ===
+logs/
+node_modules.bak_*/
+*.log
+debug-env.js
+query
+queryex
+smtp-test.js
+
+# === Next.js generated ===
+.next/
+.next.cache/
+next-env.d.ts
+
+# === Local tools/diagnostics (not shipped) ===
+tools/
