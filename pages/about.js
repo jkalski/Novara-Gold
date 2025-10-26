@@ -150,6 +150,42 @@ export default function About() {
         </div>
       </section>
 
+      {/* Contact Information Section */}
+      <section className='about-contact-section'>
+        <div className='container'>
+          <div className='contact-info-box'>
+            <div className='contact-left-column'>
+              <div className='contact-image'>
+                <Image 
+                  src="/images/contact-novara.jpg" 
+                  alt="Contact Novara Gold" 
+                  width={400}
+                  height={300}
+                  className='contact-photo'
+                />
+              </div>
+              <div className='bbb-badge'>
+                <a href="https://www.bbb.org/losangelessiliconvalley/quote/request-novara-gold-llc-1000047985/#buttonclick" target="_blank" rel="nofollow">
+                  <img src="https://seal-sanjose.bbb.org/request-a-quote/blue-badge-160-61-blue-bbb-1000047985.png" style={{border: 0}} alt="Novara Gold LLC BBB Business Review" />
+                </a>
+              </div>
+            </div>
+            <div className='contact-person'>
+              <h4>Paul Louis</h4>
+              <p className='contact-title'>Director of Acquisitions</p>
+              <div className='contact-details'>
+                <p><strong>Direct Line:</strong> <a href="tel:+14244918678">424-491-8678</a></p>
+                <p><strong>Email:</strong> <a href="mailto:paul.louis@novaragold.com">paul.louis@novaragold.com</a></p>
+                <p><strong>Website:</strong> <a href="https://www.novaragold.com" target="_blank" rel="noopener noreferrer">www.novaragold.com</a></p>
+              </div>
+              <div className='contact-address'>
+                <p>10880 Wilshire Blvd<br />Suite 1101<br />Los Angeles, CA 90024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   )
 }

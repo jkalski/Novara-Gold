@@ -15,6 +15,14 @@ export default function Footer() {
             <li style={{marginTop: '0.5rem'}}>10880 Wilshire Blvd Suite 1101<br />Los Angeles, CA 90024</li>
           </ul>
         </div>
+        <div className='col direct-contact'>
+          <ul>
+            <li><strong>Paul Louis</strong></li>
+            <li>Director of Acquisitions</li>
+            <li style={{marginTop: '0.5rem'}}>Direct: <a href='tel:+14244918678'>424-491-8678</a></li>
+            <li>Email: <a href='mailto:paul.louis@novaragold.com'>paul.louis@novaragold.com</a></li>
+          </ul>
+        </div>
         <div className='col invest'>
           <h4>Invest</h4>
           <ul>

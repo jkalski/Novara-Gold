@@ -964,7 +964,7 @@ html {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--space-10);
   margin-bottom: var(--space-16);
   max-width: 1200px;

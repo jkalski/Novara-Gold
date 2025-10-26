@@ -1,12 +1,12 @@
 // Server-side gold price caching
-// Fetches prices every 30 minutes, calculates price changes every 12 hours
+// Fetches prices every 30 minutes, calculates price changes every 24 hours
 
 let cachedData = null
 let baselinePrices = null
 let lastFetchTime = 0
 let lastPriceChangeTime = 0
 const FETCH_INTERVAL = 30 * 60 * 1000 // 30 minutes for price updates
-const PRICE_CHANGE_INTERVAL = 12 * 60 * 60 * 1000 // 12 hours for price change calculations
+const PRICE_CHANGE_INTERVAL = 24 * 60 * 60 * 1000 // 24 hours for price change calculations
 
 export default async function handler(req, res) {
   const now = Date.now()
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
           metals.palladium = palladiumPrice
         }
         
-        // Calculate price changes only every 12 hours
+        // Calculate price changes only every 24 hours
         let priceChanges = {}
         if (baselinePrices && (now - lastPriceChangeTime) > PRICE_CHANGE_INTERVAL) {
           priceChanges = {
@@ -69,7 +69,7 @@ export default async function handler(req, res) {
             platinum: ((metals.platinum - baselinePrices.platinum) / baselinePrices.platinum) * 100,
             palladium: ((metals.palladium - baselinePrices.palladium) / baselinePrices.palladium) * 100
           }
-          // Update baseline prices for next 12-hour comparison
+          // Update baseline prices for next 24-hour comparison
           baselinePrices = { ...metals }
           lastPriceChangeTime = now
         } else if (!baselinePrices) {
