@@ -1,4 +1,4 @@
-const nextConfig = { 
+﻿const nextConfig = { 
   reactStrictMode: true,
   images: {
     formats: ['image/webp', 'image/avif'],
@@ -10,3 +10,11 @@ const nextConfig = {
   }
 }
 module.exports = nextConfig
+/* >>> ops: protect /api from rewrites <<< */
+module.exports ||= {};
+module.exports.rewrites = async () => ({
+  beforeFiles: [{ source: '/api/:path*', destination: '/api/:path*' }],
+  afterFiles: [],
+  fallback: [],
+});
+
