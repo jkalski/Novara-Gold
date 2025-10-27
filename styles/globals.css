@@ -1062,6 +1062,22 @@ html {
   padding: 0 var(--space-6);
 }
 
+.footer-right-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.footer-bbb-badge {
+  display: block;
+  line-height: 0;
+}
+
+.footer-bbb-badge img {
+  height: 30px;
+  width: auto;
+}
+
 .links {
   display: flex;
   gap: var(--space-6);
@@ -1599,6 +1615,11 @@ img {
     flex-direction: column;
     gap: var(--space-4);
     text-align: center;
+  }
+  
+  .footer-right-section {
+    flex-direction: column;
+    gap: var(--space-3);
   }
   
   .links {
