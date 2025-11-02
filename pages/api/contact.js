@@ -13,10 +13,11 @@ export default async function handler(req, res) {
     message = "",
   } = data;
 
-  const smsConsent = Boolean(data.smsConsent ?? data.consent ?? false);
-
   // Decide type-specific labeling
   const isLead = formType === "lead";
+  
+  // Auto-set SMS consent to true for lead forms (checkbox is required)
+  const smsConsent = isLead ? true : Boolean(data.smsConsent ?? data.consent ?? false);
   const title = isLead ? "Investor Kit Lead" : "Customer Contact";
   const prettySubject = title;
 
