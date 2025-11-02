@@ -531,6 +531,23 @@
   transform: translateX(-7%);
 }
 
+.trust-badges-section-homepage {
+  border-bottom: none;
+}
+
+.trust-badges-section-homepage::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  top: auto;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--gs-gold) 30%, var(--gs-gold) 70%, transparent 100%);
+  box-shadow: 0 2px 4px rgba(212, 175, 55, 0.15);
+  transform: none;
+}
+
 .trust-badges-wrapper::before,
 .trust-badges-wrapper::after {
   content: '';
