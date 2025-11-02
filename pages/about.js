@@ -43,7 +43,7 @@ export default function About() {
                   We are doing this by making trust, transparency, and honesty at the heart of everything we do. We stand apart from competitors who rely on gimmicks like "free Silver" or pay high prices for celebrity endorsements. These marketing tactics only raise client costs. By avoiding such practices, we keep our pricing fair, our guidance honest, and our focus where it belongs: protecting and growing your wealth.
                 </p>
                 <p>
-                  We believe in clarity, integrity, and personal service tailored to your needs. Every client deserves the confidence of knowing their financial future is supported by real value- not distractions or inflated promises. Our clients trust us because we keep thing clear, direct, and built to last.
+                  We believe in clarity, integrity, and personal service tailored to your needs. Every client deserves the confidence of knowing their financial future is supported by real value- not distractions or inflated promises. Our clients trust us because we keep things clear, direct, and built to last.
                 </p>
                 <p>
                   We have over 20 years of experience in the financial markets combining Wall St, Commodities markets, and physical precious metals markets. It is this experience that allows us to help educate and navigate our clients through uncertain times. Novara Gold is here to compliment your investing strategy not change it. We at Novara Gold are just one more member of your financial team. Our main focus is to preserve and protect your hard-earned wealth.
@@ -86,6 +86,38 @@ export default function About() {
                   height={300}
                 />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Badges Section */}
+      <section className='trust-badges-section'>
+        <div className='container'>
+          <div className='trust-badges-wrapper'>
+            <div className='trust-badge-item trust-badge-item-bbb'>
+              <Image 
+                src="/images/BBBImage.png" 
+                alt="Better Business Bureau" 
+                width={300}
+                height={150}
+              />
+            </div>
+            <div className='trust-badge-item trust-badge-item-trustpilot'>
+              <Image 
+                src="/images/TrustPilotImage.png" 
+                alt="TrustPilot" 
+                width={200}
+                height={100}
+              />
+            </div>
+            <div className='trust-badge-item'>
+              <Image 
+                src="/images/googleImage.png" 
+                alt="Google Reviews" 
+                width={200}
+                height={100}
+              />
             </div>
           </div>
         </div>

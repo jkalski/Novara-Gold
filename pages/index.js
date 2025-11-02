@@ -373,6 +373,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trust Badges Section */}
+      <section className='trust-badges-section trust-badges-section-homepage'>
+        <div className='container'>
+          <div className='trust-badges-wrapper trust-badges-wrapper-homepage'>
+            <div className='trust-badge-item trust-badge-item-bbb'>
+              <Image 
+                src="/images/BBBImage.png" 
+                alt="Better Business Bureau" 
+                width={300}
+                height={150}
+              />
+            </div>
+            <div className='trust-badge-item trust-badge-item-trustpilot'>
+              <Image 
+                src="/images/TrustPilotImage.png" 
+                alt="TrustPilot" 
+                width={200}
+                height={100}
+              />
+            </div>
+            <div className='trust-badge-item'>
+              <Image 
+                src="/images/googleImage.png" 
+                alt="Google Reviews" 
+                width={200}
+                height={100}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Products Section */}
       <section className='featured-products-section'>
         <div className='gs-container'>
