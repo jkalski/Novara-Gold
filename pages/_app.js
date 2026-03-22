@@ -7,18 +7,18 @@ import '../styles/contact.css'
 import '../styles/research.css'
 import '../styles/insights.css'
 import '../styles/glossary.css'
+import '../styles/landing.css'
 import Layout from '../components/Layout'
 import Head from 'next/head'
 
-export default function App({ Component, pageProps }) { 
+export default function App({ Component, pageProps }) {
+  const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>)
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {getLayout(<Component {...pageProps} />)}
     </>
   )
 }
