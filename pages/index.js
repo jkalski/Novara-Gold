@@ -10,6 +10,7 @@ import {
 import { LiaCompassSolid } from 'react-icons/lia'
 import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri'
 import SEO from '../components/SEO'
+import Script from 'next/script'
 
 export default function Home() {
   const [currentMetal, setCurrentMetal] = useState(0)
@@ -21,6 +22,8 @@ export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' })
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [showFullConsent, setShowFullConsent] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const [mounted, setMounted] = useState(false)
 
   const metals = [
     { name: 'Gold', symbol: 'Au', icon: '🥇', color: '#FFD700' },
@@ -28,6 +31,16 @@ export default function Home() {
     { name: 'Platinum', symbol: 'Pt', icon: '💎', color: '#E5E4E2' },
     { name: 'Palladium', symbol: 'Pd', icon: '⚡', color: '#B4B4B4' }
   ]
+
+  useEffect(() => {
+    setMounted(true)
+    window.handleHomeTurnstileCallback = (token) => setTurnstileToken(token)
+    window.handleHomeTurnstileExpired = () => setTurnstileToken('')
+    return () => {
+      delete window.handleHomeTurnstileCallback
+      delete window.handleHomeTurnstileExpired
+    }
+  }, [])
 
   // Fetch real metal prices with 1-hour caching
   useEffect(() => {
@@ -180,7 +193,8 @@ export default function Home() {
         },
         body: JSON.stringify({
           ...formData,
-          formType: 'lead'
+          formType: 'lead',
+          turnstileToken,
         }),
       })
 
@@ -234,8 +248,10 @@ export default function Home() {
   }
 
   return (
+    <>
+    <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
     <div>
-      <SEO 
+      <SEO
         title="Novara Gold - The Future of Vaulted Wealth | Precious Metals Investment"
         description="Discover the future of vaulted wealth with Novara Gold. Expert precious metals investment services including gold, silver, platinum, and palladium IRAs with secure storage and transparent pricing."
         canonical="/"
@@ -657,7 +673,15 @@ export default function Home() {
                     </label>
                   </div>
                   
-                  <button type='submit' className='submit-btn'>
+                  {mounted && (
+                    <div
+                      className="cf-turnstile"
+                      data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                      data-callback="handleHomeTurnstileCallback"
+                      data-expired-callback="handleHomeTurnstileExpired"
+                    />
+                  )}
+                  <button type='submit' className='submit-btn' disabled={!turnstileToken}>
                     Request Free Investor Kit
                   </button>
                 </form>
@@ -667,5 +691,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   )
 }

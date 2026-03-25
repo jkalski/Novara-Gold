@@ -1,11 +1,24 @@
 import SEO from '../../components/SEO'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Script from 'next/script'
 
 export default function Products() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', consent: false })
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    window.handleProductsTurnstileCallback = (token) => setTurnstileToken(token)
+    window.handleProductsTurnstileExpired = () => setTurnstileToken('')
+    return () => {
+      delete window.handleProductsTurnstileCallback
+      delete window.handleProductsTurnstileExpired
+    }
+  }, [])
 
   // Format phone number as user types
   const formatPhoneNumber = (value) => {
@@ -50,7 +63,8 @@ export default function Products() {
         },
         body: JSON.stringify({
           ...formData,
-          formType: 'lead'
+          formType: 'lead',
+          turnstileToken,
         }),
       })
 
@@ -75,6 +89,8 @@ export default function Products() {
   }
 
   return (
+    <>
+    <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
     <div className='products-page'>
       <SEO 
         title="Precious Metals Products - Gold, Silver, Platinum & Palladium | Novara Gold"
@@ -467,7 +483,15 @@ export default function Products() {
                       </label>
                     </div>
                     
-                    <button type='submit' className='submit-btn'>
+                    {mounted && (
+                      <div
+                        className="cf-turnstile"
+                        data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                        data-callback="handleProductsTurnstileCallback"
+                        data-expired-callback="handleProductsTurnstileExpired"
+                      />
+                    )}
+                    <button type='submit' className='submit-btn' disabled={!turnstileToken}>
                       Request Free Investor Kit
                     </button>
                   </form>
@@ -483,5 +507,6 @@ export default function Products() {
 
       </div>
     </div>
+    </>
   )
 }

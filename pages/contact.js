@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FiMail, FiPhone, FiClock, FiSend } from 'react-icons/fi'
 import SEO from '../components/SEO'
+import Script from 'next/script'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -8,11 +9,22 @@ export default function Contact() {
     email: '',
     phone: '',
     subject: '',
-    message: '',
     smsConsent: false
   })
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [validationError, setValidationError] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    window.handleContactTurnstileCallback = (token) => setTurnstileToken(token)
+    window.handleContactTurnstileExpired = () => setTurnstileToken('')
+    return () => {
+      delete window.handleContactTurnstileCallback
+      delete window.handleContactTurnstileExpired
+    }
+  }, [])
 
   // Format phone number as user types
   const formatPhoneNumber = (value) => {
@@ -74,9 +86,9 @@ export default function Contact() {
           email: formData.email,
           phone: formData.phone,
           subject: formData.subject,
-          message: formData.message,
           smsConsent: formData.smsConsent,
-          formType: 'contact'
+          formType: 'contact',
+          turnstileToken,
         }),
       })
 
@@ -87,7 +99,6 @@ export default function Contact() {
           email: '',
           phone: '',
           subject: '',
-          message: '',
           smsConsent: false
         })
         
@@ -102,6 +113,8 @@ export default function Contact() {
   }
 
   return (
+    <>
+    <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
     <div className='contact-page'>
       <SEO 
         title="Contact Novara Gold - Precious Metals Investment Experts"
@@ -232,19 +245,6 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className='form-group'>
-                  <label htmlFor='message'>Message *</label>
-                  <textarea
-                    id='message'
-                    name='message'
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={6}
-                    placeholder='Tell us how we can help you with your precious metals investment needs...'
-                    required
-                  />
-                </div>
-
                 <div className='form-group checkbox-group'>
                   <label className={`checkbox-label ${validationError ? 'error' : ''}`}>
                     <div className='checkbox-container'>
@@ -269,7 +269,15 @@ export default function Contact() {
                   )}
                 </div>
 
-                <button type='submit' className='submit-btn'>
+                {mounted && (
+                  <div
+                    className="cf-turnstile"
+                    data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                    data-callback="handleContactTurnstileCallback"
+                    data-expired-callback="handleContactTurnstileExpired"
+                  />
+                )}
+                <button type='submit' className='submit-btn' disabled={!turnstileToken}>
                   <FiSend />
                   Send Message
                 </button>
@@ -287,5 +295,6 @@ export default function Contact() {
         </div>
       </div>
     </div>
+    </>
   )
 }

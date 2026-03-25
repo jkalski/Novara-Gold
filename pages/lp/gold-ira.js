@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Head from 'next/head'
+import Script from 'next/script'
 
 export default function GoldIRALandingPage() {
   const [formType, setFormType] = useState('investor-guide')
@@ -13,7 +14,19 @@ export default function GoldIRALandingPage() {
   const [videoOpen, setVideoOpen] = useState(false)
   const [smsConsent, setSmsConsent] = useState(false)
   const [smsExpanded, setSmsExpanded] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const [mounted, setMounted] = useState(false)
   const formRef = useRef(null)
+
+  useEffect(() => {
+    setMounted(true)
+    window.handleTurnstileCallback = (token) => setTurnstileToken(token)
+    window.handleTurnstileExpired = () => setTurnstileToken('')
+    return () => {
+      delete window.handleTurnstileCallback
+      delete window.handleTurnstileExpired
+    }
+  }, [])
 
   const scrollToForm = (type) => {
     setFormType(type)
@@ -44,6 +57,7 @@ export default function GoldIRALandingPage() {
           message: formType === 'portfolio-review'
             ? `Requested a portfolio review via the Gold IRA landing page.\nPreferred Date: ${formData.preferredDate || 'Not specified'}\nPreferred Time: ${formData.preferredTime || 'Not specified'}`
             : '',
+          turnstileToken,
         }),
       })
       if (!res.ok) throw new Error('failed')
@@ -80,6 +94,7 @@ export default function GoldIRALandingPage() {
         />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
+      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
 
       <div className="lp-page">
 
@@ -175,7 +190,7 @@ export default function GoldIRALandingPage() {
                     <tr>
                       <td>1 oz Coin</td>
                       <td className="lp-price-market">$4,600</td>
-                      <td className="lp-price-dealer">$6,900</td>
+                      <td className="lp-price-dealer">$5,300</td>
                     </tr>
                   </tbody>
                 </table>
@@ -206,19 +221,14 @@ export default function GoldIRALandingPage() {
             Insights From Inside the Precious Metals Industry
           </h2>
           <div className="lp-container">
-            <div className="lp-video-wrap" onClick={() => setVideoOpen(true)}>
-              <div className="lp-video-thumb">
-                <div className="lp-video-text-overlay">
-                  <p className="lp-video-label">
-                    <strong>Gold IRA Lies:</strong><br />
-                    <em>Hidden Fees Exposed</em>
-                  </p>
-                </div>
-                <button className="lp-play-btn" aria-label="Play video">
-                  <span className="lp-play-icon">▶</span>
-                </button>
-              </div>
-              <p className="lp-video-caption">Watch Before Opening a Gold IRA</p>
+            <div className="lp-cover-image-wrap">
+              <Image
+                src="/images/coverImage.png"
+                alt="Insights from inside the precious metals industry"
+                width={800}
+                height={450}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
             </div>
           </div>
         </section>
@@ -354,11 +364,19 @@ export default function GoldIRALandingPage() {
                         See our <Link href="/policies/privacy">Privacy Policy</Link> and <Link href="/policies/terms">Terms &amp; Conditions</Link>.
                       </span>
                     </label>
+                    {mounted && (
+                      <div
+                        className="cf-turnstile"
+                        data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                        data-callback="handleTurnstileCallback"
+                        data-expired-callback="handleTurnstileExpired"
+                      />
+                    )}
                     {error && <p className="lp-form-error">{error}</p>}
                     <button
                       type="submit"
                       className="lp-btn-submit"
-                      disabled={submitting || !smsConsent}
+                      disabled={submitting || !smsConsent || !turnstileToken}
                     >
                       {submitting
                         ? 'Sending…'

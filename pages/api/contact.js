@@ -11,7 +11,20 @@ export default async function handler(req, res) {
     phone = "",
     subject = "",
     message = "",
+    turnstileToken,
   } = data;
+
+  if (turnstileToken) {
+    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: process.env.TURNSTILE_SECRET_KEY, response: turnstileToken }),
+    })
+    const verifyData = await verifyRes.json()
+    if (!verifyData.success) {
+      return res.status(400).json({ ok: false, err: 'Security check failed. Please try again.' })
+    }
+  }
 
   // Decide type-specific labeling
   const isLead = formType === "lead";
