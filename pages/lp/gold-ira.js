@@ -63,12 +63,6 @@ export default function GoldIRALandingPage() {
       if (!res.ok) throw new Error('failed')
       setSubmitType(formType)
       setSubmitted(true)
-      if (formType === 'investor-guide') {
-        const a = document.createElement('a')
-        a.href = '/novara-gold-investor-guide.pdf'
-        a.download = 'Novara-Gold-Investor-Guide.pdf'
-        a.click()
-      }
     } catch {
       setError('Something went wrong. Please try again or call us directly.')
     } finally {
