@@ -14,16 +14,22 @@ export default async function handler(req, res) {
     turnstileToken,
   } = data;
 
-  if (turnstileToken) {
-    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret: process.env.TURNSTILE_SECRET_KEY, response: turnstileToken }),
-    })
-    const verifyData = await verifyRes.json()
-    if (!verifyData.success) {
-      return res.status(400).json({ ok: false, err: 'Security check failed. Please try again.' })
-    }
+  if (!turnstileToken) {
+    return res.status(400).json({ ok: false, err: 'Security check missing. Please try again.' })
+  }
+
+  const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ secret: process.env.TURNSTILE_SECRET_KEY, response: turnstileToken }),
+  })
+  const verifyData = await verifyRes.json()
+  if (!verifyData.success) {
+    return res.status(400).json({ ok: false, err: 'Security check failed. Please try again.' })
+  }
+
+  if (!name.trim() || !email.trim()) {
+    return res.status(400).json({ ok: false, err: 'Name and email are required.' })
   }
 
   // Decide type-specific labeling
