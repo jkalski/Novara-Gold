@@ -121,6 +121,33 @@
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.9);
 }
 
+/* ── Silver page hero overrides ── */
+.lp-hero-silver {
+  background-image: url('/images/free-silver.png');
+  background-position: 85% 115%;
+  background-size: 55%;
+  background-repeat: no-repeat;
+  background-color: #0a0a0a;
+  min-height: 750px;
+}
+
+.lp-hero-content-left {
+  text-align: left;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 4rem 10rem 5rem;
+}
+
+.lp-hero-content-left .lp-hero-eyebrow {
+  color: #c0c0c0;
+}
+
+.lp-hero-sub-left {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* ── Video Section ── */
 .lp-video-section {
   background: #0d0d0d;
@@ -948,6 +975,7 @@
   .lp-cta-actions {
     flex: 1;
     align-items: flex-start;
+    min-width: 0;
   }
 
   .lp-btn-cta {
@@ -958,6 +986,9 @@
 
   .lp-cta-alt-link {
     font-size: 0.65rem;
+    white-space: normal;
+    line-height: 1.4;
+    text-align: left;
   }
 
   .lp-form-modal {
