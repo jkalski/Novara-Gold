@@ -97,8 +97,19 @@ export default function SilverLandingPage() {
         {/* ── Nav ── */}
         <header className="lp-nav">
           <div className="lp-nav-inner">
-            <span className="lp-nav-wordmark">NOVARA</span>
+            <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', width: '750px', height: '200px' }}>
+              <Image
+                src="/images/NavbarLogo.png"
+                alt="Novara Gold"
+                fill
+                priority
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
           </div>
+          <a href="tel:+18002431571" className="lp-nav-call">
+            Call Now &nbsp;(800) 243-1571
+          </a>
         </header>
 
         {/* ── Hero ── */}
