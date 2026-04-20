@@ -861,12 +861,17 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .lp-nav-inner {
-    height: 70px;
+    height: 60px;
   }
 
-  .lp-nav-wordmark {
-    font-size: 2rem;
-    letter-spacing: 0.25em;
+  .lp-nav-inner > div {
+    width: 320px !important;
+    height: 80px !important;
+  }
+
+  .lp-nav-call {
+    font-size: 0.75rem;
+    right: 1rem;
   }
 
   .lp-hero {
@@ -922,12 +927,18 @@
 /* ── Phone: everything above the fold ── */
 @media (max-width: 480px) {
   .lp-nav-inner {
-    height: 48px;
+    height: 52px;
   }
 
-  .lp-nav-wordmark {
-    font-size: 1.5rem;
-    letter-spacing: 0.2em;
+  .lp-nav-inner > div {
+    width: 220px !important;
+    height: 55px !important;
+  }
+
+  .lp-nav-call {
+    font-size: 0.65rem;
+    right: 0.75rem;
+    letter-spacing: 0;
   }
 
   .lp-hero {
