@@ -28,6 +28,23 @@ export default function SilverLandingPage() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!formOpen) return
+    setTurnstileToken('')
+    const timer = setTimeout(() => {
+      const el = document.querySelector('.cf-turnstile')
+      if (el && window.turnstile) {
+        el.innerHTML = ''
+        window.turnstile.render(el, {
+          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+          callback: (token) => setTurnstileToken(token),
+          'expired-callback': () => setTurnstileToken(''),
+        })
+      }
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [formOpen])
+
   const openForm = (type) => {
     setFormType(type)
     setSubmitted(false)
@@ -90,7 +107,7 @@ export default function SilverLandingPage() {
         />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
+      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" />
 
       <div className="lp-page">
 
