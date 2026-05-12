@@ -142,6 +142,12 @@ export default function GoldIRALandingPage() {
             <p className="lp-hero-sub">
               Most investors overpay by 20% to 50%<br />and never realize it.
             </p>
+            <button
+              className="lp-btn-cta lp-hero-cta"
+              onClick={() => { setVideoOpen(true); openForm('investor-guide') }}
+            >
+              WATCH THE VIDEO &amp; GET THE GUIDE
+            </button>
           </div>
         </section>
 

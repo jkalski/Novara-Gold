@@ -141,6 +141,12 @@ export default function SilverLandingPage() {
             <p className="lp-hero-sub lp-hero-sub-left">
               It&apos;s not a bonus. It&apos;s a distraction.<br />And it&apos;s costing you.
             </p>
+            <button
+              className="lp-btn-cta lp-hero-cta"
+              onClick={() => { setVideoOpen(true); openForm('investor-guide') }}
+            >
+              WATCH THE VIDEO &amp; GET THE GUIDE
+            </button>
           </div>
         </section>
 
