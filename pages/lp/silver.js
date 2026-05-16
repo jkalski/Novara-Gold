@@ -145,7 +145,7 @@ export default function SilverLandingPage() {
               className="lp-btn-cta lp-hero-cta"
               onClick={() => { setVideoOpen(true); openForm('investor-guide') }}
             >
-              WATCH THE VIDEO &amp; GET THE GUIDE
+              GET THE GUIDE
             </button>
           </div>
         </section>
@@ -205,7 +205,7 @@ export default function SilverLandingPage() {
                 className="lp-btn-cta"
                 onClick={() => { setVideoOpen(true); openForm('investor-guide') }}
               >
-                WATCH THE VIDEO &amp; GET THE GUIDE
+                GET THE GUIDE
               </button>
               <button
                 className="lp-cta-alt-link"
@@ -230,7 +230,7 @@ export default function SilverLandingPage() {
               </button>
               <div className="lp-iframe-wrap">
                 <iframe
-                  src="https://www.youtube.com/embed/FNTfjNAr6p8?autoplay=1"
+                  src="https://www.youtube.com/embed/FNTfjNAr6p8"
                   title="The Truth Behind Free Silver Offers"
                   style={{ border: 'none' }}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

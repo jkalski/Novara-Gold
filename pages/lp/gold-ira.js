@@ -146,7 +146,7 @@ export default function GoldIRALandingPage() {
               className="lp-btn-cta lp-hero-cta"
               onClick={() => { setVideoOpen(true); openForm('investor-guide') }}
             >
-              WATCH THE VIDEO &amp; GET THE GUIDE
+              GET THE GUIDE
             </button>
           </div>
         </section>
@@ -206,7 +206,7 @@ export default function GoldIRALandingPage() {
                 className="lp-btn-cta"
                 onClick={() => { setVideoOpen(true); openForm('investor-guide') }}
               >
-                WATCH THE VIDEO &amp; GET THE GUIDE
+                GET THE GUIDE
               </button>
               <button
                 className="lp-cta-alt-link"
@@ -231,7 +231,7 @@ export default function GoldIRALandingPage() {
               </button>
               <div className="lp-iframe-wrap">
                 <iframe
-                  src="https://www.youtube.com/embed/72JVwgM5T3Q?autoplay=1"
+                  src="https://www.youtube.com/embed/72JVwgM5T3Q"
                   title="Gold IRA Lies: Hidden Fees Exposed"
                   style={{ border: 'none' }}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
