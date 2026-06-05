@@ -417,10 +417,10 @@ html {
   background: var(--gs-white);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-radius: var(--radius-lg);
-  padding: var(--space-8) 0;
-  margin-top: 0;
-  min-width: clamp(20rem, 50vw, 56.25rem);
+  padding: var(--space-6) 0;
+  width: max-content;
   border: 1px solid var(--gs-blue);
+  z-index: 500;
 }
 
 .mega.open {
@@ -430,18 +430,15 @@ html {
 }
 
 .mega-inner {
-  max-width: 1200px;
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-10);
-  padding: 0 var(--space-8);
+  grid-template-columns: repeat(auto-fit, max-content);
+  gap: var(--space-8);
+  padding: 0 var(--space-5);
 }
 
 .mega-col {
   display: flex;
   flex-direction: column;
-  min-height: 120px;
 }
 
 .mega-col h4 {
@@ -478,6 +475,7 @@ html {
   display: block;
   padding: var(--space-2) 0;
   border-radius: var(--radius-sm);
+  white-space: nowrap;
 }
 
 .mega-col a:hover {
@@ -1134,29 +1132,13 @@ img {
     padding: 0 var(--space-8);
   }
   
-  .mega {
-    min-width: clamp(20rem, 50vw, 56.25rem);
-  }
-  
-  .mega-inner {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-10);
-  }
 }
+
 
 /* Tablet Landscape */
 @media (max-width: 64rem) {
   .container {
     padding: 0 var(--space-4);
-  }
-  
-  .mega {
-    min-width: clamp(15rem, 40vw, 37.5rem);
-  }
-  
-  .mega-inner {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
   }
   
   .hero h1 {
@@ -1174,14 +1156,6 @@ img {
 
 /* Desktop */
 @media (max-width: 74.9375rem) {
-  .mega {
-    min-width: clamp(15rem, 35vw, 43.75rem);
-  }
-  
-  .mega-inner {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-8);
-  }
   
   .hero-content {
     grid-template-columns: 1fr;
