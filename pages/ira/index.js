@@ -254,7 +254,7 @@ export default function IRA() {
 
             <div className='faq-item'>
               <h4>Can I add to my precious metals IRA over time?</h4>
-              <p>Yes, you can make annual contributions up to the IRS limits ($7,000 for 2024, or $8,000 if you're 50 or older).</p>
+              <p>Yes, you can make annual contributions up to the IRS limits ($7,500 for 2026, or $8,600 if you're 50 or older).</p>
             </div>
 
             <div className='faq-item'>

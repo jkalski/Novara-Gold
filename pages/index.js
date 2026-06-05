@@ -257,29 +257,6 @@ export default function Home() {
         canonical="/"
         keywords="precious metals investment, gold IRA, silver IRA, platinum investment, palladium, secure storage, retirement planning, wealth protection"
       />
-      {/* Hero Section */}
-      <section className='hero'>
-        <div className='container'>
-          <div className='hero-content'>
-            <div className='hero-logo'>
-              <Image 
-                src="/images/FrontLogo.png" 
-                alt="NOVARA GOLD: The Future of Vaulted Wealth"
-                width={1000}
-                height={200}
-                priority
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-              />
-            </div>
-            <div className='hero-actions'>
-              <a href='/products' className='hero-cta'>Explore Products</a>
-              <a href='#precious-metals' className='hero-cta-secondary'>Get Started</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Live Prices Ticker */}
       <section className='ticker-ribbon'>
         <div className='ticker-track' id='tickerTrack'>
@@ -324,19 +301,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Quote Section */}
-      <section className='gs-what-we-do-section'>
-        <div className='gs-container'>
-          <div className='gs-section-header'>
+      {/* Hero / Quote Section */}
+      <section className='hero'>
+        <div className='container'>
+          <div className='hero-content'>
             <blockquote className='about-quote'>
               <p>
                 <RiDoubleQuotesL className='quote-icon-left' />
-                Novara Gold was established to be an industry changer in an industry that is desperate for change. We are doing this by making trust, transparency, and honesty at the heart of everything we do. We stand apart from competitors who rely on gimmicks like 'free Silver' or pay high prices for celebrity endorsements. These marketing tactics only raise client costs. By avoiding such practices, we keep our pricing fair, our guidance honest, and our focus where it belongs: protecting and growing your wealth.
+                Novara Gold was established to be an industry changer in an industry that is desperate for change. We are doing this by making trust, transparency, and honesty at the heart of everything we do. We stand apart from competitors who rely on gimmicks like &apos;free Silver&apos; or pay high prices for celebrity endorsements. These marketing tactics only raise client costs. By avoiding such practices, we keep our pricing fair, our guidance honest, and our focus where it belongs: protecting and growing your wealth.
                 <RiDoubleQuotesR className='quote-icon-right' />
               </p>
               <cite>- Novara Gold</cite>
             </blockquote>
           </div>
+        </div>
+        <div className='hero-actions'>
+          <a href='/insights' className='hero-cta-secondary'>Educational Videos</a>
+          <a href='#precious-metals' className='hero-cta-secondary'>Get Started</a>
         </div>
       </section>
 
