@@ -164,7 +164,7 @@ export default function LandingPage() {
   return (
     <>
       <Head>
-        <title>Precious Metals for Long-Term Wealth Preservation | Novara Gold</title>
+        <title>What You Don't Know Could Cost You Thousands | Novara Gold</title>
         <meta
           name="description"
           content="Transparent pricing. Institutional service. No gimmicks. No pressure. Request your free 2026 investor guide."
@@ -202,9 +202,8 @@ export default function LandingPage() {
           <div className="ng-hero-overlay" />
           <div className="ng-hero-content">
             <h1 className="ng-hero-headline">
-              Precious Metals<br />
-              for Long-Term<br />
-              <span className="ng-hero-wealth-line"><span className="ng-hero-gold">Wealth</span> Preservation</span>
+              What You Don't Know<br />
+              <span className="ng-hero-wealth-line">Could Cost You <span className="ng-hero-gold">Thousands</span></span>
             </h1>
             <div className="ng-hero-rule" />
             <p className="ng-hero-sub">
