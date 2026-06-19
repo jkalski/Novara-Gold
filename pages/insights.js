@@ -313,7 +313,7 @@ export default function InsightsPage({ marketUpdates, featuredUpdate, contentful
             </div>
             <div className='ins-spotlight-img-wrap'>
               <Image
-                src="/images/insights_img.png"
+                src="/images/spotlightimg.png"
                 alt="Precious metals market analysis"
                 fill
                 style={{ objectFit: 'cover' }}
