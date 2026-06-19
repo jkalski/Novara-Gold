@@ -133,10 +133,8 @@ export default function Navbar() {
             
             <ul className='top-level'>
               {MENU.map((item, index) => (
-                <li 
-                  key={index} 
-                  onMouseEnter={() => setOpen(index)} 
-                  onMouseLeave={() => setOpen(null)} 
+                <li
+                  key={index}
                   className={item.columns ? 'has-mega' : ''}
                 >
                   {item.href ? (
@@ -144,15 +142,26 @@ export default function Navbar() {
                       {item.label}
                     </Link>
                   ) : (
-                    <button 
-                      className='top-link mobile-hidden' 
-                      onClick={() => setOpen(open === index ? null : index)} 
+                    <button
+                      className='top-link mobile-hidden'
+                      onClick={() => setOpen(open === index ? null : index)}
                       aria-expanded={open === index}
                     >
                       {item.label}
                     </button>
                   )}
-                  
+
+                  <button
+                    className='mobile-accordion-btn'
+                    onClick={() => setOpen(open === index ? null : index)}
+                    aria-expanded={open === index}
+                  >
+                    <span>{item.label}</span>
+                    <span className='mobile-accordion-icon' aria-hidden='true'>
+                      {open === index ? '−' : '+'}
+                    </span>
+                  </button>
+
                   {item.columns && (
                     <div className={`mega ${open === index ? 'open' : ''}`}>
                       <div className='mega-inner'>

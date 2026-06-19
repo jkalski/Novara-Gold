@@ -357,6 +357,11 @@ html {
   display: none;
 }
 
+/* Mobile accordion toggle - Hidden on desktop */
+.mobile-accordion-btn {
+  display: none;
+}
+
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -1322,37 +1327,72 @@ img {
   
   .mega {
     position: static;
+    display: none;
     opacity: 1;
     transform: none;
-    padding: var(--space-4) 0;
+    padding: var(--space-2) 0 var(--space-4);
     box-shadow: none;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.15);
     min-width: auto;
     border-radius: 0;
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin: 0;
   }
-  
+
+  .mega.open {
+    display: block;
+  }
+
+  .mobile-accordion-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--gs-white);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+    padding: var(--space-4) var(--space-3);
+    cursor: pointer;
+    text-align: left;
+    letter-spacing: 0.01em;
+  }
+
+  .mobile-accordion-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .mobile-accordion-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    font-weight: 300;
+    opacity: 0.7;
+    flex-shrink: 0;
+    margin-left: var(--space-3);
+  }
+
   .mega-inner {
     grid-template-columns: 1fr;
-    gap: var(--space-4);
-    padding: 0 var(--space-4);
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
   }
-  
+
   .mega-col h4 {
-    color: var(--gs-white);
-    font-size: 0.9rem;
-    margin-bottom: var(--space-3);
+    display: none;
   }
-  
+
   .mega-col a {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    padding: var(--space-2) 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    padding: var(--space-3) var(--space-3);
     transition: none;
+    display: block;
+    border-radius: var(--radius-sm);
   }
-  
+
   .mega-col a:hover {
     color: var(--gs-white);
     background: rgba(255, 255, 255, 0.1);
