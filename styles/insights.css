@@ -159,7 +159,7 @@
 .ins-view-all:hover { gap: 9px; }
 
 .ins-spotlight-img-wrap {
-  flex: 0 0 36%;
+  flex: 1;
   position: relative;
   min-height: 400px;
   background: linear-gradient(135deg, #f0e6c8 0%, #e8d5a3 100%);
