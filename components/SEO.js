@@ -9,7 +9,7 @@ export default function SEO({
   twitterCard = 'summary_large_image',
   keywords = 'precious metals, gold IRA, silver IRA, platinum, palladium, investment, retirement, secure storage'
 }) {
-  const siteUrl = 'https://novaragold.com' // Replace with your actual domain
+  const siteUrl = 'https://www.novaragold.com'
   const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl
   const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 
@@ -58,7 +58,7 @@ export default function SEO({
             "logo": `${siteUrl}/images/Main Logo.png`,
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+1-424-491-8678",
+              "telephone": "+1-800-243-1571",
               "contactType": "customer service"
             },
             "sameAs": [
