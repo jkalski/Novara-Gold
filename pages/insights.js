@@ -118,11 +118,14 @@ export default function InsightsPage({ marketUpdates, featuredUpdate, contentful
   const videos = marketUpdates.filter(u => u.fields.contentType !== 'article')
   const articles = marketUpdates.filter(u => u.fields.contentType === 'article')
   const [showAllArticles, setShowAllArticles] = useState(false)
+  const [activeVideo, setActiveVideo] = useState(null)
+  const [isPlaying, setIsPlaying] = useState(false)
 
-  const featuredId = getYouTubeId(featuredUpdate?.fields?.youTubeUrl)
-  const featuredThumb = featuredId
-    ? `https://img.youtube.com/vi/${featuredId}/maxresdefault.jpg`
-    : null
+  const displayVideo = activeVideo || featuredUpdate
+  const activeId = getYouTubeId(displayVideo?.fields?.youTubeUrl)
+  const activeThumb = activeId ? `https://img.youtube.com/vi/${activeId}/maxresdefault.jpg` : null
+  const isFeatured = !activeVideo || activeVideo.sys?.id === featuredUpdate?.sys?.id
+
   const spotlightArticle = articles[0] || null
   const spotlightDate = spotlightArticle?.fields?.publishedDate
     ? new Date(spotlightArticle.fields.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -153,45 +156,55 @@ export default function InsightsPage({ marketUpdates, featuredUpdate, contentful
         {contentfulConfigured && (featuredUpdate || videos.length > 0) && (
           <>
             <div className='vi-card'>
-              {featuredUpdate && (
+              {displayVideo && (
                 <div
                   className='vi-featured'
-                  style={featuredThumb ? { backgroundImage: `url(${featuredThumb})` } : {}}
+                  style={!isPlaying && activeThumb ? { backgroundImage: `url(${activeThumb})` } : {}}
                 >
-                  <div className='vi-featured-overlay' />
-                  <div className='vi-featured-top'>
-                    <span className='vi-featured-badge'>FEATURED</span>
-                  </div>
-                  <a
-                    href={featuredUpdate.fields.youTubeUrl || YT_CHANNEL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className='vi-play-btn'
-                    aria-label="Play video"
-                  >
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-                      <polygon points="6,3 20,12 6,21" />
-                    </svg>
-                  </a>
-                  <div className='vi-featured-bottom'>
-                    <h2 className='vi-featured-title'>
-                      {featuredUpdate.fields.title || 'Market Analysis'}
-                    </h2>
-                    {featuredUpdate.fields.shortDescription && (
-                      <p className='vi-featured-desc'>{featuredUpdate.fields.shortDescription}</p>
-                    )}
-                    <a
-                      href={featuredUpdate.fields.youTubeUrl || YT_CHANNEL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className='vi-watch-btn'
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
-                        <path d="M21.8 8s-.3-1.7-1.1-2.4c-.9-.9-1.9-.9-2.3-1C15.7 4.4 12 4.4 12 4.4s-3.7 0-6.4.2c-.4.1-1.4.1-2.3 1C2.5 6.3 2.2 8 2.2 8S2 9.9 2 11.8v1.8c0 1.9.2 3.8.2 3.8s.3 1.7 1.1 2.4c.9.9 2.1.8 2.7 1 1.9.2 8 .2 8 .2s3.7 0 6.4-.2c.4-.1 1.4-.1 2.3-1 .8-.7 1.1-2.4 1.1-2.4s.2-1.9.2-3.8v-1.8c0-1.9-.2-3.8-.2-3.8zM9.7 15.5V8.6l6.6 3.5-6.6 3.4z" />
-                      </svg>
-                      Watch on YouTube
-                    </a>
-                  </div>
+                  {isPlaying && activeId ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${activeId}?autoplay=1&rel=0`}
+                      title={displayVideo.fields.title || 'Video'}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+                    />
+                  ) : (
+                    <>
+                      <div className='vi-featured-overlay' />
+                      <div className='vi-featured-top'>
+                        <span className='vi-featured-badge'>{isFeatured ? 'FEATURED' : 'NOW PLAYING'}</span>
+                      </div>
+                      <button
+                        onClick={() => setIsPlaying(true)}
+                        className='vi-play-btn'
+                        aria-label="Play video"
+                      >
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+                          <polygon points="6,3 20,12 6,21" />
+                        </svg>
+                      </button>
+                      <div className='vi-featured-bottom'>
+                        <h2 className='vi-featured-title'>
+                          {displayVideo.fields.title || 'Market Analysis'}
+                        </h2>
+                        {displayVideo.fields.shortDescription && (
+                          <p className='vi-featured-desc'>{displayVideo.fields.shortDescription}</p>
+                        )}
+                        <a
+                          href={displayVideo.fields.youTubeUrl || YT_CHANNEL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className='vi-watch-btn'
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+                            <path d="M21.8 8s-.3-1.7-1.1-2.4c-.9-.9-1.9-.9-2.3-1C15.7 4.4 12 4.4 12 4.4s-3.7 0-6.4.2c-.4.1-1.4.1-2.3 1C2.5 6.3 2.2 8 2.2 8S2 9.9 2 11.8v1.8c0 1.9.2 3.8.2 3.8s.3 1.7 1.1 2.4c.9.9 2.1.8 2.7 1 1.9.2 8 .2 8 .2s3.7 0 6.4-.2c.4-.1 1.4-.1 2.3-1 .8-.7 1.1-2.4 1.1-2.4s.2-1.9.2-3.8v-1.8c0-1.9-.2-3.8-.2-3.8zM9.7 15.5V8.6l6.6 3.5-6.6 3.4z" />
+                          </svg>
+                          Watch on YouTube
+                        </a>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
               <div className='vi-list'>
@@ -202,8 +215,13 @@ export default function InsightsPage({ marketUpdates, featuredUpdate, contentful
                   const date = rawDate
                     ? new Date(rawDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
                     : ''
+                  const isActive = displayVideo?.sys?.id === v.sys.id
                   return (
-                    <a key={v.sys.id} href={v.fields.youTubeUrl || YT_CHANNEL} target="_blank" rel="noopener noreferrer" className='vi-list-item'>
+                    <button
+                      key={v.sys.id}
+                      onClick={() => { setActiveVideo(v); setIsPlaying(true) }}
+                      className={`vi-list-item${isActive ? ' vi-list-item--active' : ''}`}
+                    >
                       <div className='vi-list-thumb'>
                         {thumb ? <img src={thumb} alt={v.fields.title || 'Video thumbnail'} /> : <div className='vi-thumb-placeholder' />}
                         <div className='vi-list-play'>
@@ -215,7 +233,7 @@ export default function InsightsPage({ marketUpdates, featuredUpdate, contentful
                         <span className='vi-list-date'>{date}</span>
                         {v.fields.shortDescription && <span className='vi-list-desc'>{v.fields.shortDescription}</span>}
                       </div>
-                    </a>
+                    </button>
                   )
                 })}
               </div>

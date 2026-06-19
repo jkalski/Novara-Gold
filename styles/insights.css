@@ -293,6 +293,8 @@
   backdrop-filter: blur(4px);
   transition: background 0.2s ease, transform 0.2s ease;
   padding-left: 4px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .vi-play-btn:hover {
@@ -378,10 +380,24 @@
   text-decoration: none;
   transition: background 0.15s ease;
   flex: 1;
+  background: none;
+  border-left: 3px solid transparent;
+  border-top: none;
+  border-right: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .vi-list-item:hover {
   background: #faf9f6;
+}
+
+.vi-list-item--active {
+  background: #faf9f6;
+  border-left-color: var(--gs-gold);
 }
 
 .vi-list-thumb {
