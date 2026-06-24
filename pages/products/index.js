@@ -386,7 +386,7 @@ export default function Products() {
                 <h3>Contact Us</h3>
                 <p>Have questions about our products?</p>
                 <p className='phone-number'>(800) 243-1571</p>
-                <button className='sidebar-btn'>Call Now</button>
+                <a href='tel:8002431571' className='sidebar-btn'>Call Now</a>
               </div>
             </div>
           </div>

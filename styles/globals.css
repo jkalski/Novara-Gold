@@ -2158,3 +2158,12 @@ img {
     padding: var(--space-3);
   }
 }
+
+/* Disable hover transforms on touch devices */
+@media (hover: none) {
+  .principle-card:hover { transform: none; }
+  .principle-card:hover .principle-icon { transform: none; }
+  .service-link:hover::after { transform: none; }
+  .hero-cta:hover { transform: none; }
+  .hero-cta-secondary:hover { transform: none; }
+}
