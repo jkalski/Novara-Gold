@@ -11,8 +11,6 @@ export default function LandingPage() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
-  const [smsConsent, setSmsConsent] = useState(false)
-  const [smsExpanded, setSmsExpanded] = useState(false)
   const [turnstileToken, setTurnstileToken] = useState('')
   const [mounted, setMounted] = useState(false)
 
@@ -24,8 +22,6 @@ export default function LandingPage() {
   const [modalSubmitted, setModalSubmitted] = useState(false)
   const [modalSubmitType, setModalSubmitType] = useState('investor-guide')
   const [modalError, setModalError] = useState('')
-  const [modalSmsConsent, setModalSmsConsent] = useState(false)
-  const [modalSmsExpanded, setModalSmsExpanded] = useState(false)
   const [modalTurnstileToken, setModalTurnstileToken] = useState('')
 
   // Auto-open modal after 3 seconds
@@ -115,8 +111,6 @@ export default function LandingPage() {
     setModalFormType(type)
     setModalSubmitted(false)
     setModalData({ name: '', email: '', phone: '', preferredDate: '', preferredTime: '' })
-    setModalSmsConsent(false)
-    setModalSmsExpanded(false)
     setModalError('')
     setModalOpen(true)
   }
@@ -189,7 +183,7 @@ export default function LandingPage() {
           <div className="ng-nav-phone-block">
             <span className="ng-nav-phone-label">SPEAK WITH A METALS SPECIALIST</span>
             <a href="tel:+18002431571" className="ng-nav-phone-number">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a227" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d1f3c" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.66A2 2 0 012 1.07h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
               </svg>
               800-243-1571
@@ -202,8 +196,8 @@ export default function LandingPage() {
           <div className="ng-hero-overlay" />
           <div className="ng-hero-content">
             <h1 className="ng-hero-headline">
-              What You Don't Know<br />
-              <span className="ng-hero-wealth-line">Could Cost You <span className="ng-hero-gold">Thousands</span></span>
+              Before You Buy Gold Anywhere, Read This Free Guide.<br />
+              <span className="ng-hero-wealth-line">What You Don't Know Can Cost You <span className="ng-hero-gold">Thousands.</span></span>
             </h1>
             <div className="ng-hero-rule" />
             <p className="ng-hero-sub">
@@ -280,7 +274,7 @@ export default function LandingPage() {
 
           {/* Left: Why Gold */}
           <div className="ng-why">
-            <p className="ng-why-label">WHY INVESTORS CHOOSE GOLD</p>
+            <p className="ng-why-label">WHY INVESTORS CHOOSE PRECIOUS METALS</p>
             <h2 className="ng-why-headline">
               A Proven Store of Value<br />in Uncertain Times
             </h2>
@@ -290,6 +284,7 @@ export default function LandingPage() {
             </p>
             <ul className="ng-bullets">
               {[
+                'No risk to the New digital world',
                 'Protection against inflation and currency debasement',
                 'Diversification beyond traditional assets',
                 'Global demand with a finite supply',
@@ -307,7 +302,7 @@ export default function LandingPage() {
           <div className="ng-form-card" id="guide-form">
             {!submitted ? (
               <>
-                <h2 className="ng-form-title">Request Your Free Guide</h2>
+                <h2 className="ng-form-title">Get Your Free Guide</h2>
                 <p className="ng-form-sub">
                   Discover how sophisticated investors are using precious metals to protect their wealth.
                 </p>
@@ -354,27 +349,6 @@ export default function LandingPage() {
                     autoComplete="tel"
                   />
 
-                  <label className="ng-sms-consent">
-                    <input
-                      type="checkbox"
-                      checked={smsConsent}
-                      onChange={(e) => setSmsConsent(e.target.checked)}
-                      required
-                    />
-                    <span className="ng-sms-text">
-                      By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text HELP to 424-491-8678. Message and data rates may apply. Messaging frequency may vary.{' '}
-                      {!smsExpanded ? (
-                        <button type="button" className="ng-sms-toggle" onClick={() => setSmsExpanded(true)}>See More</button>
-                      ) : (
-                        <>
-                          You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase.{' '}
-                          <button type="button" className="ng-sms-toggle" onClick={() => setSmsExpanded(false)}>See Less</button>
-                        </>
-                      )}{' '}
-                      See our <Link href="/policies/privacy">Privacy Policy</Link> and <Link href="/policies/terms">Terms &amp; Conditions</Link>.
-                    </span>
-                  </label>
-
                   {mounted && (
                     <div
                       className="cf-turnstile"
@@ -386,10 +360,14 @@ export default function LandingPage() {
 
                   {error && <p className="ng-form-error">{error}</p>}
 
+                  <p className="ng-implied-consent">
+                    By clicking the button below, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text HELP to 424-491-8678. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <Link href="/policies/privacy">Privacy Policy</Link> and <Link href="/policies/terms">Terms &amp; Conditions</Link>.
+                  </p>
+
                   <button
                     type="submit"
                     className="ng-btn-submit"
-                    disabled={submitting || !smsConsent || !turnstileToken}
+                    disabled={submitting || !turnstileToken}
                   >
                     {submitting ? 'Sending…' : 'SEND ME THE GUIDE →'}
                   </button>
@@ -414,7 +392,7 @@ export default function LandingPage() {
         {/* ── Why Novara Gold ── */}
         <section className="ng-pillars">
           <h2 className="ng-pillars-title">Why <span>Novara</span> Gold</h2>
-          <p className="ng-pillars-sub">We combine institutional-level service with a client-first approach.</p>
+          <p className="ng-pillars-sub">The Precious Metals Industry Needed a Better Standard. We Built One.</p>
           <div className="ng-pillars-grid">
             {[
               {
@@ -623,27 +601,6 @@ export default function LandingPage() {
                       </>
                     )}
 
-                    <label className="ng-sms-consent">
-                      <input
-                        type="checkbox"
-                        checked={modalSmsConsent}
-                        onChange={(e) => setModalSmsConsent(e.target.checked)}
-                        required
-                      />
-                      <span className="ng-sms-text">
-                        By clicking this box, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text HELP to 424-491-8678. Message and data rates may apply. Messaging frequency may vary.{' '}
-                        {!modalSmsExpanded ? (
-                          <button type="button" className="ng-sms-toggle" onClick={() => setModalSmsExpanded(true)}>See More</button>
-                        ) : (
-                          <>
-                            You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase.{' '}
-                            <button type="button" className="ng-sms-toggle" onClick={() => setModalSmsExpanded(false)}>See Less</button>
-                          </>
-                        )}{' '}
-                        See our <Link href="/policies/privacy">Privacy Policy</Link> and <Link href="/policies/terms">Terms &amp; Conditions</Link>.
-                      </span>
-                    </label>
-
                     {mounted && (
                       <div
                         id="ng-modal-turnstile"
@@ -655,10 +612,14 @@ export default function LandingPage() {
 
                     {modalError && <p className="ng-form-error">{modalError}</p>}
 
+                    <p className="ng-implied-consent">
+                      By clicking the button below, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text HELP to 424-491-8678. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <Link href="/policies/privacy">Privacy Policy</Link> and <Link href="/policies/terms">Terms &amp; Conditions</Link>.
+                    </p>
+
                     <button
                       type="submit"
                       className="ng-btn-submit"
-                      disabled={modalSubmitting || !modalSmsConsent || !modalTurnstileToken}
+                      disabled={modalSubmitting || !modalTurnstileToken}
                     >
                       {modalSubmitting
                         ? 'Sending…'
