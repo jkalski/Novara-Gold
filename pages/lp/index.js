@@ -14,33 +14,13 @@ export default function LandingPage() {
   const [turnstileToken, setTurnstileToken] = useState('')
   const [mounted, setMounted] = useState(false)
 
-  // ── Modal state ──
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalFormType, setModalFormType] = useState('investor-guide')
-  const [modalData, setModalData] = useState({ name: '', email: '', phone: '', preferredDate: '', preferredTime: '' })
-  const [modalSubmitting, setModalSubmitting] = useState(false)
-  const [modalSubmitted, setModalSubmitted] = useState(false)
-  const [modalSubmitType, setModalSubmitType] = useState('investor-guide')
-  const [modalError, setModalError] = useState('')
-  const [modalTurnstileToken, setModalTurnstileToken] = useState('')
-
-  // Auto-open modal after 3 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => openModal('investor-guide'), 3000)
-    return () => clearTimeout(timer)
-  }, [])
-
   useEffect(() => {
     setMounted(true)
     window.handleTurnstileCallback = (token) => setTurnstileToken(token)
     window.handleTurnstileExpired = () => setTurnstileToken('')
-    window.handleModalTurnstileCallback = (token) => setModalTurnstileToken(token)
-    window.handleModalTurnstileExpired = () => setModalTurnstileToken('')
     return () => {
       delete window.handleTurnstileCallback
       delete window.handleTurnstileExpired
-      delete window.handleModalTurnstileCallback
-      delete window.handleModalTurnstileExpired
     }
   }, [])
 
@@ -86,68 +66,6 @@ export default function LandingPage() {
       setError('Something went wrong. Please try again or call us directly.')
     } finally {
       setSubmitting(false)
-    }
-  }
-
-  // Modal Turnstile — re-render when modal opens
-  useEffect(() => {
-    if (!modalOpen) return
-    setModalTurnstileToken('')
-    const timer = setTimeout(() => {
-      const el = document.getElementById('ng-modal-turnstile')
-      if (el && window.turnstile) {
-        el.innerHTML = ''
-        window.turnstile.render(el, {
-          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-          callback: (token) => setModalTurnstileToken(token),
-          'expired-callback': () => setModalTurnstileToken(''),
-        })
-      }
-    }, 150)
-    return () => clearTimeout(timer)
-  }, [modalOpen])
-
-  const openModal = (type) => {
-    setModalFormType(type)
-    setModalSubmitted(false)
-    setModalData({ name: '', email: '', phone: '', preferredDate: '', preferredTime: '' })
-    setModalError('')
-    setModalOpen(true)
-  }
-
-  const closeModal = () => setModalOpen(false)
-
-  const handleModalChange = (e) => {
-    setModalData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
-
-  const handleModalSubmit = async (e) => {
-    e.preventDefault()
-    setModalSubmitting(true)
-    setModalError('')
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formType: modalFormType === 'investor-guide' ? 'lead' : 'contact',
-          name: modalData.name,
-          email: modalData.email,
-          phone: modalData.phone,
-          subject: modalFormType === 'portfolio-review' ? 'Portfolio Review Request (Landing Page)' : '',
-          message: modalFormType === 'portfolio-review'
-            ? `Requested a portfolio review via the landing page.\nPreferred Date: ${modalData.preferredDate || 'Not specified'}\nPreferred Time: ${modalData.preferredTime || 'Not specified'}`
-            : '',
-          turnstileToken: modalTurnstileToken,
-        }),
-      })
-      if (!res.ok) throw new Error('failed')
-      setModalSubmitType(modalFormType)
-      setModalSubmitted(true)
-    } catch {
-      setModalError('Something went wrong. Please try again or call us directly.')
-    } finally {
-      setModalSubmitting(false)
     }
   }
 
@@ -201,10 +119,9 @@ export default function LandingPage() {
             </h1>
             <div className="ng-hero-rule" />
             <p className="ng-hero-sub">
-              Transparent pricing. Institutional service.<br />
-              No gimmicks. No pressure.
+              Learn how to avoid overpriced coins, hidden markups, and costly mistakes before making your next precious metals purchase.
             </p>
-            <button className="ng-hero-cta" onClick={() => openModal('investor-guide')}>
+            <button className="ng-hero-cta" onClick={scrollToForm}>
               REQUEST THE 2026 INVESTOR GUIDE &nbsp;→
             </button>
             <p className="ng-hero-privacy">
@@ -511,145 +428,6 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* ── Guide / Consultation Modal ── */}
-        {modalOpen && (
-          <div className="ng-modal-backdrop" onClick={closeModal}>
-            <div className="ng-modal-box" onClick={(e) => e.stopPropagation()}>
-              <button className="ng-modal-close" onClick={closeModal} aria-label="Close">&#10005;</button>
-
-              {!modalSubmitted ? (
-                <>
-                  <h2 className="ng-modal-title">
-                    {modalFormType === 'investor-guide'
-                      ? 'Download the Novara Gold Investor Guide'
-                      : 'Request a Free Portfolio Review'}
-                  </h2>
-                  <p className="ng-modal-sub">
-                    {modalFormType === 'investor-guide'
-                      ? 'Learn how the precious metals industry really works.'
-                      : 'Speak with a Novara specialist about your portfolio goals.'}
-                  </p>
-
-                  <div className="ng-modal-tabs">
-                    <button
-                      className={`ng-modal-tab ${modalFormType === 'investor-guide' ? 'ng-modal-tab-active' : ''}`}
-                      onClick={() => setModalFormType('investor-guide')}
-                    >
-                      Investor Guide
-                    </button>
-                    <button
-                      className={`ng-modal-tab ${modalFormType === 'portfolio-review' ? 'ng-modal-tab-active' : ''}`}
-                      onClick={() => setModalFormType('portfolio-review')}
-                    >
-                      Portfolio Review
-                    </button>
-                  </div>
-
-                  <form className="ng-modal-form" onSubmit={handleModalSubmit} noValidate>
-                    <input
-                      className="ng-input"
-                      type="text"
-                      name="name"
-                      placeholder="Full Name"
-                      value={modalData.name}
-                      onChange={handleModalChange}
-                      required
-                      autoComplete="name"
-                    />
-                    <input
-                      className="ng-input"
-                      type="email"
-                      name="email"
-                      placeholder="Email Address"
-                      value={modalData.email}
-                      onChange={handleModalChange}
-                      required
-                      autoComplete="email"
-                    />
-                    <input
-                      className="ng-input"
-                      type="tel"
-                      name="phone"
-                      placeholder="Phone Number"
-                      value={modalData.phone}
-                      onChange={handleModalChange}
-                      required
-                      autoComplete="tel"
-                    />
-
-                    {modalFormType === 'portfolio-review' && (
-                      <>
-                        <label className="ng-input-label">Preferred Date to Be Reached</label>
-                        <input
-                          className="ng-input"
-                          type="date"
-                          name="preferredDate"
-                          value={modalData.preferredDate}
-                          onChange={handleModalChange}
-                          required
-                          min={new Date().toISOString().split('T')[0]}
-                        />
-                        <label className="ng-input-label">Preferred Time</label>
-                        <input
-                          className="ng-input"
-                          type="time"
-                          name="preferredTime"
-                          value={modalData.preferredTime}
-                          onChange={handleModalChange}
-                          required
-                        />
-                      </>
-                    )}
-
-                    {mounted && (
-                      <div
-                        id="ng-modal-turnstile"
-                        data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-                        data-callback="handleModalTurnstileCallback"
-                        data-expired-callback="handleModalTurnstileExpired"
-                      />
-                    )}
-
-                    {modalError && <p className="ng-form-error">{modalError}</p>}
-
-                    <p className="ng-implied-consent">
-                      By clicking the button below, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text HELP to 424-491-8678. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <Link href="/policies/privacy">Privacy Policy</Link> and <Link href="/policies/terms">Terms &amp; Conditions</Link>.
-                    </p>
-
-                    <button
-                      type="submit"
-                      className="ng-btn-submit"
-                      disabled={modalSubmitting || !modalTurnstileToken}
-                    >
-                      {modalSubmitting
-                        ? 'Sending…'
-                        : modalFormType === 'investor-guide'
-                        ? 'Download Now'
-                        : 'Request My Review'}
-                    </button>
-                  </form>
-                </>
-              ) : (
-                <div className="ng-thankyou">
-                  <div className="ng-ty-icon">&#10003;</div>
-                  <h2>
-                    {modalSubmitType === 'investor-guide'
-                      ? 'Your Guide is on Its Way!'
-                      : 'Request Received!'}
-                  </h2>
-                  <p>
-                    {modalSubmitType === 'investor-guide'
-                      ? 'Thank you! A Novara specialist will be in touch shortly with your guide and next steps.'
-                      : 'Thank you! A Novara specialist will reach out within 1 business day.'}
-                  </p>
-                  <button className="ng-btn-submit" style={{ marginTop: '1rem' }} onClick={closeModal}>
-                    Close
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* ── Footer ── */}
         <footer className="ng-footer">
