@@ -124,12 +124,12 @@ export default function LandingPage() {
             <button className="ng-hero-cta" onClick={scrollToForm}>
               REQUEST THE 2026 INVESTOR GUIDE &nbsp;→
             </button>
-            <p className="ng-hero-privacy">
+            <div className="ng-hero-privacy">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }}>
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
               </svg>
               100% Private &amp; Confidential
-            </p>
+            </div>
           </div>
         </section>
 
@@ -277,9 +277,9 @@ export default function LandingPage() {
 
                   {error && <p className="ng-form-error">{error}</p>}
 
-                  <p className="ng-implied-consent">
+                  <div className="ng-implied-consent">
                     By clicking the button below, you agree to receive SMS messages about appointment reminders and follow-up messages from Novara Gold. Reply STOP to opt out at any time. For help, text HELP to 424-491-8678. Message and data rates may apply. Messaging frequency may vary. You also agree to receive calls, text messages, and prerecorded messages via an automated dialing system about promotions from or on behalf of Novara Gold. You understand that consent is not a condition of purchase. See our <Link href="/policies/privacy">Privacy Policy</Link> and <Link href="/policies/terms">Terms &amp; Conditions</Link>.
-                  </p>
+                  </div>
 
                   <button
                     type="submit"
@@ -289,12 +289,12 @@ export default function LandingPage() {
                     {submitting ? 'Sending…' : 'SEND ME THE GUIDE →'}
                   </button>
                 </form>
-                <p className="ng-form-privacy">
+                <div className="ng-form-privacy">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }}>
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
                   </svg>
                   Your information is secure and will never be shared.
-                </p>
+                </div>
               </>
             ) : (
               <div className="ng-thankyou">
