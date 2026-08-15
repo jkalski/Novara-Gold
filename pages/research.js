@@ -20,32 +20,22 @@ export default function ResearchPage() {
   // Fetch real metal prices
   useEffect(() => {
     const fetchRealPrices = async () => {
-      const response = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=4ff26aae9ecf81f96108f6f6e47cb828&base=USD&currencies=XAU,XAG,XPT,XPD,XCU,XRH,USD')
-      const data = await response.json()
-      
-      const prices = {
-        gold: Math.round(data.rates.USDXAU * 100) / 100,
-        silver: Math.round(data.rates.USDXAG * 100) / 100,
-        platinum: Math.round(data.rates.USDXPT * 100) / 100,
-        palladium: Math.round(data.rates.USDXPD * 100) / 100,
-        copper: Math.round(data.rates.USDXCU * 100) / 100,
-        rhodium: Math.round(data.rates.USDXRH * 100) / 100,
-        iridium: Math.round(data.rates.USDUSD * 100) / 100,
-        ruthenium: Math.round(data.rates.USDUSD * 100) / 100
+      try {
+        const response = await fetch('/api/gold-price')
+        if (!response.ok) throw new Error(`Price request failed with status ${response.status}`)
+
+        const data = await response.json()
+        setMetalPrices({
+          gold: data.gold,
+          silver: data.silver,
+          platinum: data.platinum,
+          palladium: data.palladium
+        })
+        setPriceChanges(data.priceChanges || {})
+        setLastUpdated(data.lastUpdated ? new Date(data.lastUpdated) : new Date())
+      } catch (error) {
+        console.error('Error fetching research metal prices:', error)
       }
-      
-      const changes = {
-        gold: (Math.random() - 0.5) * 4,
-        silver: (Math.random() - 0.5) * 6,
-        platinum: (Math.random() - 0.5) * 5,
-        palladium: (Math.random() - 0.5) * 8,
-        copper: (Math.random() - 0.5) * 6,
-        rhodium: (Math.random() - 0.5) * 10
-      }
-      
-      setMetalPrices(prices)
-      setPriceChanges(changes)
-      setLastUpdated(new Date())
     }
     
     fetchRealPrices()
@@ -172,20 +162,6 @@ export default function ResearchPage() {
                     <span className='price'>${metalPrices.palladium?.toFixed(2) || '0.00'}</span>
                     <span className={`change ${priceChanges.palladium >= 0 ? 'positive' : 'negative'}`}>
                       {priceChanges.palladium >= 0 ? '+' : ''}{priceChanges.palladium ? priceChanges.palladium.toFixed(2) : '0.00'}%
-                    </span>
-                  </div>
-                  <div className='price-row'>
-                    <span className='metal'>Copper</span>
-                    <span className='price'>${metalPrices.copper?.toFixed(2) || '0.00'}</span>
-                    <span className={`change ${priceChanges.copper >= 0 ? 'positive' : 'negative'}`}>
-                      {priceChanges.copper >= 0 ? '+' : ''}{priceChanges.copper ? priceChanges.copper.toFixed(2) : '0.00'}%
-                    </span>
-                  </div>
-                  <div className='price-row'>
-                    <span className='metal'>Rhodium</span>
-                    <span className='price'>${metalPrices.rhodium?.toFixed(2) || '0.00'}</span>
-                    <span className={`change ${priceChanges.rhodium >= 0 ? 'positive' : 'negative'}`}>
-                      {priceChanges.rhodium >= 0 ? '+' : ''}{priceChanges.rhodium ? priceChanges.rhodium.toFixed(2) : '0.00'}%
                     </span>
                   </div>
                 </div>

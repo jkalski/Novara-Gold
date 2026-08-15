@@ -14,6 +14,15 @@ export default function Document() {
       </Head>
       <body>
         <Main />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=2103043630250342&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
         <NextScript />
       </body>
     </Html>
