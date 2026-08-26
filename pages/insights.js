@@ -11,8 +11,68 @@ function getYouTubeId(url) {
   return m ? m[1] : null
 }
 
+function RichTextNode({ node, nodeKey }) {
+  if (!node) return null
+
+  if (node.nodeType === 'text') {
+    let content = node.value
+    ;(node.marks || []).forEach(mark => {
+      if (mark.type === 'bold') content = <strong>{content}</strong>
+      if (mark.type === 'italic') content = <em>{content}</em>
+      if (mark.type === 'underline') content = <u>{content}</u>
+      if (mark.type === 'code') content = <code>{content}</code>
+    })
+    return content
+  }
+
+  const children = (node.content || []).map((child, index) => (
+    <RichTextNode key={`${nodeKey}-${index}`} node={child} nodeKey={`${nodeKey}-${index}`} />
+  ))
+  const plainText = (node.content || []).map(child => child.value || '').join('').trim()
+
+  // Several legacy entries contain editor placeholders that should not be printed.
+  if (node.nodeType === 'paragraph' && plainText.toLowerCase() === 'text') return null
+
+  switch (node.nodeType) {
+    case 'document': return <>{children}</>
+    case 'paragraph': return plainText || children.some(Boolean) ? <p>{children}</p> : null
+    case 'heading-1': return <h2>{children}</h2>
+    case 'heading-2': return <h3>{children}</h3>
+    case 'heading-3': return <h4>{children}</h4>
+    case 'heading-4':
+    case 'heading-5':
+    case 'heading-6': return <h5>{children}</h5>
+    case 'unordered-list': return <ul>{children}</ul>
+    case 'ordered-list': return <ol>{children}</ol>
+    case 'list-item': return <li>{children}</li>
+    case 'blockquote': return <blockquote>{children}</blockquote>
+    case 'hr': return <hr />
+    case 'hyperlink': {
+      const uri = node.data?.uri
+      return uri ? <a href={uri} target="_blank" rel="noopener noreferrer">{children}</a> : children
+    }
+    case 'embedded-asset-block': {
+      const image = node.data?.target?.fields
+      const src = image?.file?.url
+      return src ? <img src={src.startsWith('//') ? `https:${src}` : src} alt={image.description || image.title || ''} /> : null
+    }
+    default: return <>{children}</>
+  }
+}
+
+function ArticleRichText({ fields }) {
+  const documents = [fields.excerptRichText, fields.additionalTextRichText].filter(Boolean)
+  if (documents.length === 0) {
+    const fullText = [fields.shortDescription, fields.additionalText].filter(Boolean).join('\n\n')
+    return <p>{fullText}</p>
+  }
+
+  return documents.map((document, index) => (
+    <RichTextNode key={index} node={document} nodeKey={`document-${index}`} />
+  ))
+}
+
 function ArticleModal({ a, onClose }) {
-  const fullText = [a.fields.shortDescription, a.fields.additionalText].filter(Boolean).join('\n\n')
   const date = a.fields.publishedDate
     ? new Date(a.fields.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
     : ''
@@ -41,7 +101,7 @@ function ArticleModal({ a, onClose }) {
         </div>
 
         <div className='am-body'>
-          <p>{fullText}</p>
+          <ArticleRichText fields={a.fields} />
         </div>
 
         {a.fields.articleLink && (
