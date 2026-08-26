@@ -937,6 +937,21 @@
 .am-body li { margin-bottom: 0.4em; }
 .am-body li p { margin: 0; }
 
+.am-body strong {
+  color: var(--gs-gray-900);
+  font-weight: var(--font-bold);
+}
+
+.am-body em { font-style: italic; }
+.am-body u { text-underline-offset: 2px; }
+
+.am-body code {
+  background: var(--gs-gray-100);
+  border-radius: 4px;
+  padding: 0.1em 0.3em;
+  font-size: 0.9em;
+}
+
 .am-body a {
   color: var(--gs-gold-dark);
   text-decoration: underline;
