@@ -5,10 +5,10 @@ import {
   FiX, 
   FiUsers, 
   FiLock, 
-  FiUserX 
+  FiUserX,
+  FiBarChart2
 } from 'react-icons/fi'
 import { LiaCompassSolid } from 'react-icons/lia'
-import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri'
 import SEO from '../components/SEO'
 import Script from 'next/script'
 
@@ -24,6 +24,7 @@ export default function Home() {
   const [showFullConsent, setShowFullConsent] = useState(false)
   const [turnstileToken, setTurnstileToken] = useState('')
   const [mounted, setMounted] = useState(false)
+  const [isFounderVideoPlaying, setIsFounderVideoPlaying] = useState(false)
 
   const metals = [
     { name: 'Gold', symbol: 'Au', icon: '🥇', color: '#FFD700' },
@@ -40,6 +41,14 @@ export default function Home() {
       delete window.handleHomeTurnstileCallback
       delete window.handleHomeTurnstileExpired
     }
+  }, [])
+
+  useEffect(() => {
+    const founderVideoTimer = window.setTimeout(() => {
+      setIsFounderVideoPlaying(true)
+    }, 2500)
+
+    return () => window.clearTimeout(founderVideoTimer)
   }, [])
 
   // Fetch real metal prices with 1-hour caching
@@ -301,23 +310,77 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hero / Quote Section */}
-      <section className='hero'>
+      {/* Co-Founder Welcome Section */}
+      <section className='hero home-quote-hero'>
         <div className='container'>
           <div className='hero-content'>
-            <blockquote className='about-quote'>
-              <p>
-                <RiDoubleQuotesL className='quote-icon-left' />
-                Novara Gold was established to be an industry changer in an industry that is desperate for change. We are doing this by making trust, transparency, and honesty at the heart of everything we do. We stand apart from competitors who rely on gimmicks like &apos;free Silver&apos; or pay high prices for celebrity endorsements. These marketing tactics only raise client costs. By avoiding such practices, we keep our pricing fair, our guidance honest, and our focus where it belongs: protecting and growing your wealth.
-                <RiDoubleQuotesR className='quote-icon-right' />
-              </p>
-              <cite>- Novara Gold</cite>
-            </blockquote>
+            <header className='founder-hero-header'>
+              <div className='founder-eyebrow'><span>A Message From Our Co-Founder</span></div>
+              <h1>Welcome to <span>Novara Gold</span></h1>
+              <p>Learn who we are, what we do, and how we help clients<br className='founder-desktop-break' /> protect and grow their wealth with physical precious metals.</p>
+            </header>
+
+            <div className='founder-hero-grid'>
+              <div className='founder-video'>
+                {isFounderVideoPlaying ? (
+                  <iframe
+                    src='https://www.youtube.com/embed/knES0eDMOBE?start=2&rel=0&autoplay=1&mute=1&playsinline=1'
+                    title='A message from the Novara Gold co-founder'
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                    allowFullScreen
+                  />
+                ) : (
+                  <button
+                    type='button'
+                    className='founder-video-poster'
+                    onClick={() => setIsFounderVideoPlaying(true)}
+                    aria-label='Play a message from the Novara Gold co-founder'
+                  >
+                    <Image
+                      src='/images/cover_video_front.png'
+                      alt='A message from Alan Nassif, Co-Founder of Novara Gold'
+                      fill
+                      sizes='(min-width: 60rem) 45vw, 94vw'
+                      priority
+                    />
+                    <span className='founder-video-play' aria-hidden='true' />
+                  </button>
+                )}
+              </div>
+
+              <div className='founder-highlights'>
+                <div className='founder-highlight'>
+                  <FiShield aria-hidden='true' />
+                  <div>
+                    <h2>Our Mission</h2>
+                    <p>Why we do what we do.</p>
+                  </div>
+                </div>
+                <div className='founder-highlight'>
+                  <FiBarChart2 aria-hidden='true' />
+                  <div>
+                    <h2>Our Approach</h2>
+                    <p>Transparency, education and client-first service.</p>
+                  </div>
+                </div>
+                <div className='founder-highlight'>
+                  <FiUsers aria-hidden='true' />
+                  <div>
+                    <h2>Your Advantage</h2>
+                    <p>How physical metals can help protect and grow your wealth.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className='founder-hero-footer'>
+              <span className='founder-signature'>- Novara Gold</span>
+              <div className='founder-hero-actions'>
+                <a href='/insights' className='hero-cta-secondary'>Educational Videos</a>
+                <a href='#precious-metals' className='hero-cta-secondary founder-cta-get-started'>Get Started</a>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className='hero-actions'>
-          <a href='/insights' className='hero-cta-secondary'>Educational Videos</a>
-          <a href='#precious-metals' className='hero-cta-secondary'>Get Started</a>
         </div>
       </section>
 
@@ -426,7 +489,7 @@ export default function Home() {
                 <h3>Gold American Eagle</h3>
                 <p className='product-metal'>Gold</p>
                 <p className='product-description'>The most popular gold coin in the world, backed by the U.S. government and IRA-eligible.</p>
-                <a href='/products' className='product-link'>View Details →</a>
+                <a href='/products' className='product-link'>View Details</a>
               </div>
             </div>
             
@@ -445,7 +508,7 @@ export default function Home() {
                 <h3>Gold PAMP Suisse Bar</h3>
                 <p className='product-metal'>Gold</p>
                 <p className='product-description'>Premium gold bars from PAMP Suisse, known for exceptional quality and purity.</p>
-                <a href='/products' className='product-link'>View Details →</a>
+                <a href='/products' className='product-link'>View Details</a>
               </div>
             </div>
             
@@ -464,7 +527,7 @@ export default function Home() {
                 <h3>Silver American Eagle</h3>
                 <p className='product-metal'>Silver</p>
                 <p className='product-description'>America's premier silver bullion coin, offering exceptional value and liquidity.</p>
-                <a href='/products' className='product-link'>View Details →</a>
+                <a href='/products' className='product-link'>View Details</a>
               </div>
             </div>
             
@@ -483,7 +546,7 @@ export default function Home() {
                 <h3>Palladium Maple Leaf</h3>
                 <p className='product-metal'>Palladium</p>
                 <p className='product-description'>Rare palladium coins from the Royal Canadian Mint, offering unique investment opportunities.</p>
-                <a href='/products' className='product-link'>View Details →</a>
+                <a href='/products' className='product-link'>View Details</a>
               </div>
             </div>
           </div>
