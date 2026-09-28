@@ -11,6 +11,7 @@ import {
 import { LiaCompassSolid } from 'react-icons/lia'
 import SEO from '../components/SEO'
 import Script from 'next/script'
+import Head from 'next/head'
 
 export default function Home() {
   const [currentMetal, setCurrentMetal] = useState(0)
@@ -266,6 +267,15 @@ export default function Home() {
         canonical="/"
         keywords="precious metals investment, gold IRA, silver IRA, platinum investment, palladium, secure storage, retirement planning, wealth protection"
       />
+      <Head>
+        <link
+          rel='preload'
+          as='image'
+          href='/images/front_background.webp'
+          type='image/webp'
+          fetchPriority='high'
+        />
+      </Head>
       {/* Live Prices Ticker */}
       <section className='ticker-ribbon'>
         <div className='ticker-track' id='tickerTrack'>
