@@ -1188,8 +1188,8 @@
 }
 
 .ng-hero-cta {
-  background: linear-gradient(180deg, #d4aa30 0%, #b8891a 100%);
-  color: #0a0a0a;
+  background: #2BB61F;
+  color: #ffffff;
   border: none;
   border-radius: 3px;
   padding: 1rem 1.75rem;
@@ -1199,7 +1199,7 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: filter 0.15s, transform 0.15s;
-  box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+  box-shadow: 0 4px 20px rgba(43, 182, 31, 0.4);
   display: inline-block;
   white-space: nowrap;
 }
@@ -1519,8 +1519,8 @@
 
 .ng-btn-submit {
   width: 100%;
-  background: linear-gradient(135deg, #c9a227, #e8bc40);
-  color: #0a1628;
+  background: #2BB61F;
+  color: #ffffff;
   border: none;
   border-radius: 4px;
   padding: 1rem;
@@ -1529,7 +1529,7 @@
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: filter 0.15s, transform 0.15s;
-  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.35);
+  box-shadow: 0 4px 14px rgba(43, 182, 31, 0.35);
   text-transform: uppercase;
 }
 
