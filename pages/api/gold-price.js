@@ -1,12 +1,12 @@
 // Server-side gold price caching
-// Fetches prices every 30 minutes, calculates price changes every 24 hours
+// Fetches prices every 30 minutes and compares against the previous GMT close.
 
 let cachedData = null
 let baselinePrices = null
 let lastFetchTime = 0
-let lastPriceChangeTime = 0
+let baselineDate = null
 const FETCH_INTERVAL = 30 * 60 * 1000 // 30 minutes for price updates
-const PRICE_CHANGE_INTERVAL = 24 * 60 * 60 * 1000 // 24 hours for price change calculations
+const DAY = 24 * 60 * 60 * 1000
 
 export default async function handler(req, res) {
   const now = Date.now()
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       const response = await fetch(`https://api.metalpriceapi.com/v1/latest?api_key=${apiKey}&base=USD&currencies=XAU,XAG,XPT,XPD`)
       const data = await response.json()
       
-      if (data && data.rates) {
+      if (response.ok && data.success !== false && data.rates) {
         // Process all metals
         const metals = {}
         
@@ -60,36 +60,38 @@ export default async function handler(req, res) {
           metals.palladium = palladiumPrice
         }
         
-        // Calculate price changes only every 24 hours
+        // Match the baseline to the quote's date, including delayed quotes.
+        const quoteTime = Number.isFinite(data.timestamp) ? data.timestamp * 1000 : now
+        const previousDate = new Date(quoteTime - DAY).toISOString().slice(0, 10)
         let priceChanges = {}
-        if (baselinePrices && (now - lastPriceChangeTime) > PRICE_CHANGE_INTERVAL) {
-          priceChanges = {
-            gold: ((metals.gold - baselinePrices.gold) / baselinePrices.gold) * 100,
-            silver: ((metals.silver - baselinePrices.silver) / baselinePrices.silver) * 100,
-            platinum: ((metals.platinum - baselinePrices.platinum) / baselinePrices.platinum) * 100,
-            palladium: ((metals.palladium - baselinePrices.palladium) / baselinePrices.palladium) * 100
+        try {
+          if (!baselinePrices || baselineDate !== previousDate) {
+            // One historical request covers all four metals; reuse it for the day.
+            const historyResponse = await fetch(`https://api.metalpriceapi.com/v1/${previousDate}?api_key=${apiKey}&base=USD&currencies=XAU,XAG,XPT,XPD`)
+            const history = await historyResponse.json()
+            if (!historyResponse.ok || history.success === false || !history.rates) {
+              throw new Error('Historical metal prices unavailable')
+            }
+            const nextBaseline = {}
+            for (const [metal, symbol] of Object.entries({ gold: 'XAU', silver: 'XAG', platinum: 'XPT', palladium: 'XPD' })) {
+              const rate = history.rates[symbol]
+              if (!Number.isFinite(rate) || rate <= 0) {
+                throw new Error('Invalid historical metal price')
+              }
+              nextBaseline[metal] = rate < 1 ? 1 / rate : rate
+            }
+            baselinePrices = nextBaseline
+            baselineDate = previousDate
           }
-          // Update baseline prices for next 24-hour comparison
-          baselinePrices = { ...metals }
-          lastPriceChangeTime = now
-        } else if (!baselinePrices) {
-          // First time - set baseline prices
-          baselinePrices = { ...metals }
-          lastPriceChangeTime = now
-          priceChanges = {
-            gold: 0,
-            silver: 0,
-            platinum: 0,
-            palladium: 0
+          for (const [metal, price] of Object.entries(metals)) {
+            if (Number.isFinite(price) && price > 0) {
+              priceChanges[metal] = ((price - baselinePrices[metal]) / baselinePrices[metal]) * 100
+            }
           }
-        } else {
-          // Use existing price changes
-          priceChanges = cachedData?.priceChanges || {
-            gold: 0,
-            silver: 0,
-            platinum: 0,
-            palladium: 0
-          }
+        } catch {
+          // Keep current prices if history fails; retry on the next price refresh.
+          // Do not substitute a made-up zero or a baseline from the wrong day.
+          console.error('Previous closing prices unavailable; price changes omitted')
         }
 
         // Cache the data with price changes

@@ -57,8 +57,8 @@ export default function Home() {
     const fetchRealPrices = async () => {
       try {
         // Check if we have cached data that's still fresh (1 hour)
-        const cachedData = localStorage.getItem('homepageMetalPrices')
-        const cacheTime = localStorage.getItem('homepageMetalPricesTime')
+        const cachedData = localStorage.getItem('homepageMetalPrices:v2')
+        const cacheTime = localStorage.getItem('homepageMetalPricesTime:v2')
         const now = Date.now()
         const cacheExpiry = 60 * 60 * 1000 // 1 hour in milliseconds
         
@@ -106,8 +106,8 @@ export default function Home() {
             priceChanges,
             lastUpdated: new Date().toISOString()
           }
-          localStorage.setItem('homepageMetalPrices', JSON.stringify(cacheData))
-          localStorage.setItem('homepageMetalPricesTime', now.toString())
+          localStorage.setItem('homepageMetalPrices:v2', JSON.stringify(cacheData))
+          localStorage.setItem('homepageMetalPricesTime:v2', now.toString())
           
           setPrices(prices)
           setPriceChanges(priceChanges)
