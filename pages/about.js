@@ -14,20 +14,12 @@ export default function About() {
       <section className='about-hero'>
         <div className='hero-background'>
           <Image 
-            src="/images/goldbarsBackground.jpg" 
+            src="/images/whyNovara.png"
             alt="Gold bars" 
-            width={1920}
-            height={1080}
+            width={2103}
+            height={748}
             priority
           />
-        </div>
-        <div className='container'>
-          <div className='about-hero-content'>
-            <h1>Why Novara Gold</h1>
-            <p className='about-hero-subtitle'>
-              Trust, transparency, and honesty at the heart of everything we do
-            </p>
-          </div>
         </div>
       </section>
 

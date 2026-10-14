@@ -100,16 +100,7 @@ export default function Products() {
       />
       
       {/* Hero Section */}
-      <section className='products-hero'>
-        <div className='container'>
-          <div className='hero-content'>
-            <h1>Gold and Silver Products</h1>
-            <p className='hero-subtitle'>
-              Discover our comprehensive range of precious metals investment products. From gold and silver to platinum and palladium, we offer secure storage and transparent pricing for all your precious metals investments.
-            </p>
-          </div>
-        </div>
-      </section>
+      <section className='products-hero' />
 
       <div className='container'>
 
