@@ -46,6 +46,10 @@ export default function LandingPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!formData.phone.trim()) {
+      setError('Please enter your phone number.')
+      return
+    }
     setSubmitting(true)
     setError('')
     try {
@@ -223,7 +227,7 @@ export default function LandingPage() {
                 <p className="ng-form-sub">
                   Discover how sophisticated investors are using precious metals to protect their wealth.
                 </p>
-                <form className="ng-form" onSubmit={handleSubmit} noValidate>
+                <form className="ng-form" onSubmit={handleSubmit}>
                   <div className="ng-form-row">
                     <input
                       className="ng-input"
@@ -260,9 +264,10 @@ export default function LandingPage() {
                     className="ng-input"
                     type="tel"
                     name="phone"
-                    placeholder="Phone Number (Optional)"
+                    placeholder="Phone Number (Required)"
                     value={formData.phone}
                     onChange={handleChange}
+                    required
                     autoComplete="tel"
                   />
 
